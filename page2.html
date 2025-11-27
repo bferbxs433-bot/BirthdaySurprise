@@ -1,33 +1,41 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <title>2. وعودنا الأبدية ✨</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body { font-family: 'Arial', sans-serif; background-color: #e0f7fa; color: #0097a7; text-align: center; padding: 40px; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
-        .card { background-color: white; padding: 30px; border-radius: 20px; box-shadow: 0 8px 15px rgba(0,0,0,0.3); }
-        h2 { font-size: 2.5em; color: #00bcd4; }
-        ul { list-style: none; padding: 0; margin: 20px 0; text-align: right; line-height: 2; font-size: 1.1em; }
-        li { border-bottom: 1px dashed #e0f7fa; padding-bottom: 10px; margin-bottom: 10px; }
-        .next-btn { background-color: #00bcd4; color: white; padding: 15px 35px; text-decoration: none; border-radius: 40px; font-size: 1.3em; display: inline-block; margin-top: 30px; transition: background-color 0.3s; }
-        .next-btn:hover { background-color: #00a0b0; }
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@700&family=El+Messiri:wght@700&display=swap');
+        body { 
+            font-family: 'El Messiri', 'Cairo', sans-serif; 
+            background: linear-gradient(to bottom, #fff0f5, #ffe4e1); /* خلفية وردية ناعمة */
+            color: #333; 
+            text-align: center; 
+            padding: 40px; 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+        }
+        .card { 
+            background-color: rgba(255, 255, 255, 0.95); 
+            padding: 30px; 
+            border-radius: 25px; 
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.4); 
+            border: 3px solid #ffb6c1;
+        }
+        h2 { font-size: 2.5em; color: #ff69b4; }
+        ul { list-style: none; padding: 0; margin: 20px 0; text-align: right; line-height: 2.2; font-size: 1.2em; }
+        li { border-bottom: 1px dashed #ffb6c1; padding-bottom: 10px; margin-bottom: 15px; }
+        img { width: 90%; max-width: 400px; border-radius: 15px; margin: 20px 0; border: 4px solid #ffb6c1; }
+        .next-btn { 
+            background-color: #ff69b4; 
+            color: white; 
+            padding: 15px 35px; 
+            text-decoration: none; 
+            border-radius: 40px; 
+            font-size: 1.3em; 
+            display: inline-block; 
+            margin-top: 30px; 
+            transition: all 0.4s; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .next-btn:hover { 
+            background-color: #e91e63; 
+            transform: scale(1.05); 
+        }
     </style>
-</head>
-<body>
-    <div class="card">
-        <h2>💖 وعود من قلبي لكِ يا [اسم حبيبتك] 💖</h2>
-        <img src="https://i.pinimg.com/originals/bb/e2/5c/bbe25c9b4e6d30f5b9d2f2d3f9f9b5c3.gif" alt="Anime Couple Promise" style="width: 90%; max-width: 400px; border-radius: 15px; margin: 20px 0;" />
-        
-        <ul>
-            <li>**وعد 1:** سأستمر في دعمكِ في كل أحلامكِ وطموحاتكِ.</li>
-            <li>**وعد 2:** سأخصص وقتاً لمغامراتنا الممتعة كل شهر، بغض النظر عن انشغالاتي.</li>
-            <li>**وعد 3:** سأذكركِ كل يوم بمدى جمالكِ وقوتكِ وإشراقكِ.</li>
-            <li>**وعد 4:** سأحافظ على التواصل الصادق وأشارككِ كل ما يدور في بالي وقلبي.</li>
-        </ul>
-        <p>لقد أوفيتُ وعودي! الآن لصفحة "الذكريات المشتركة":</p>
-        
-        <a href="page3.html" class="next-btn">ذكرياتنا في انتظارك! 📸</a>
-    </div>
-</body>
-</html>
