@@ -1,15 +1,22 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>1. انطلاق الرحلة ✨</title>
+    <title>1. A Sweet Surprise ✨</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@700&family=El+Messiri:wght@700&display=swap');
+        :root {
+            --primary-pink: #ff69b4;
+            --secondary-pink: #f7a8c9;
+            --background-soft: #fff6e0;
+            --card-soft: #fcf9f3;
+        }
 
         body { 
-            font-family: 'El Messiri', 'Cairo', sans-serif; 
-            background: linear-gradient(to top right, #fff0f5, #ffe4e1); /* خلفية وردية ناعمة */
+            font-family: 'Poppins', sans-serif; 
+            background: var(--background-soft);
             color: #333; 
             text-align: center; 
             min-height: 100vh; 
@@ -18,206 +25,182 @@
             justify-content: center; 
             align-items: center; 
             margin: 0;
-            overflow: hidden; /* لمنع ظهور شريط التمرير */
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Decoration styles (same as before) */
+        .decoration {
+            position: absolute;
+            opacity: 0.5;
+            animation: float 10s ease-in-out infinite;
+        }
+        .star {
+            top: 5%; left: 10%; width: 30px; height: 30px; background: gold; clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+        }
+        .cloud {
+            top: 15%; right: 5%; width: 50px; height: 30px; background: #ADD8E6; border-radius: 50%;
+        }
+        .heart {
+            bottom: 5%; left: 5%; width: 20px; height: 20px; background: var(--primary-pink); transform: rotate(-45deg); border-radius: 50% 50% 0 0;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-15px) rotate(5deg); }
         }
 
         .container {
-            width: 90%;
-            max-width: 600px;
-            padding: 20px;
-            background-color: white;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(255, 105, 180, 0.4);
+            width: 95%;
+            max-width: 400px;
+            padding: 30px 20px;
+            background-color: var(--card-soft);
+            border-radius: 25px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 10;
         }
 
         h1 {
-            color: #ff69b4; 
-            font-size: 2.2em; 
-            margin-bottom: 30px;
+            color: #cc3366; 
+            font-size: 1.8em; 
+            margin-bottom: 5px;
         }
-
-        /* تصميم الظرف (Envelope) */
-        .envelope-wrap {
-            position: relative;
-            width: 300px;
-            height: 200px;
-            margin: 50px auto;
-            cursor: pointer;
-            transition: transform 0.8s ease;
+        .subtitle {
+            color: #777;
+            margin-bottom: 40px;
+            font-size: 0.9em;
         }
         
-        /* الرسالة بالداخل */
-        .card-inside {
-            position: absolute;
+        /* Envelope styles (same as before) */
+        .envelope-wrap {
+            position: relative;
+            width: 80%;
+            height: 180px;
+            margin: 50px auto;
+            perspective: 1000px; 
+            cursor: pointer;
+        }
+        
+        .envelope-outer {
             width: 100%;
             height: 100%;
-            background: #fff8f8;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
-            z-index: 2;
-            padding: 20px;
-            box-sizing: border-box;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 1.5s;
+        }
+        
+        .envelope-front {
+            background-color: #ffc0d0;
+            border-radius: 15px;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            backface-visibility: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1.5em;
-            color: #ff69b4;
-            transform: translateY(10px); /* يبدأ أسفل قليلاً */
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border: 1px solid #ffb6c1;
         }
         
-        /* الغلاف الخارجي */
-        .envelope {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-color: #ffb6c1; /* لون الظرف */
-            border-radius: 10px;
-            z-index: 3;
-            transition: transform 0.8s ease;
-            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+        .heart-seal {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-pink);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        
-        /* طية الظرف العلوية */
-        .flap {
+        .heart-seal::before {
+            content: "💖";
+            font-size: 1.2em;
+        }
+
+        .envelope-flap {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 50%;
-            background-color: #ff69b4; /* لون الطية الداكن */
-            border-radius: 10px 10px 0 0;
-            transform-origin: top;
-            transition: transform 0.8s ease;
-            z-index: 4;
-            /* شكل المثلث */
+            background-color: var(--primary-pink);
             clip-path: polygon(0 0, 100% 0, 50% 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            border-radius: 15px 15px 0 0;
+            transform-origin: top;
+            transition: transform 1.5s ease-out;
+            z-index: 100;
+        }
+        
+        .envelope-outer.open .envelope-flap {
+            transform: rotateX(180deg) translateY(10px);
+            z-index: 1;
+        }
+        .envelope-outer.open {
+             transform: translateY(-20px);
         }
 
-        /* الختم (شكل قلب) */
-        .seal {
-            width: 30px;
-            height: 30px;
-            background-color: #e91e63;
-            border-radius: 50%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            transition: opacity 0.3s;
-            z-index: 5;
-            /* شكل قلب صغير داخل الدائرة */
-        }
-        .seal::before, .seal::after {
-            content: "";
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-color: #e91e63;
-            border-radius: 50%;
-        }
-        .seal::before {
-            left: -50%;
-            top: 0;
-        }
-        .seal::after {
-            top: -50%;
-            left: 0;
-        }
-        
-        .seal span {
-            position: absolute;
-            width: 70%;
-            height: 70%;
-            background: white;
-            border-radius: 50%;
-            left: 15%;
-            top: 15%;
-            z-index: 6;
-            font-size: 0.8em;
-            text-align: center;
-            color: #e91e63;
-            line-height: 30px;
-        }
-        
-        /* حالة الفتح */
-        .envelope-wrap.open .flap {
-            transform: rotateX(180deg);
-            z-index: 1; 
-        }
-
-        .envelope-wrap.open .envelope {
-            transform: translateY(10px); 
-        }
-        
-        .envelope-wrap.open .card-inside {
-            transform: translateY(-20px) scale(1.05); /* إبراز الرسالة للخارج */
-            transition-delay: 0.5s;
-        }
-        
-        .envelope-wrap.open .seal {
-            opacity: 0; 
-        }
-
-        .message-prompt {
-            margin-top: 30px;
-            font-size: 1.1em;
-            color: #ff69b4;
-            font-weight: bold;
+        .prompt-text {
+            color: #888;
+            margin-top: 40px;
+            font-size: 1em;
         }
         
         .action-button {
-            background-color: #ff69b4;
+            background-color: var(--primary-pink);
             color: white;
-            padding: 15px 30px;
-            border-radius: 30px;
-            cursor: pointer;
+            padding: 15px 35px;
+            border-radius: 40px;
             border: none;
             font-size: 1.2em;
             margin-top: 20px;
-            transition: background-color 0.3s;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+            transition: all 0.3s;
         }
         .action-button:hover {
             background-color: #e91e63;
+            transform: translateY(-2px);
         }
     </style>
 </head>
 <body>
 
+    <div class="decoration star"></div>
+    <div class="decoration cloud" style="right: 20%;"></div>
+    <div class="decoration heart" style="top: 80%; left: 70%;"></div>
+    
     <div class="container">
-        <h1>رسالة حب مُختومة بمناسبة عيد ميلادك! ❤️</h1>
+        <h1>A Birthday Love Letter For My Queen 💌</h1>
+        <p class="subtitle">From my heart to the star of this day.</p>
         
-        <div class="envelope-wrap" id="envelope">
-            <div class="card-inside">
-                <p>رسالة حب في انتظارك!</p>
-            </div>
-            <div class="envelope"></div>
-            <div class="flap">
-                <div class="seal"></div>
+        <div class="envelope-wrap" id="envelope-wrap">
+            <div class="envelope-outer" id="envelope-outer">
+                <div class="envelope-flap"></div>
+                <div class="envelope-front">
+                    <div class="heart-seal"></div>
+                </div>
             </div>
         </div>
 
-        <p class="message-prompt">اضغطي على الرسالة لفتحها ومشاهدة محتوياتها!</p>
-        <button class="action-button" id="openBtn">انتقلي لرحلة المفاجآت! 🚀</button>
+        <p class="prompt-text">Click to open your surprise and start the journey!</p>
+        <button class="action-button" id="openBtn">Start the Surprises Journey! 🚀</button>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const envelope = document.getElementById('envelope');
+            const envelopeOuter = document.getElementById('envelope-outer');
             const openBtn = document.getElementById('openBtn');
+            const envelopeWrap = document.getElementById('envelope-wrap');
+
+            const openEnvelope = () => {
+                 envelopeOuter.classList.add('open');
+            };
+
+            envelopeWrap.addEventListener('click', openEnvelope);
             
-            // عند الضغط على الظرف، افتحه
-            envelope.addEventListener('click', () => {
-                envelope.classList.add('open');
-            });
-            
-            // عند الضغط على زر الانتقال، افتح الظرف ثم انتقل للصفحة 2
             openBtn.addEventListener('click', () => {
-                envelope.classList.add('open');
-                
-                // الانتقال يتم بعد 1.5 ثانية (بعد اكتمال حركة الظرف السلسة)
+                openEnvelope();
                 setTimeout(() => {
                     window.location.href = 'page2.html'; 
                 }, 1500); 
