@@ -10,13 +10,14 @@
         :root {
             --primary-pink: #ff69b4;
             --secondary-pink: #f7a8c9;
-            --background-soft: #fffafc; /* لون أبيض مائل للوردي الفاتح جداً */
+            --background-soft: #fffafc; 
             --card-soft: #ffffff;
-            --envelope-color: #ffc0d0; /* لون الظرف الوردي */
+            --envelope-color: #ffc0d0; 
             --seal-color: #e91e63;
             --text-color-dark: #333;
             --text-color-medium: #777;
-            --text-color-light: #cc3366; /* للنصوص داخل الرسالة */
+            --text-color-light: #cc3366;
+            --animation-duration: 2s; /* مدة أطول لسحب الرسالة */
         }
 
         body { 
@@ -32,23 +33,24 @@
             margin: 0;
             overflow: hidden;
             position: relative;
-            background-image: url('data:image/svg+xml;utf8,<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><g opacity="0.1"><path fill="%23FFC0CB" d="M100 0L125 75L200 75L138 125L162 200L100 150L38 200L62 125L0 75L75 75Z"/></g></svg>'); /* قلوب شفافة جداً في الخلفية */
-            background-size: 80px; /* حجم القلوب */
+            /* زيادة كثافة القلوب الشفافة في الخلفية */
+            background-image: url('data:image/svg+xml;utf8,<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><g opacity="0.15"><path fill="%23FFC0CB" d="M100 0L125 75L200 75L138 125L162 200L100 150L38 200L62 125L0 75L75 75Z"/></g></svg>'); 
+            background-size: 60px; /* تصغير حجم القلوب لتبدو أكثر كثافة */
         }
         
-        /* عناصر الزينة المطابقة للصورة تماماً */
+        /* عناصر الزينة - تم مضاعفة الرموز تقريباً */
         .decoration {
             position: absolute;
-            opacity: 0.8;
-            animation: float 12s ease-in-out infinite alternate;
+            opacity: 0.9; /* زيادة الوضوح قليلاً */
+            animation: float 10s ease-in-out infinite alternate;
             z-index: 5;
         }
 
         /* شكل القلب للزينة */
         .heart-dec {
-            width: 20px; height: 20px; background: #FF9AA2; /* لون وردي فاتح مطابق */
+            width: 25px; height: 25px; background: #FF9AA2; 
             transform: rotate(-45deg); border-radius: 50% 50% 0 0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.15); /* ظل أوضح */
         }
         .heart-dec::before, .heart-dec::after {
             content: ""; position: absolute; width: 100%; height: 100%;
@@ -59,59 +61,15 @@
 
         /* شكل النجمة للزينة */
         .star-dec {
-            width: 15px; height: 15px; background: #FFD700; /* ذهبي */
+            width: 18px; height: 18px; background: #FFD700; 
             clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.15);
         }
         
         /* شكل الغيمة للزينة */
         .cloud-dec {
-            width: 50px; height: 30px; background: #ADD8E6; border-radius: 50%; position: relative;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            width: 60px; height: 35px; background: #ADD8E6; border-radius: 50%; position: relative;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.15);
         }
         .cloud-dec::before {
             content: ""; position: absolute; width: 60%; height: 60%; background: #ADD8E6; border-radius: 50%; top: -10px; right: 10px;
-        }
-        .cloud-dec::after {
-            content: ""; position: absolute; width: 40%; height: 40%; background: #ADD8E6; border-radius: 50%; bottom: -5px; left: 5px;
-        }
-
-        /* شكل الكيكة (باستخدام SVG بسيط بدلا من صورة خارجية) */
-        .cake-dec {
-            width: 40px; height: 40px;
-            background-color: #F8BBD0; /* قاعدة الكيك */
-            border-radius: 5px 5px 0 0;
-            position: relative;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .cake-dec::before { /* الطبقة العلوية */
-            content: ''; position: absolute; top: -10px; left: 5px;
-            width: 30px; height: 10px; background-color: #FFCDD2;
-            border-radius: 5px 5px 0 0;
-        }
-        .cake-dec::after { /* Cherry */
-            content: ''; position: absolute; top: -15px; left: 15px;
-            width: 10px; height: 10px; background-color: #E57373;
-            border-radius: 50%;
-        }
-
-        /* توزيع العناصر في الخلفية */
-        .heart.top-right-1 { top: 10px; right: 10px; animation-delay: 1s; }
-        .cloud.top-left-1 { top: 20%; left: 8%; animation-delay: 3s; }
-        .cake.top-right-2 { top: 5%; right: 20%; animation-delay: 5s; }
-        .star.bottom-left-1 { bottom: 20px; left: 20%; animation-delay: 7s; }
-        .heart.bottom-right-1 { bottom: 10px; right: 5%; animation-delay: 9s; }
-        .cloud.bottom-left-2 { bottom: 15%; left: 10%; animation-delay: 11s; }
-        .star.top-center-left { top: 5%; left: 30%; animation-delay: 2s; }
-        .cake.bottom-right-corner { bottom: 5%; right: 2%; animation-delay: 4s; }
-
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0); }
-            50% { transform: translateY(-10px) rotate(-3deg); }
-        }
-
-        .container {
-            width: 95%;
-            max-width: 450px;
-            padding: 20px; /* تقليل البادينغ ليناسب
