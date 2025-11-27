@@ -5,24 +5,224 @@
     <title>1. انطلاق الرحلة ✨</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body { font-family: 'Arial', sans-serif; background: linear-gradient(to right, #ff9aa2, #ffb3c0); color: white; text-align: center; padding: 40px; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
-        .card { background-color: rgba(255, 255, 255, 0.2); padding: 30px; border-radius: 20px; box-shadow: 0 8px 15px rgba(0,0,0,0.3); }
-        h1 { font-size: 3em; color: #fff; text-shadow: 1px 1px 3px #000; }
-        img { width: 90%; max-width: 400px; border-radius: 15px; margin: 20px 0; border: 4px solid #fff; }
-        .next-btn { background-color: #e91e63; color: white; padding: 15px 35px; text-decoration: none; border-radius: 40px; font-size: 1.3em; display: inline-block; margin-top: 30px; transition: background-color 0.3s; }
-        .next-btn:hover { background-color: #c2185b; }
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@700&family=El+Messiri:wght@700&display=swap');
+
+        body { 
+            font-family: 'El Messiri', 'Cairo', sans-serif; 
+            background: linear-gradient(to top right, #fff0f5, #ffe4e1); /* خلفية وردية ناعمة */
+            color: #333; 
+            text-align: center; 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            margin: 0;
+            overflow: hidden; /* لمنع ظهور شريط التمرير */
+        }
+
+        .container {
+            width: 90%;
+            max-width: 600px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(255, 105, 180, 0.4);
+        }
+
+        h1 {
+            color: #ff69b4; 
+            font-size: 2.2em; 
+            margin-bottom: 30px;
+        }
+
+        /* تصميم الظرف (Envelope) */
+        .envelope-wrap {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            margin: 50px auto;
+            cursor: pointer;
+            transition: transform 0.8s ease;
+        }
+        
+        /* الرسالة بالداخل */
+        .card-inside {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #fff8f8;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            z-index: 2;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5em;
+            color: #ff69b4;
+            transform: translateY(10px); /* يبدأ أسفل قليلاً */
+        }
+        
+        /* الغلاف الخارجي */
+        .envelope {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #ffb6c1; /* لون الظرف */
+            border-radius: 10px;
+            z-index: 3;
+            transition: transform 0.8s ease;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+        }
+        
+        /* طية الظرف العلوية */
+        .flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background-color: #ff69b4; /* لون الطية الداكن */
+            border-radius: 10px 10px 0 0;
+            transform-origin: top;
+            transition: transform 0.8s ease;
+            z-index: 4;
+            /* شكل المثلث */
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* الختم (شكل قلب) */
+        .seal {
+            width: 30px;
+            height: 30px;
+            background-color: #e91e63;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s;
+            z-index: 5;
+            /* شكل قلب صغير داخل الدائرة */
+        }
+        .seal::before, .seal::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #e91e63;
+            border-radius: 50%;
+        }
+        .seal::before {
+            left: -50%;
+            top: 0;
+        }
+        .seal::after {
+            top: -50%;
+            left: 0;
+        }
+        
+        .seal span {
+            position: absolute;
+            width: 70%;
+            height: 70%;
+            background: white;
+            border-radius: 50%;
+            left: 15%;
+            top: 15%;
+            z-index: 6;
+            font-size: 0.8em;
+            text-align: center;
+            color: #e91e63;
+            line-height: 30px;
+        }
+        
+        /* حالة الفتح */
+        .envelope-wrap.open .flap {
+            transform: rotateX(180deg);
+            z-index: 1; 
+        }
+
+        .envelope-wrap.open .envelope {
+            transform: translateY(10px); 
+        }
+        
+        .envelope-wrap.open .card-inside {
+            transform: translateY(-20px) scale(1.05); /* إبراز الرسالة للخارج */
+            transition-delay: 0.5s;
+        }
+        
+        .envelope-wrap.open .seal {
+            opacity: 0; 
+        }
+
+        .message-prompt {
+            margin-top: 30px;
+            font-size: 1.1em;
+            color: #ff69b4;
+            font-weight: bold;
+        }
+        
+        .action-button {
+            background-color: #ff69b4;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            border: none;
+            font-size: 1.2em;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        .action-button:hover {
+            background-color: #e91e63;
+        }
     </style>
 </head>
 <body>
-    <div class="card">
-        <h1>💖 مفاجأة عيد ميلاد سعيد يا [اسم حبيبتك]! 💖</h1>
-        <img src="https://i.pinimg.com/originals/c9/21/f4/c921f452d3a33d9413203b544d673f8d.gif" alt="Anime Couple Hug" />
-        <p style="font-size: 1.2em; margin: 20px 0;">
-            أهلاً بكِ في أول محطة من رحلة الحب المكونة من 5 صفحات، كل صفحة تحمل مفاجأة خاصة جداً من قلبي.
-        </p>
-        <p style="font-weight: bold;">اضغطي على الزر الآن لـ "صفحة الوعود":</p>
+
+    <div class="container">
+        <h1>رسالة حب مُختومة بمناسبة عيد ميلادك! ❤️</h1>
         
-        <a href="page2.html" class="next-btn">انتقلي لصفحة الوعود! 💌</a>
+        <div class="envelope-wrap" id="envelope">
+            <div class="card-inside">
+                <p>رسالة حب في انتظارك!</p>
+            </div>
+            <div class="envelope"></div>
+            <div class="flap">
+                <div class="seal"></div>
+            </div>
+        </div>
+
+        <p class="message-prompt">اضغطي على الرسالة لفتحها ومشاهدة محتوياتها!</p>
+        <button class="action-button" id="openBtn">انتقلي لرحلة المفاجآت! 🚀</button>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const envelope = document.getElementById('envelope');
+            const openBtn = document.getElementById('openBtn');
+            
+            // عند الضغط على الظرف، افتحه
+            envelope.addEventListener('click', () => {
+                envelope.classList.add('open');
+            });
+            
+            // عند الضغط على زر الانتقال، افتح الظرف ثم انتقل للصفحة 2
+            openBtn.addEventListener('click', () => {
+                envelope.classList.add('open');
+                
+                // الانتقال يتم بعد 1.5 ثانية (بعد اكتمال حركة الظرف السلسة)
+                setTimeout(() => {
+                    window.location.href = 'page2.html'; 
+                }, 1500); 
+            });
+        });
+    </script>
 </body>
 </html>
