@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>5. المفاجأة النهائية! 🚨</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: 'Arial', sans-serif; background-color: #000000; color: #ffffff; text-align: center; padding: 40px; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+        .card { background-color: #333333; padding: 40px; border-radius: 25px; box-shadow: 0 0 40px #ff0055; border: 5px solid #ff0055; animation: sparkle 1.5s infinite alternate; }
+        h5 { font-size: 4em; color: #ff0055; }
+        .final-message { font-size: 1.8em; margin: 30px 0; line-height: 1.6; color: #fff; }
+        @keyframes sparkle { from { box-shadow: 0 0 20px #ff0055; } to { box-shadow: 0 0 50px #ff0055, 0 0 60px #ffc0cb; } }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h5>🚨 المفاجأة الأخيرة! 🚨</h5>
+        <img src="https://i.pinimg.com/originals/f3/e6/7d/f3e67d2e0e0e0e0e0e0e0e0e0e0e0e0e.gif" alt="Anime Couple Surprise" style="width: 90%; max-width: 400px; border-radius: 15px; margin: 20px 0; border: none;" />
+        
+        <div class="final-message">
+            <p><strong>حبيبتي [اسم حبيبتك]،</strong></p>
+            <p>لقد أظهرتِ صبركِ وحبكِ بالوصول إلى النهاية! لا شيء يقارن بفرحتي بوجودكِ في حياتي.</p>
+            <p><strong>المفاجأة الكبرى هي: [اكتب هنا المفاجأة الفعلية الكبرى، مثلاً: "لقد اشتريتُ لكِ خاتماً مفاجئاً، انظري في الدرج الأول!" أو "أنتظرُكِ أمام باب المنزل الآن لنذهب إلى [اسم المكان]!"]</strong></p>
+            <p style="margin-top: 30px; font-style: italic;">كل عام وأنتِ حب حياتي. أُحبكِ إلى ما لا نهاية. - حبيبك ❤️</p>
+        </div>
+    </div>
+</body>
+</html>

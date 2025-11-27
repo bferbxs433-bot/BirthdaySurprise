@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>4. أحلامنا المشتركة 💭</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: 'Arial', sans-serif; background-color: #f3e5f5; color: #ab47bc; text-align: center; padding: 40px; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+        .card { background-color: white; padding: 30px; border-radius: 20px; box-shadow: 0 8px 15px rgba(0,0,0,0.3); }
+        h4 { font-size: 2.5em; color: #9c27b0; }
+        .dream-list { border: 2px solid #9c27b0; padding: 20px; border-radius: 15px; margin: 20px 0; text-align: right; }
+        .next-btn { background-color: #9c27b0; color: white; padding: 15px 35px; text-decoration: none; border-radius: 40px; font-size: 1.3em; display: inline-block; margin-top: 30px; transition: background-color 0.3s; }
+        .next-btn:hover { background-color: #8e24aa; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h4>🌈 أحلامنا التي سنحققها معاً 🌈</h4>
+        <img src="https://i.pinimg.com/originals/7b/4b/3e/7b4b3e3e3e3e3e3e3e3e3e3e3e3e3e3e.gif" alt="Anime Couple Dreams" style="width: 90%; max-width: 400px; border-radius: 15px; margin: 20px 0;" />
+        
+        <div class="dream-list">
+            <p><strong>حبيبتي [اسم حبيبتك]،</strong> أحلامي المستقبلية أصبحت كلها أنتِ:</p>
+            <ul>
+                <li>**حلم 1:** أن نسافر إلى [اسم البلد المفضل] ونأكل [اسم وجبة مفضلة] معاً.</li>
+                <li>**حلم 2:** أن نرى أنفسنا بعد [عدد السنوات] سنوات، ونحن [صِف المشهد].</li>
+                <li>**حلم 3:** أن نبني [نوع المشروع أو العمل المشترك] الذي تحدثنا عنه.</li>
+            </ul>
+        </div>
+        
+        <a href="final.html" class="next-btn">حان وقت المفاجأة الكبرى! 🎁</a>
+    </div>
+</body>
+</html>
