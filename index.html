@@ -2,11 +2,10 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>1. رسالة حب سريعة 💌</title>
+    <title>1. رسالة حب بعيد ميلادك 💖</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Changa:wght@600;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
-    
-    <style>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet"> <style>
         :root {
             --primary-pink: #ff69b4;
             --secondary-pink: #f7a8c9;
@@ -14,12 +13,13 @@
             --card-soft: #ffffff;
             --envelope-color: #ffc0d0; /* لون الظرف الوردي */
             --seal-color: #e91e63;
+            --text-color: #555; /* لون نص عام أغمق قليلا */
         }
 
         body { 
             font-family: 'Changa', 'Amiri', sans-serif; 
             background: var(--background-soft);
-            color: #333; 
+            color: var(--text-color); 
             text-align: center; 
             min-height: 100vh; 
             display: flex; 
@@ -29,32 +29,42 @@
             margin: 0;
             overflow: hidden;
             position: relative;
+            background-image: url('data:image/svg+xml;utf8,<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><g opacity="0.1"><path fill="%23FFC0CB" d="M100 0L125 75L200 75L138 125L162 200L100 150L38 200L62 125L0 75L75 75Z"/></g></svg>'); /* قلوب شفافة جداً في الخلفية */
+            background-size: 80px; /* حجم القلوب */
         }
         
-        /* عناصر الزينة المطابقة للصورة */
+        /* عناصر الزينة المطابقة للصورة تماماً */
         .decoration {
             position: absolute;
             opacity: 0.8;
             animation: float 12s ease-in-out infinite alternate;
             z-index: 5;
         }
+
+        /* شكل القلب للزينة */
         .heart-dec {
-            width: 20px; height: 20px; background: var(--primary-pink); transform: rotate(-45deg); border-radius: 50% 50% 0 0;
+            width: 20px; height: 20px; background: #FF9AA2; /* لون وردي فاتح مطابق */
+            transform: rotate(-45deg); border-radius: 50% 50% 0 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         .heart-dec::before, .heart-dec::after {
-            content: "";
-            position: absolute;
-            width: 100%; height: 100%; background: var(--primary-pink); border-radius: 50%;
+            content: ""; position: absolute; width: 100%; height: 100%;
+            background: #FF9AA2; border-radius: 50%;
         }
         .heart-dec::before { top: 0; right: 50%; }
         .heart-dec::after { bottom: 50%; left: 0; }
 
+        /* شكل النجمة للزينة */
         .star-dec {
-            width: 15px; height: 15px; background: gold; clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            width: 15px; height: 15px; background: gold;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         
+        /* شكل الغيمة للزينة */
         .cloud-dec {
             width: 50px; height: 30px; background: #ADD8E6; border-radius: 50%; position: relative;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         .cloud-dec::before {
             content: ""; position: absolute; width: 60%; height: 60%; background: #ADD8E6; border-radius: 50%; top: -10px; right: 10px;
@@ -63,11 +73,32 @@
             content: ""; position: absolute; width: 40%; height: 40%; background: #ADD8E6; border-radius: 50%; bottom: -5px; left: 5px;
         }
 
+        /* شكل الكيكة (باستخدام SVG بسيط بدلا من صورة خارجية) */
+        .cake-dec {
+            width: 40px; height: 40px;
+            background-color: #F8BBD0; /* قاعدة الكيك */
+            border-radius: 5px 5px 0 0;
+            position: relative;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .cake-dec::before { /* الطبقة العلوية */
+            content: ''; position: absolute; top: -10px; left: 5px;
+            width: 30px; height: 10px; background-color: #FFCDD2;
+            border-radius: 5px 5px 0 0;
+        }
+        .cake-dec::after { /* Cherry */
+            content: ''; position: absolute; top: -15px; left: 15px;
+            width: 10px; height: 10px; background-color: #E57373;
+            border-radius: 50%;
+        }
 
-        .heart.top-left { top: 10px; left: 10px; animation-delay: 1s; }
-        .cloud.top-right { top: 15%; right: 5%; animation-delay: 3s; }
-        .star.bottom-left { bottom: 20px; left: 20%; animation-delay: 5s; }
-        .cake.top-right-2 { top: 5%; right: 20%; animation-delay: 7s; } /* الكيكة غير موجودة كرمز CSS، لكن نستبدلها بنجمة */
+        /* توزيع العناصر في الخلفية */
+        .heart.top-right-1 { top: 10px; right: 10px; animation-delay: 1s; }
+        .cloud.top-left-1 { top: 15%; left: 5%; animation-delay: 3s; }
+        .cake.top-right-2 { top: 5%; right: 20%; animation-delay: 5s; }
+        .star.bottom-left-1 { bottom: 20px; left: 20%; animation-delay: 7s; }
+        .heart.bottom-right-1 { bottom: 10px; right: 5%; animation-delay: 9s; }
+        .cloud.bottom-left-2 { bottom: 15%; left: 10%; animation-delay: 11s; }
 
 
         @keyframes float {
@@ -78,7 +109,7 @@
         .container {
             width: 95%;
             max-width: 450px;
-            padding: 30px 20px;
+            padding: 20px; /* تقليل البادينغ ليناسب الصورة */
             background-color: var(--card-soft);
             border-radius: 25px;
             box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15); /* ظل أكبر وأوضح */
@@ -87,10 +118,38 @@
             z-index: 10;
         }
 
-        h1 {
-            color: var(--primary-pink); 
-            font-size: 1.8em; 
-            margin-bottom: 5px;
+        .header-text {
+            margin-bottom: 20px; /* مسافة أقل كما في الصورة */
+            line-height: 1.2;
+        }
+        .header-text h1 {
+            font-family: 'Pacifico', cursive; /* خط Pacifico للجزء الإنجليزي */
+            color: var(--primary-pink);
+            font-size: 2.2em; /* حجم أكبر */
+            margin-bottom: 0;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .header-text .arabic-name {
+            font-family: 'Changa', sans-serif;
+            font-weight: 800;
+            font-size: 1.8em; /* حجم مشابه */
+            color: var(--primary-pink);
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 5px; /* مسافة بين الإنجليزي والعربي */
+        }
+        .header-text .sparkle {
+            color: gold;
+            font-size: 1.5em;
+            vertical-align: middle;
+            margin: 0 5px;
+        }
+        .header-text .sub-info {
+            font-size: 0.9em;
+            color: #888;
+            margin-top: 5px;
+            line-height: 1.5;
         }
         
         /* الظرف الثلاثي الأبعاد والمفتوح جزئياً */
@@ -135,7 +194,7 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
             z-index: 20;
-            top: 15%;
+            top: 15%; /* تبدأ من المنتصف */
             left: 10%;
             transform: translateY(0) rotateX(0);
             transition: transform 1.5s ease-out, top 1.5s ease-out;
@@ -143,8 +202,9 @@
             box-sizing: border-box;
             text-align: center;
             font-size: 1.1em;
-            color: #cc3366;
+            color: #cc3366; /* لون نص الرسالة مطابق */
             font-weight: bold;
+            line-height: 1.6;
         }
         
         /* طية الظرف العلوية (المفتوحة) */
@@ -181,7 +241,7 @@
         
         /* حالة الفتح بالكامل */
         .envelope-wrap.open .card-inside {
-            transform: translateY(-50px) scale(1.05);
+            transform: translateY(-50px) scale(1.05); /* تبرز للخارج أكثر */
             top: 0;
             box-shadow: 0 15px 30px rgba(0,0,0,0.2);
         }
@@ -200,6 +260,8 @@
             cursor: pointer;
             box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
             transition: all 0.3s;
+            font-family: 'Changa', sans-serif; /* استخدام نفس الخط للزر */
+            font-weight: 600;
         }
         .action-button:hover {
             background-color: #e91e63;
@@ -209,12 +271,22 @@
 </head>
 <body>
 
-    <div class="decoration heart-dec top-left" style="top: 10px; right: 20px;"></div>
-    <div class="decoration cloud-dec top-right" style="top: 15%; left: 5%;"></div>
-    <div class="decoration star-dec bottom-left" style="bottom: 20px; right: 10%;"></div>
-    
+    <div class="decoration heart-dec" style="top: 10px; right: 10px; transform: rotate(-30deg);"></div>
+    <div class="decoration cloud-dec" style="top: 20px; left: 15%;"></div>
+    <div class="decoration star-dec" style="bottom: 20px; right: 30px; animation-delay: 2s;"></div>
+    <div class="decoration cake-dec" style="top: 5%; right: 25%; animation-delay: 4s;"></div>
+    <div class="decoration heart-dec" style="bottom: 15%; left: 10%; animation-delay: 6s; transform: rotate(45deg);"></div>
+    <div class="decoration cloud-dec" style="bottom: 5%; right: 20%; animation-delay: 8s;"></div>
+    <div class="decoration star-dec" style="top: 10%; left: 80%; animation-delay: 10s;"></div>
+    <div class="decoration cake-dec" style="bottom: 25%; right: 10%; animation-delay: 12s;"></div>
+
+
     <div class="container">
-        <h1 style="font-family: 'Changa', sans-serif; font-weight: 800;"> رسالة حب بعيد ميلادك 💖</h1>
+        <div class="header-text">
+            <h1 class="arabic-name">انضفبي</h1> <span class="sparkle">✨</span> <h1>Pacific</h1>
+            <p class="sub-info">sub cane : 777</p>
+            <p class="sub-info">htte vaniipotub iitbe2.cum</p>
+        </div>
         
         <div class="envelope-wrap" id="envelope-wrap">
             <div class="envelope-body">
@@ -222,18 +294,18 @@
             </div>
             <div class="card-inside">
                 <p>
-                    <span style="font-size: 1.4em; color: #e91e63;">هل أنتِ مستعدة للسحر؟</span>
+                    <span style="font-size: 1.4em; color: #e91e63;">عدد هال المحجر؟</span>
                     <br>
-                    <span style="font-size: 1.2em;">الكون ينتظر قلبكِ...</span>
+                    <span style="font-size: 1.2em;">النت با كي</span>
                     <br>
-                    <em style="color: #777;">... لنبدأ رحلة الحب</em>
+                    <em style="color: #777;">... درسيش يجد ان كنوي</em>
                 </p>
             </div>
             <div class="envelope-flap"></div>
             <div class="seal"></div>
         </div>
 
-        <button class="action-button" id="openBtn">حوليني إلى حبك الآن 💘</button>
+        <button class="action-button" id="openBtn">حاول ماليغ فين</button>
     </div>
 
     <script>
