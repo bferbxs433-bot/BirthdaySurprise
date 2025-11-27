@@ -1,40 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>3. Our Anime Memories 📸</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@700&family=El+Messiri:wght@700&display=swap');
+        :root {
+            --primary-pink: #ff69b4;
+            --secondary-pink: #f7a8c9;
+            --background-soft: #fff6e0;
+            --card-soft: #fcf9f3;
+        }
         body { 
-            font-family: 'El Messiri', 'Cairo', sans-serif; 
-            background: linear-gradient(to bottom, #fff0f5, #ffe4e1); 
+            font-family: 'Poppins', sans-serif; 
+            background: linear-gradient(to bottom, #fff0f5, #ffe4e1);
             color: #333; 
             text-align: center; 
-            padding: 40px; 
             min-height: 100vh; 
             display: flex; 
             flex-direction: column; 
             justify-content: center; 
+            align-items: center; 
+            margin: 0;
+            position: relative;
         }
+
         .card { 
-            background-color: rgba(255, 255, 255, 0.95); 
+            width: 95%;
+            max-width: 450px;
             padding: 30px; 
+            background: linear-gradient(135deg, #ffffff, var(--card-soft)); 
             border-radius: 25px; 
-            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.4); 
-            border: 3px solid #ffb6c1;
+            box-shadow: 0 10px 40px rgba(255, 105, 180, 0.4); 
+            border: 1px solid #f0e6f0;
+            position: relative;
+            z-index: 10;
         }
-        h3 { font-size: 2.5em; color: #ff69b4; }
-        .memory { border: 2px dashed #ffb6c1; padding: 20px; margin: 20px 0; border-radius: 15px; text-align: right; font-size: 1.1em; }
-        img { width: 90%; max-width: 400px; border-radius: 15px; margin: 20px 0; border: 4px solid #ffb6c1; }
+
+        h3 { 
+            font-size: 2.5em; 
+            color: #ff9800;
+            margin: 10px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        .memory { border: 2px dashed #ffb6c1; padding: 20px; margin: 20px 0; border-radius: 15px; text-align: left; font-size: 1.1em; background-color: #fffaf0; }
+        
+        img { 
+            width: 90%; max-width: 400px; border-radius: 15px; margin: 20px 0; border: 4px solid #ffb6c1; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
         .next-btn { 
-            background-color: #ff69b4; 
+            background-color: #ff9800;
             color: white; 
-            padding: 15px 35px; 
+            padding: 18px 40px; 
             text-decoration: none; 
-            border-radius: 40px; 
-            font-size: 1.3em; 
+            border-radius: 50px; 
+            font-size: 1.4em; 
             display: inline-block; 
-            margin-top: 30px; 
+            margin-top: 20px; 
             transition: all 0.4s; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4);
+            border: none;
         }
         .next-btn:hover { 
-            background-color: #e91e63; 
+            background-color: #f57c00; 
             transform: scale(1.05); 
         }
     </style>
+</head>
+<body>
+    <div class="card">
+        <h3>🖼️ Treasures from Our Anime Memories 🖼️</h3>
+        <img src="https://i.pinimg.com/originals/a0/0b/b3/a00bb3a2e7c4b7b2b7b2b7b2b2b2b2b2b2b2b2b2.gif" alt="Anime Couple Memories" />
+        
+        <div class="memory">
+            <p style="font-weight: bold;">Memory 1 (The Anime Laugh):</p>
+            <p>Do you remember [mention date or event] when we were [mention details], and how we laughed until we cried? That pure laugh is the best sound I've ever heard!</p>
+        </div>
+        
+        <div class="memory">
+            <p style="font-weight: bold;">Memory 2 (The Movie Night):</p>
+            <p>I love recalling that quiet night when we watched [favorite movie/series name], it was more about the cuddling than the movie itself! ❤️</p>
+        </div>
+        
+        <a href="page4.html" class="next-btn">To Our Shared Dreams! 💭</a>
+    </div>
+</body>
+</html>
