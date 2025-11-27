@@ -12,12 +12,12 @@
             --secondary-pink: #f7a8c9;
             --background-soft: #fffafc; 
             --card-soft: #ffffff;
-            --envelope-color: #ffc0d0; 
+            --envelope-color: #ffc0d0; /* لون الظرف الوردي */
             --seal-color: #e91e63;
             --text-color-dark: #333;
             --text-color-medium: #777;
-            --text-color-light: #cc3366;
-            --animation-duration: 2s; /* مدة أطول لسحب الرسالة */
+            --text-color-light: #cc3366; 
+            --animation-duration: 2.2s; /* زيادة مدة الحركة أكثر */
         }
 
         body { 
@@ -33,43 +33,276 @@
             margin: 0;
             overflow: hidden;
             position: relative;
-            /* زيادة كثافة القلوب الشفافة في الخلفية */
-            background-image: url('data:image/svg+xml;utf8,<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><g opacity="0.15"><path fill="%23FFC0CB" d="M100 0L125 75L200 75L138 125L162 200L100 150L38 200L62 125L0 75L75 75Z"/></g></svg>'); 
-            background-size: 60px; /* تصغير حجم القلوب لتبدو أكثر كثافة */
+            /* خلفية القلوب الشفافة - تم تفتيحها جداً */
+            background-image: url('data:image/svg+xml;utf8,<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><g opacity="0.1"><path fill="%23FFC0CB" d="M100 0L125 75L200 75L138 125L162 200L100 150L38 200L62 125L0 75L75 75Z"/></g></svg>'); 
+            background-size: 60px; 
         }
         
-        /* عناصر الزينة - تم مضاعفة الرموز تقريباً */
+        /* عناصر الزينة - الآن نستخدم الرموز التعبيرية (Emojis) لضمان الدقة بدلاً من رسمها بـ CSS */
         .decoration {
             position: absolute;
-            opacity: 0.9; /* زيادة الوضوح قليلاً */
+            font-size: 2.5em; /* حجم كبير للرموز */
+            opacity: 0.9;
             animation: float 10s ease-in-out infinite alternate;
             z-index: 5;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8); /* لجعل الرموز تبرز على الخلفية */
         }
 
-        /* شكل القلب للزينة */
-        .heart-dec {
-            width: 25px; height: 25px; background: #FF9AA2; 
-            transform: rotate(-45deg); border-radius: 50% 50% 0 0;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.15); /* ظل أوضح */
-        }
-        .heart-dec::before, .heart-dec::after {
-            content: ""; position: absolute; width: 100%; height: 100%;
-            background: #FF9AA2; border-radius: 50%;
-        }
-        .heart-dec::before { top: 0; right: 50%; }
-        .heart-dec::after { bottom: 50%; left: 0; }
+        /* توزيع الرموز الكثيرة جداً (باستخدام رموز الأيقونات المطابقة للصورة) */
+        .deco-1 { top: 15px; right: 10px; animation-delay: 0s; } /* قلب وردي */
+        .deco-2 { top: 10%; left: 5%; animation-delay: 2s; } /* غيمة زرقاء */
+        .deco-3 { bottom: 25px; right: 25px; animation-delay: 4s; } /* كيكة */
+        .deco-4 { top: 5%; right: 20%; animation-delay: 6s; } /* نجمة زرقاء */
+        .deco-5 { bottom: 10%; left: 15%; animation-delay: 8s; } /* قلب وردي */
+        .deco-6 { bottom: 5%; right: 15%; animation-delay: 10s; } /* غيمة زرقاء */
+        .deco-7 { top: 10%; left: 80%; animation-delay: 1s; } /* كيكة */
+        .deco-8 { bottom: 20%; left: 5%; animation-delay: 3s; } /* نجمة زرقاء */
+        .deco-9 { top: 30%; right: 5%; animation-delay: 5s; } /* قلب وردي */
+        .deco-10 { bottom: 30%; left: 5%; animation-delay: 7s; } /* نجمة زرقاء */
+        .deco-11 { top: 3%; left: 30%; animation-delay: 9s; } /* كيكة */
+        .deco-12 { bottom: 3%; right: 30%; animation-delay: 11s; } /* غيمة زرقاء */
 
-        /* شكل النجمة للزينة */
-        .star-dec {
-            width: 18px; height: 18px; background: #FFD700; 
-            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-            box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-15px) rotate(-5deg); } 
+        }
+
+        .container {
+            width: 95%;
+            max-width: 550px; 
+            padding: 30px; 
+            background-color: var(--card-soft);
+            border-radius: 40px; /* زيادة حواف الاستدارة لتطابق الصورة تماماً */
+            
+            /* الظل الناعم جداً (المطابق للصورة) */
+            box-shadow: 
+                0 0 0 10px rgba(255, 255, 255, 0.5), /* إطار أبيض داخلي خفيف جداً */
+                0 10px 40px rgba(0, 0, 0, 0.1), /* ظل ناعم عام */
+                0 25px 80px rgba(255, 105, 180, 0.15); /* ظل وردي خفيف جداً في الأسفل */
+
+            border: 3px solid var(--secondary-pink);
+            position: relative;
+            z-index: 10;
+        }
+
+        .header-text {
+            margin-bottom: 25px; 
+            line-height: 1.2;
+        }
+        .header-text h1 {
+            font-family: 'Pacifico', cursive; 
+            color: var(--primary-pink);
+            font-size: 2.5em; 
+            margin-bottom: 0;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .header-text .arabic-name {
+            font-family: 'Changa', sans-serif;
+            font-weight: 800;
+            font-size: 2em; 
+            color: var(--primary-pink);
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 5px; 
+        }
+        .header-text .sparkle {
+            color: gold;
+            font-size: 1.8em;
+            vertical-align: middle;
+            margin: 0 8px;
+        }
+        .header-text .sub-info {
+            font-size: 1em;
+            color: var(--text-color-medium);
+            margin-top: 5px;
+            line-height: 1.5;
         }
         
-        /* شكل الغيمة للزينة */
-        .cloud-dec {
-            width: 60px; height: 35px; background: #ADD8E6; border-radius: 50%; position: relative;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+        /* الظرف الثلاثي الأبعاد - تحسين الظل */
+        .envelope-wrap {
+            position: relative;
+            width: 85%; /* حجم أكبر */
+            max-width: 380px;
+            height: 280px; 
+            margin: 40px auto;
+            cursor: pointer;
+            perspective: 1000px;
         }
-        .cloud-dec::before {
-            content: ""; position: absolute; width: 60%; height: 60%; background: #ADD8E6; border-radius: 50%; top: -10px; right: 10px;
+        
+        .envelope-body {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--envelope-color);
+            border-radius: 15px; 
+            /* الظل 3D الناعم للظرف */
+            box-shadow: 
+                0 5px 15px rgba(0,0,0,0.1),
+                inset 0 -5px 15px rgba(0, 0, 0, 0.05); /* ظل داخلي خفيف يعطي العمق */
+        }
+
+        .envelope-back-flap {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #f7a8c9;
+            clip-path: polygon(0% 100%, 50% 50%, 100% 100%);
+            border-radius: 0 0 15px 15px;
+            z-index: 1;
+        }
+        
+        /* الرسالة الداخلية - تحسين حركة السحب */
+        .card-inside {
+            position: absolute;
+            width: 90%; 
+            height: 80%; 
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.15);
+            z-index: 20;
+            top: 10%; 
+            left: 5%;
+            transform: translateY(0) rotateX(0);
+            /* حركة احترافية أطول وأكثر سلاسة */
+            transition: transform var(--animation-duration) cubic-bezier(0.42, 0, 0.58, 1.2), top var(--animation-duration) cubic-bezier(0.42, 0, 0.58, 1.2);
+            padding: 25px;
+            box-sizing: border-box;
+            text-align: center;
+            font-size: 1.2em;
+            color: var(--text-color-light); 
+            font-weight: bold;
+            line-height: 1.7;
+        }
+        
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background-color: var(--secondary-pink); 
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+            border-radius: 15px 15px 0 0;
+            transform-origin: top;
+            transition: transform var(--animation-duration) ease-out; 
+            z-index: 30;
+            transform: rotateX(180deg); 
+            opacity: 0.9;
+        }
+
+        /* الختم الدائري */
+        .seal {
+            position: absolute;
+            width: 40px; height: 40px; /* حجم أكبر */
+            background: var(--seal-color);
+            border-radius: 50%;
+            z-index: 40;
+            top: 70%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+            transition: opacity 0.3s;
+        }
+        
+        /* حالة الفتح بالكامل */
+        .envelope-wrap.open .card-inside {
+            transform: translateY(-90px) scale(1.08); 
+            top: -10%; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .envelope-wrap.open .envelope-flap {
+             transform: rotateX(190deg); /* فتح الغطاء بشكل أكبر */
+        }
+        .envelope-wrap.open .seal {
+            opacity: 0; 
+        }
+
+        .action-button {
+            background-color: var(--seal-color); /* لون الزر مطابق للختم لزيادة التناسق */
+            color: white;
+            padding: 18px 45px; 
+            border-radius: 50px; /* حواف مستديرة بالكامل */
+            border: none;
+            font-size: 1.4em; /* حجم أكبر */
+            margin-top: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(233, 30, 99, 0.6); 
+            transition: all 0.3s;
+            font-family: 'Changa', sans-serif; 
+            font-weight: 700;
+        }
+        .action-button:hover {
+            background-color: #d81b60;
+            transform: translateY(-3px) scale(1.02);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="decoration deco-1">💖</div>
+    <div class="decoration deco-2">☁️</div>
+    <div class="decoration deco-3">🎂</div>
+    <div class="decoration deco-4">⭐</div>
+    <div class="decoration deco-5">💖</div>
+    <div class="decoration deco-6">☁️</div>
+    <div class="decoration deco-7">🎂</div>
+    <div class="decoration deco-8">⭐</div>
+    <div class="decoration deco-9">💖</div>
+    <div class="decoration deco-10">⭐</div>
+    <div class="decoration deco-11">🎂</div>
+    <div class="decoration deco-12">☁️</div>
+
+
+    <div class="container">
+        <div class="header-text">
+            <h1 class="arabic-name">انصفي</h1> <span class="sparkle">✨</span> <h1>Pacific</h1>
+            <p class="sub-info">sub cane : 777</p>
+            <p class="sub-info">htte vaniipotub itbe2.cum</p>
+        </div>
+        
+        <div class="envelope-wrap" id="envelope-wrap">
+            <div class="envelope-body">
+                <div class="envelope-back-flap"></div>
+            </div>
+            <div class="card-inside">
+                <p>
+                    <span style="font-size: 1.6em; color: var(--text-color-light);">عدد هال المحجر؟</span>
+                    <br>
+                    <span style="font-size: 1.3em;">النت با كي</span>
+                    <br>
+                    <em style="color: var(--text-color-medium);">... درسيش يجد ان كنوي</em>
+                </p>
+            </div>
+            <div class="envelope-flap"></div>
+            <div class="seal"></div>
+        </div>
+
+        <button class="action-button" id="openBtn">حاول ماليغ فين</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const envelopeWrap = document.getElementById('envelope-wrap');
+            const openBtn = document.getElementById('openBtn');
+
+            const openEnvelope = () => {
+                 envelopeWrap.classList.add('open');
+            };
+
+            // عند الضغط على الظرف نفسه
+            envelopeWrap.addEventListener('click', openEnvelope);
+            
+            // عند الضغط على زر الانتقال
+            openBtn.addEventListener('click', () => {
+                openEnvelope();
+                // الانتقال يتم بعد 2.2 ثانية (بعد اكتمال حركة الظرف السلسة)
+                setTimeout(() => {
+                    window.location.href = 'page2.html'; 
+                }, 2200); 
+            });
+        });
+    </script>
+</body>
+</html>
