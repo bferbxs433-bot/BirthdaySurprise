@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <title>1. رسالة حب بعيد ميلادك 💖</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Changa:wght@600;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet"> <style>
+    <link href="https://fonts.googleapis.com/css2?family=Changa:wght@600;800&family=Amiri:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+    
+    <style>
         :root {
             --primary-pink: #ff69b4;
             --secondary-pink: #f7a8c9;
@@ -13,13 +14,15 @@
             --card-soft: #ffffff;
             --envelope-color: #ffc0d0; /* لون الظرف الوردي */
             --seal-color: #e91e63;
-            --text-color: #555; /* لون نص عام أغمق قليلا */
+            --text-color-dark: #333;
+            --text-color-medium: #777;
+            --text-color-light: #cc3366; /* للنصوص داخل الرسالة */
         }
 
         body { 
             font-family: 'Changa', 'Amiri', sans-serif; 
             background: var(--background-soft);
-            color: var(--text-color); 
+            color: var(--text-color-dark); 
             text-align: center; 
             min-height: 100vh; 
             display: flex; 
@@ -56,7 +59,7 @@
 
         /* شكل النجمة للزينة */
         .star-dec {
-            width: 15px; height: 15px; background: gold;
+            width: 15px; height: 15px; background: #FFD700; /* ذهبي */
             clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
@@ -94,11 +97,13 @@
 
         /* توزيع العناصر في الخلفية */
         .heart.top-right-1 { top: 10px; right: 10px; animation-delay: 1s; }
-        .cloud.top-left-1 { top: 15%; left: 5%; animation-delay: 3s; }
+        .cloud.top-left-1 { top: 20%; left: 8%; animation-delay: 3s; }
         .cake.top-right-2 { top: 5%; right: 20%; animation-delay: 5s; }
         .star.bottom-left-1 { bottom: 20px; left: 20%; animation-delay: 7s; }
         .heart.bottom-right-1 { bottom: 10px; right: 5%; animation-delay: 9s; }
         .cloud.bottom-left-2 { bottom: 15%; left: 10%; animation-delay: 11s; }
+        .star.top-center-left { top: 5%; left: 30%; animation-delay: 2s; }
+        .cake.bottom-right-corner { bottom: 5%; right: 2%; animation-delay: 4s; }
 
 
         @keyframes float {
@@ -109,226 +114,4 @@
         .container {
             width: 95%;
             max-width: 450px;
-            padding: 20px; /* تقليل البادينغ ليناسب الصورة */
-            background-color: var(--card-soft);
-            border-radius: 25px;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15); /* ظل أكبر وأوضح */
-            border: 3px solid var(--secondary-pink);
-            position: relative;
-            z-index: 10;
-        }
-
-        .header-text {
-            margin-bottom: 20px; /* مسافة أقل كما في الصورة */
-            line-height: 1.2;
-        }
-        .header-text h1 {
-            font-family: 'Pacifico', cursive; /* خط Pacifico للجزء الإنجليزي */
-            color: var(--primary-pink);
-            font-size: 2.2em; /* حجم أكبر */
-            margin-bottom: 0;
-            display: inline-block;
-            vertical-align: middle;
-        }
-        .header-text .arabic-name {
-            font-family: 'Changa', sans-serif;
-            font-weight: 800;
-            font-size: 1.8em; /* حجم مشابه */
-            color: var(--primary-pink);
-            display: inline-block;
-            vertical-align: middle;
-            margin-right: 5px; /* مسافة بين الإنجليزي والعربي */
-        }
-        .header-text .sparkle {
-            color: gold;
-            font-size: 1.5em;
-            vertical-align: middle;
-            margin: 0 5px;
-        }
-        .header-text .sub-info {
-            font-size: 0.9em;
-            color: #888;
-            margin-top: 5px;
-            line-height: 1.5;
-        }
-        
-        /* الظرف الثلاثي الأبعاد والمفتوح جزئياً */
-        .envelope-wrap {
-            position: relative;
-            width: 70%;
-            max-width: 300px;
-            height: 200px;
-            margin: 40px auto;
-            cursor: pointer;
-            perspective: 1000px;
-            transition: transform 1.5s;
-        }
-        
-        /* جسم الظرف (الواجهة الأمامية) */
-        .envelope-body {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: var(--envelope-color);
-            border-radius: 10px;
-            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-        }
-
-        /* طية الظرف السفلية (التي تعطي شكل V) */
-        .envelope-back-flap {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: #f7a8c9;
-            clip-path: polygon(0% 100%, 50% 50%, 100% 100%);
-            border-radius: 0 0 10px 10px;
-            z-index: 1;
-        }
-        
-        /* الرسالة الداخلية */
-        .card-inside {
-            position: absolute;
-            width: 80%;
-            height: 70%;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            z-index: 20;
-            top: 15%; /* تبدأ من المنتصف */
-            left: 10%;
-            transform: translateY(0) rotateX(0);
-            transition: transform 1.5s ease-out, top 1.5s ease-out;
-            padding: 20px;
-            box-sizing: border-box;
-            text-align: center;
-            font-size: 1.1em;
-            color: #cc3366; /* لون نص الرسالة مطابق */
-            font-weight: bold;
-            line-height: 1.6;
-        }
-        
-        /* طية الظرف العلوية (المفتوحة) */
-        .envelope-flap {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 50%;
-            background-color: var(--secondary-pink); 
-            clip-path: polygon(0 0, 100% 0, 50% 100%);
-            border-radius: 10px 10px 0 0;
-            transform-origin: top;
-            transition: transform 1.5s ease-out;
-            z-index: 30;
-            transform: rotateX(180deg); /* يبدأ مفتوحاً جزئياً */
-            opacity: 0.9;
-        }
-
-        /* الختم الدائري */
-        .seal {
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            background: var(--seal-color);
-            border-radius: 50%;
-            z-index: 40;
-            top: 70%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            transition: opacity 0.3s;
-        }
-        
-        /* حالة الفتح بالكامل */
-        .envelope-wrap.open .card-inside {
-            transform: translateY(-50px) scale(1.05); /* تبرز للخارج أكثر */
-            top: 0;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-        }
-        .envelope-wrap.open .seal {
-            opacity: 0; /* إخفاء الختم عند الفتح */
-        }
-
-        .action-button {
-            background-color: var(--primary-pink);
-            color: white;
-            padding: 15px 35px;
-            border-radius: 40px;
-            border: none;
-            font-size: 1.2em;
-            margin-top: 40px;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
-            transition: all 0.3s;
-            font-family: 'Changa', sans-serif; /* استخدام نفس الخط للزر */
-            font-weight: 600;
-        }
-        .action-button:hover {
-            background-color: #e91e63;
-            transform: translateY(-2px);
-        }
-    </style>
-</head>
-<body>
-
-    <div class="decoration heart-dec" style="top: 10px; right: 10px; transform: rotate(-30deg);"></div>
-    <div class="decoration cloud-dec" style="top: 20px; left: 15%;"></div>
-    <div class="decoration star-dec" style="bottom: 20px; right: 30px; animation-delay: 2s;"></div>
-    <div class="decoration cake-dec" style="top: 5%; right: 25%; animation-delay: 4s;"></div>
-    <div class="decoration heart-dec" style="bottom: 15%; left: 10%; animation-delay: 6s; transform: rotate(45deg);"></div>
-    <div class="decoration cloud-dec" style="bottom: 5%; right: 20%; animation-delay: 8s;"></div>
-    <div class="decoration star-dec" style="top: 10%; left: 80%; animation-delay: 10s;"></div>
-    <div class="decoration cake-dec" style="bottom: 25%; right: 10%; animation-delay: 12s;"></div>
-
-
-    <div class="container">
-        <div class="header-text">
-            <h1 class="arabic-name">انضفبي</h1> <span class="sparkle">✨</span> <h1>Pacific</h1>
-            <p class="sub-info">sub cane : 777</p>
-            <p class="sub-info">htte vaniipotub iitbe2.cum</p>
-        </div>
-        
-        <div class="envelope-wrap" id="envelope-wrap">
-            <div class="envelope-body">
-                <div class="envelope-back-flap"></div>
-            </div>
-            <div class="card-inside">
-                <p>
-                    <span style="font-size: 1.4em; color: #e91e63;">عدد هال المحجر؟</span>
-                    <br>
-                    <span style="font-size: 1.2em;">النت با كي</span>
-                    <br>
-                    <em style="color: #777;">... درسيش يجد ان كنوي</em>
-                </p>
-            </div>
-            <div class="envelope-flap"></div>
-            <div class="seal"></div>
-        </div>
-
-        <button class="action-button" id="openBtn">حاول ماليغ فين</button>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const envelopeWrap = document.getElementById('envelope-wrap');
-            const openBtn = document.getElementById('openBtn');
-
-            const openEnvelope = () => {
-                 envelopeWrap.classList.add('open');
-            };
-
-            // عند الضغط على الظرف نفسه
-            envelopeWrap.addEventListener('click', openEnvelope);
-            
-            // عند الضغط على زر الانتقال
-            openBtn.addEventListener('click', () => {
-                openEnvelope();
-                // الانتقال يتم بعد 1.5 ثانية (بعد اكتمال حركة الظرف السلسة)
-                setTimeout(() => {
-                    window.location.href = 'page2.html'; 
-                }, 1500); 
-            });
-        });
-    </script>
-</body>
-</html>
+            padding: 20px; /* تقليل البادينغ ليناسب
