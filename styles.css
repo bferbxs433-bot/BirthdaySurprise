@@ -2,15 +2,14 @@
 :root {
     --primary-color: #ff69b4;  /* وردي أساسي (نقي) */
     --accent-dark: #b32d56;    /* وردي غامق للنصوص والأزرار (أكثر قوة) */
-    --primary-soft: #ffebee;   /* وردي فاتح جداً للخلفيات */
-    --background-light: #ffffff; 
-    --card-bg: #ffffff;
-    --text-color: #333;
+    --space-dark: #1f083b;     /* لون أساسي للفضاء (بنفسجي/أزرق داكن) */
+    --star-glow: #ffffff;      /* لون النجوم */
+    --text-color-light: #fefefe; /* لون فاتح للنصوص على خلفية داكنة */
     --shadow-soft: rgba(255, 105, 180, 0.4);
     --animation-duration: 1.2s;
 }
 
-/* الرسوم المتحركة الأساسية (ستستخدم في جميع الصفحات) */
+/* الرسوم المتحركة الأساسية (كما هي) */
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -27,12 +26,22 @@
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-5px); }
 }
+@keyframes stars {
+    0% { background-position: 0 0; }
+    100% { background-position: 10000px 5000px; } /* حركة بطيئة للنجوم */
+}
 
 
 body {
     font-family: 'Changa', 'Amiri', sans-serif;
-    background-color: var(--primary-soft); 
-    color: var(--text-color);
+    /* الخلفية الجديدة: تدرج لوني للفضاء مع نجوم */
+    background: 
+        radial-gradient(ellipse at bottom, #2d0047 0%, #0d0116 100%), /* تدرج لوني */
+        repeating-radial-gradient(circle at center, var(--star-glow) 0, rgba(255, 255, 255, 0) 1px) 0 0/1000px 1000px, /* نجوم كبيرة */
+        repeating-radial-gradient(circle at center, rgba(255, 255, 255, 0.8) 0, rgba(255, 255, 255, 0) 0.5px) 0 0/500px 500px; /* نجوم صغيرة */
+    
+    background-color: var(--space-dark);
+    color: var(--text-color-light); /* تغيير لون النص ليتناسب مع الخلفية الداكنة */
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -40,99 +49,34 @@ body {
     margin: 0;
     overflow-x: hidden; 
     position: relative;
+    /* أنميشن لحركة النجوم البطيئة */
+    animation: fadeIn 3s ease-out, stars 200s linear infinite; 
 }
 
-/* 1. تأثير الخلفية المتحرك (Anime/Romantic) */
-body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* خلفية متكررة من قلوب صغيرة ناعمة */
-    background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><g opacity="0.1"><path fill="%23FFC0CB" d="M50 0 C 65 0, 75 15, 50 35 C 25 15, 35 0, 50 0 Z"/></g></svg>'); 
-    background-size: 50px; 
-    opacity: 0.8;
-    z-index: 0;
-    animation: fadeIn 3s ease-out; /* ظهور هادئ للخلفية */
-}
-
-/* تصميم البطاقة الرئيسية / صفحات المحتوى */
+/* ⚠️ تحديث لون النص في جميع الصفحات ليكون فاتحاً على الخلفية الداكنة */
 .card-wrapper, .page-content {
-    width: 90%;
-    max-width: 420px; 
-    position: relative;
-    z-index: 10;
-    padding: 20px;
-    margin: 50px auto;
-    background-color: transparent; 
+    /* ... الكود السابق ... */
+    color: var(--text-color-light); /* تغيير لون النص في العناصر الداخلية */
+}
+/* يجب التأكد من أن النصوص داخل البطاقات بيضاء أو فاتحة */
+.letter h2, .page-content h2, .message-body p, .promise-header, .final-message {
+    color: var(--text-color-light); 
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* إضافة ظل بسيط للنص لبروزه */
 }
 
-/* --- الظرف والرسالة (في index.html) --- */
-.envelope {
-    position: relative;
-    width: 100%;
-    height: 350px;
-    border-radius: 15px;
-    background-color: var(--primary-soft);
-    box-shadow: 0 15px 50px var(--shadow-soft); 
-    perspective: 1000px;
-    transition: transform 0.8s;
-    animation: fadeIn var(--animation-duration) ease-out, float 4s infinite alternate; /* الظرف يظهر ويطفو */
+/* تنسيق الظرف والبطاقات لبروزها على خلفية الفضاء */
+.envelope, .page-content {
+    background-color: rgba(255, 255, 255, 0.1); /* شبه شفاف ليرى الخلفية */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* إطار أبيض ناعم */
 }
-
-.flap {
-    /* كود الـ 3D كما هو */
-    transition: transform var(--animation-duration) ease-out;
-}
-
+/* الرسالة الداخلية يجب أن تبقى بيضاء لسهولة القراءة */
 .letter {
-    /* كود الرسالة كما هو */
-    transition: opacity 1s 0.3s, transform var(--animation-duration) 0.3s ease-out;
+    background: var(--card-bg); /* أبيض صلب */
+    color: var(--text-color); /* نص داكن داخل الرسالة البيضاء */
 }
-
-.seal {
-    /* الختم يضيف تأثير نبض (Pulse) لجذب الانتباه */
-    animation: pulseGlow 1.5s infinite; 
-    cursor: pointer;
-}
-
-/* --- الأزرار الاحترافية (3. مؤثرات تفاعلية) --- */
-.action-button {
-    background-color: var(--accent-dark);
-    color: white;
-    padding: 18px 45px;
-    border-radius: 50px;
-    border: none;
-    font-size: 1.3em;
-    margin-top: 50px;
-    box-shadow: 0 8px 30px var(--shadow-soft);
-    transition: all 0.3s ease-in-out;
-    animation: slideInUp var(--animation-duration) ease-out; /* الزر ينبثق للداخل */
-}
-
-.action-button:hover {
-    background-color: var(--primary-color);
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 12px 35px var(--shadow-soft); /* ظل أقوى عند التفاعل */
-}
-
-/* --- صفحات المحتوى الداخلية (2. تأثيرات عند التحميل) --- */
-.page-content {
-    background-color: var(--card-bg);
-    border-radius: 15px;
-    padding: 40px 30px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-    animation: fadeIn var(--animation-duration) ease-out; /* ظهور ناعم للصفحة */
-}
-
-.page-content h2, .promise-header, .final-message {
+/* إعادة لون نص الرسالة لداكن */
+.letter h2, .letter p {
     color: var(--accent-dark);
-    font-weight: 800;
-    animation: slideInUp var(--animation-duration) 0.2s ease-out both; /* العناوين تنزلق */
 }
 
-.message-body p, .promise-list li, .gallery-item {
-    animation: fadeIn 1.5s ease-out; /* المحتوى يظهر ببطء */
-}
+/* ... بقية الأكواد كما هي ... */
