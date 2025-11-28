@@ -2,100 +2,67 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>3. المفاجأة الثالثة: معرض الذكريات 🖼️</title>
+    <title>2. رسالة حب وتقدير 📝</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Changa:wght@600;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     
     <style>
-        .page-header {
-            font-size: 1.6em;
-            color: var(--primary-color);
-            margin-bottom: 30px;
-            font-weight: 800;
+        .page-content {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 40px 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            max-width: 450px;
+            width: 90%;
+            margin: 50px auto; /* لوسطنة الرسالة في الشاشة */
+            animation: fadeInUp var(--animation-duration) ease-out;
         }
 
-        /* حاوية المعرض */
-        .gallery {
-            display: flex;
-            overflow-x: scroll; /* تمكين التمرير الأفقي باليد */
-            scroll-snap-type: x mandatory; /* لجعل كل صورة تستقر عند التمرير */
-            border-radius: 15px;
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 10px 0;
-            margin-bottom: 30px;
-            -webkit-overflow-scrolling: touch; /* لتحسين التمرير على الهواتف */
+        .page-content h2 {
+            color: var(--accent-dark);
+            font-size: 2em;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--primary-soft);
+            padding-bottom: 10px;
         }
-        
-        .gallery-item {
-            flex: 0 0 90%; /* كل صورة تأخذ 90% من مساحة العرض */
-            scroll-snap-align: center;
-            margin: 0 5%;
-            position: relative;
-            background: var(--card-bg);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            padding: 15px;
-            box-sizing: border-box;
+
+        .message-body {
+            text-align: right;
+            line-height: 1.8;
+            font-size: 1.1em;
+            color: var(--text-color);
         }
-        
-        .gallery-item img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            filter: grayscale(0.1);
-            transition: transform 0.3s;
-        }
-        
-        .gallery-item:hover img {
-            transform: scale(1.03);
-            filter: grayscale(0);
-        }
-        
-        .image-caption {
-            font-size: 1em;
-            color: var(--text-dark);
-            margin-top: 10px;
+
+        .signature {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 1.2em;
+            color: var(--accent-dark);
             font-weight: 600;
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="page-content">
+        <h2>عيد ميلاد سعيد يا ملاكي! 🎂</h2>
         
-        <div class="page-header">
-            رحلة عبر أجمل ذكرياتنا! 📸
+        <div class="message-body">
+            <p><strong>حبيبتي [اسم حبيبتك]،</strong></p>
+            <p>
+                لا يمكن للكلمات أن تصف كم أنتِ مميزة في حياتي. في هذا اليوم الجميل، أريد أن أقول لكِ أن وجودكِ هو أفضل هدية. أنتِ النور والهدوء والجمال الذي يملأ عالمي. أتمنى لكِ عاماً مليئاً بالضحك والحب اللامتناهي.
+            </p>
         </div>
         
-        <p style="color: var(--text-light);">
-            مرري لليمين لرؤية اللحظات التي جمعتنا! (تحتاجين لتحميل صورك وتسميتها)
-        </p>
-
-        <div class="gallery">
-            <div class="gallery-item">
-                <img src="images/memory1.jpg" alt="صورة ذكرى 1">
-                <div class="image-caption">أول لقاء لنا، يوم لن ينسى.</div>
-            </div>
-            
-            <div class="gallery-item">
-                <img src="images/memory2.jpg" alt="صورة ذكرى 2">
-                <div class="image-caption">ضحكتك في ذلك اليوم، أجمل هدية.</div>
-            </div>
-
-            <div class="gallery-item">
-                <img src="images/memory3.jpg" alt="صورة ذكرى 3">
-                <div class="image-caption">لحظة جنون وضحك لا يتوقف.</div>
-            </div>
+        <div class="signature">
+            بكل الحب والامتنان،
+            <br>
+            حبيبك المفتون ❤️
         </div>
         
-        <p style="color: var(--text-color-medium); font-size: 0.9em;">
-            (الرجاء تحميل 3 صور مفضلة لكِ إلى مجلد images وتسميتها memory1.jpg, memory2.jpg, memory3.jpg)
-        </p>
-
-        <a href="page4.html" class="action-button">
-            انتقلي للمفاجأة الرابعة
+        <a href="page3.html" class="action-button" style="margin-top: 40px;">
+            استكشاف المفاجأة الثالثة (3/5)
         </a>
-        
     </div>
 </body>
 </html>
