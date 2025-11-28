@@ -2,58 +2,51 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>1. رسالة خاصة لروح قلبي 💌</title>
+    <title>1. اضغط لفتح رسالة حب 💖</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Changa:wght@600;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    
-    <style>
-        /* رموز أنمي متحركة */
-        .decoration-heart {
-            position: absolute;
-            width: 30px; height: 30px;
-            background-color: var(--primary-color);
-            border-radius: 50%;
-            clip-path: polygon(50% 100%, 0% 40%, 10% 0%, 50% 10%, 90% 0%, 100% 40%);
-            animation: floatHeart 10s infinite ease-in-out;
-        }
-        #heart1 { top: 10%; left: 5%; animation-delay: 0s; }
-        #heart2 { top: 25%; right: 15%; width: 40px; height: 40px; background-color: var(--secondary-color); animation-delay: 3s; }
-        #heart3 { bottom: 20%; left: 10%; animation-delay: 6s; }
-
-        @keyframes floatHeart {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(15deg); }
-        }
-        
-        .main-message {
-            font-size: 1.3em;
-            color: var(--text-light);
-            margin-bottom: 40px;
-        }
-    </style>
 </head>
 <body>
 
-    <div class="decoration-heart" id="heart1"></div>
-    <div class="decoration-heart" id="heart2"></div>
-    <div class="decoration-heart" id="heart3"></div>
-
-    <div class="container">
+    <div class="card-wrapper">
         
-        <h1>أنتِ هدية الحياة! 💖</h1>
-        <h3>"إلى روح قلبي التي تحتفل بيوم ميلادها..."</h3>
-        
-        <p class="main-message">
-            اليوم ليس مجرد يوم ميلاد، بل هو احتفال بوجود أجمل إنسانة في حياتي. 
-            أعددت لكِ مفاجأة خاصة جداً، تبدأ بـ:
-        </p>
-
-        <a href="page2.html" class="action-button">
-            افتح رسالة الاحتفال
-        </a>
+        <div class="envelope" id="envelope">
+            
+            <div class="flap" onclick="openEnvelope()"></div>
+            
+            <div class="letter">
+                <h2 style="color: var(--accent-dark); margin-top: 0;">رسالة أولى من القلب!</h2>
+                <p style="line-height: 1.8;">
+                    أعلم أن هذا ليس شكل البطاقة المعتاد، لكن هذا التصميم الأنيق كله لأجلكِ! 
+                    <br>
+                    <strong>هذا الظرف يخفي خلفه 5 مفاجآت في انتظارك...</strong>
+                </p>
+                <p style="margin-top: 30px; color: var(--accent-dark); font-size: 1.1em; font-weight: bold;">
+                    اضغطي على الزر أدناه لبدء الاحتفال!
+                </p>
+                
+                <a href="page2.html" class="action-button" style="margin-top: 20px;">
+                    لنبدأ مفاجأة اليوم! 🎁
+                </a>
+            </div>
+            
+            <div class="seal" onclick="openEnvelope()">
+                💌
+            </div>
+            
+        </div>
         
     </div>
 
+    <script>
+        function openEnvelope() {
+            const envelope = document.getElementById('envelope');
+            envelope.classList.add('open');
+            // تعطيل النقر على الختم بعد الفتح لمنع المشاكل
+            document.querySelector('.seal').onclick = null;
+            document.querySelector('.flap').onclick = null;
+        }
+    </script>
 </body>
 </html>
