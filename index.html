@@ -2,121 +2,134 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌟 عيد ميلاد سارة 🌟</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>💌 رسالة عيد ميلاد سارة</title>
 
     <style>
         /* ---------------------------------------------------- */
-        /* 1. التنسيق الأساسي والبدء بالخلفية السوداء */
+        /* 1. التنسيق الأساسي والخلفية المتدرجة الأنيقة */
         /* ---------------------------------------------------- */
         body {
-            background: #000; /* الخلفية السوداء للفضاء */
+            /* تدرج لوني ناعم (مثل الذي في الفيديو) */
+            background: linear-gradient(180deg, #fff7fa 0%, #ffedf3 100%);
             margin: 0;
-            overflow: hidden; /* إخفاء الأجزاء الزائدة من النجوم */
-            font-family: Tahoma, Arial, sans-serif;
-            min-height: 100vh; /* تغطية كاملة للشاشة */
-        }
-
-        /* ---------------------------------------------------- */
-        /* 2. إنشاء النجوم المتحركة باستخدام box-shadow */
-        /* ---------------------------------------------------- */
-        #stars, #stars2, #stars3 {
-            width: 1px;
-            height: 1px;
-            background: transparent;
-            position: absolute;
-            top: 0;
-            left: 0;
-            /* توليد النجوم: استخدمنا نقاط عشوائية تغطي مساحة كبيرة */
-            box-shadow: 
-                200px 100px #FFF, 400px 200px #EEE, 600px 300px #DDD, 800px 400px #CCC, 1000px 500px #BBB,
-                100px 600px #FFF, 300px 700px #EEE, 500px 800px #DDD, 700px 900px #CCC, 900px 1000px #BBB,
-                1200px 100px #FFF, 1400px 200px #EEE, 1600px 300px #DDD, 1800px 400px #CCC, 2000px 500px #BBB,
-                1100px 600px #FFF, 1300px 700px #EEE, 1500px 800px #DDD, 1700px 900px #CCC, 1900px 1000px #BBB,
-                50px 100px #FFF, 150px 250px #EEE, 250px 50px #DDD, 350px 400px #CCC, 450px 600px #BBB;
-        }
-
-        /* تحديد حجم طبقات النجوم وسرعتها */
-        #stars {
-            width: 1500px; 
-            height: 1500px;
-            animation: moveStar 100s linear infinite; /* أسرع طبقة */
-        }
-        #stars2 {
-            width: 2000px;
-            height: 2000px;
-            animation: moveStar 180s linear infinite; /* متوسطة السرعة */
-        }
-        #stars3 {
-            width: 3000px;
-            height: 3000px;
-            animation: moveStar 250s linear infinite; /* أبطأ طبقة للعمق */
-        }
-
-        /* تعريف حركة النجوم */
-        @keyframes moveStar {
-            from {
-                transform: translate(0, 0);
-            }
-            to {
-                /* تتحرك النجوم لتشبه السفر في الفضاء */
-                transform: translate(-3000px, 3000px); 
-            }
-        }
-
-        /* ---------------------------------------------------- */
-        /* 3. تنسيق المحتوى (النص والأزرار) */
-        /* ---------------------------------------------------- */
-        .content-container {
-            position: relative;
-            z-index: 10; /* ليكون المحتوى فوق الخلفية */
+            overflow-x: hidden;
+            font-family: 'Tahoma', sans-serif;
+            min-height: 100vh;
+            color: #333;
             text-align: center;
-            padding-top: 25vh; /* ترك مسافة من الأعلى */
-            color: white;
         }
 
+        /* ---------------------------------------------------- */
+        /* 2. تصميم البطاقة البيضاء الأساسية (التي تحمل المحتوى) */
+        /* ---------------------------------------------------- */
+        .main-card {
+            background: white;
+            border-radius: 25px; /* حواف مستديرة جداً */
+            box-shadow: 0 15px 35px rgba(255, 94, 140, 0.2); /* ظل ناعم وردي */
+            padding: 30px 20px;
+            margin: 50px auto;
+            width: 90%;
+            max-width: 450px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* ---------------------------------------------------- */
+        /* 3. عناصر التحريك والخلفية (النجوم / الزخارف) */
+        /* ---------------------------------------------------- */
+        .decoration {
+            position: absolute;
+            opacity: 0.7;
+            animation: float 10s ease-in-out infinite; /* حركة عائمة بطيئة */
+            z-index: 1;
+        }
+
+        /* تعريف الحركة العائمة */
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(20px, -20px) rotate(5deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
+        /* مواقع وحجم الزخارف (النجوم، القلوب، السحاب) */
+        .dec-star1 { top: 10%; left: 5%; width: 40px; }
+        .dec-heart { top: 70%; right: 10%; width: 25px; animation-duration: 12s; }
+        .dec-cloud { top: 5%; right: 15%; width: 60px; animation-duration: 15s; }
+        .dec-star2 { bottom: 15%; left: 20%; width: 30px; animation-duration: 9s; }
+
+        /* ---------------------------------------------------- */
+        /* 4. تنسيق النصوص والأزرار */
+        /* ---------------------------------------------------- */
         .heading {
-            font-size: 2.5em;
-            color: gold;
-            text-shadow: 0 0 15px rgba(255, 215, 0, 0.9); /* ظل ذهبي لامع */
+            font-size: 1.8em;
+            color: #ff5e8c; /* لون زهري أنيق */
+            font-weight: 900;
             margin-bottom: 5px;
+        }
+        
+        .sub-heading {
+            font-size: 1.2em;
+            color: #a0a0a0;
+            margin-bottom: 25px;
         }
 
         .intro-text {
-            font-size: 1.2em;
-            margin-top: 10px;
-            color: #ccc;
+            font-size: 1em;
+            line-height: 1.6;
+            margin-bottom: 30px;
         }
 
-        .bday-button {
-            background: #FFD700; /* ذهبي لامع */
-            color: #000;
+        .modern-button {
+            background: #ff5e8c; /* لون زهري لامع (Hot Pink) */
+            color: white;
             border: none;
-            padding: 15px 30px;
+            padding: 15px 40px;
             border-radius: 50px;
-            cursor: pointer;
-            font-size: 1.1em;
-            margin-top: 40px;
-            transition: background 0.3s;
+            font-size: 1.2em;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(255, 94, 140, 0.6); /* ظل مطابق للزر */
+            transition: all 0.3s;
             text-decoration: none;
-            display: inline-block; /* ليتصرف كزر في كل المتصفحات */
+            display: inline-block;
         }
-        .bday-button:hover {
-            background: #FFF;
+
+        .modern-button:hover {
+            background: #ff7aa5;
+            transform: scale(1.05);
+            box-shadow: 0 7px 20px rgba(255, 94, 140, 0.8);
+        }
+        
+        .footer-note {
+            margin-top: 30px;
+            color: #ff5e8c;
+            font-size: 0.85em;
         }
 
     </style>
 </head>
 <body>
-    <div id="stars"></div>
-    <div id="stars2"></div>
-    <div id="stars3"></div>
     
-    <div class="content-container">
-        <h1 class="heading">عيد ميلاد سعيد يا سارة</h1>
-        <p class="intro-text">يا من تضيء حياتي كنجوم هذا الكون... انطلقي في رحلتنا! 💖</p>
+    <div class="decoration dec-star1">⭐</div>
+    <div class="decoration dec-heart">💖</div>
+    <div class="decoration dec-cloud">☁️</div>
+    <div class="decoration dec-star2">✨</div>
+
+    <div class="main-card">
         
-        <a href="#" class="bday-button">ابدأ المفاجأة 🚀</a>
+        <h2 class="sub-heading">مفاجأة عيد الميلاد!</h2>
+        <h1 class="heading">عيد ميلاد سعيد، يا جميلة!</h1>
+        
+        <p class="intro-text">
+            اليوم هو يوم الاحتفال بأروع شخص في عالمي. لقد قمت بإعداد شيء مميز جداً. 
+            هل أنتِ جاهزة للانطلاق في رحلة المفاجآت؟
+        </p>
+
+        <a href="#" class="modern-button">انطلق الآن! 💖</a>
+
     </div>
+
+    <p class="footer-note">صُنعت بحب لا متناهي ليومكِ الخاص</p>
+    
 </body>
 </html>
