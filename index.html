@@ -2,35 +2,39 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>🔒 واجهة الوصول المشفرة 3D</title>
+    <title>✨ المفاجأة الكبرى: عرض ثلاثي الأبعاد ✨</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Changa:wght@600;800&display=swap" rel="stylesheet">
     
     <style>
         /* ------------------------- الألوان والثوابت ------------------------- */
         :root {
-            --dark-core: #0a0115;        /* خلفية داكنة جداً */
-            --neon-blue: #00e5ff;        /* لون التكنولوجيا الأساسي */
-            --neon-pink: #ff007f;        /* لون التحقق والنجاح */
-            --glass-base: rgba(0, 0, 0, 0.4); 
+            --dark-core: #0a0115;        
+            --neon-blue: #00e5ff;        
+            --neon-pink: #ff007f;        
             --text-light: #e0f7fa;
+            --interface-color: rgba(0, 0, 0, 0.6);
         }
 
         /* ------------------------- الأنميشن والتأثيرات الخيالية ------------------------- */
-        @keyframes scanLine {
-            0% { transform: translateY(0) scaleX(1.1); opacity: 0.8; }
-            100% { transform: translateY(300px) scaleX(1.1); opacity: 0; }
+        @keyframes rotateCube {
+            from { transform: rotateY(0deg) rotateX(0deg); }
+            to { transform: rotateY(360deg) rotateX(360deg); }
         }
-        @keyframes interfaceGlow {
-            0% { box-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue) inset; }
-            50% { box-shadow: 0 0 15px var(--neon-blue), 0 0 30px var(--neon-blue) inset; }
-            100% { box-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue) inset; }
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink); }
+            50% { box-shadow: 0 0 25px var(--neon-blue), 0 0 40px var(--neon-blue); }
+            100% { box-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink); }
         }
-        @keyframes unlockSuccess {
-            0%, 100% { background-color: var(--neon-blue); }
-            50% { background-color: var(--neon-pink); }
+        @keyframes glitch { /* تأثير التقطيع البصري */
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-3px, -3px); }
+            60% { transform: translate(4px, 4px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
         }
-
+        
         /* ------------------------- الجسم والخلفية الكونية ------------------------- */
         body {
             font-family: 'Changa', sans-serif;
@@ -40,202 +44,63 @@
             justify-content: center;
             align-items: center;
             background-color: var(--dark-core);
-            background-image: radial-gradient(#00f 1px, transparent 1px), radial-gradient(#00f 1px, transparent 1px);
+            /* إضافة بعض النقاط النيونية للخلفية */
+            background-image: radial-gradient(var(--neon-blue) 1px, transparent 1px), radial-gradient(var(--neon-pink) 1px, transparent 1px);
             background-size: 50px 50px;
             background-position: 0 0, 25px 25px;
             position: relative;
             overflow: hidden;
             color: var(--text-light);
             /* تهيئة للمنظور 3D */
-            perspective: 1200px;
+            perspective: 1000px; 
         }
-        
-        /* ------------------------- واجهة النظام (The 3D UI) ------------------------- */
-        .system-interface {
-            width: 700px;
-            height: 500px;
-            background-color: var(--glass-base);
-            border: 2px solid var(--neon-blue);
-            border-radius: 20px;
-            padding: 40px;
-            z-index: 10;
-            backdrop-filter: blur(15px); /* تأثير الزجاج */
-            /* تأثير 3D (إمالة خفيفة لخلق العمق) */
-            transform: rotateX(10deg) rotateY(-5deg) translateZ(50px);
-            box-shadow: 0 50px 100px rgba(0, 0, 0, 0.8), 0 0 50px var(--neon-blue);
+
+        /* ------------------------- المجسم ثلاثي الأبعاد (The Cube) ------------------------- */
+        .holographic-display-container {
+            width: 300px;
+            height: 300px;
+            /* تطبيق المنظور 3D على الحاوية */
+            transform-style: preserve-3d;
+            animation: rotateCube 30s infinite linear; /* دوران بطيء مستمر */
             position: relative;
-            animation: interfaceGlow 4s infinite alternate;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
         }
 
-        /* شريط المسح الضوئي الخيالي */
-        .scan-line {
+        .cube-face {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(to right, transparent, var(--neon-blue), transparent);
-            animation: scanLine 5s infinite linear;
-            z-index: 12;
-            filter: blur(1px);
-        }
-
-        /* ------------------------- محتوى الواجهة ------------------------- */
-        h1 {
-            font-size: 2.5em;
-            color: var(--neon-pink);
-            text-shadow: 0 0 10px var(--neon-pink);
-            margin-bottom: 5px;
-            text-transform: uppercase;
-        }
-        .status-text {
-            color: var(--neon-blue);
-            font-size: 1.2em;
-            margin-bottom: 40px;
-            border-bottom: 2px solid var(--neon-blue);
-            padding-bottom: 10px;
-        }
-        
-        .message-content {
-            font-size: 1.1em;
-            line-height: 1.8;
-            margin-bottom: 50px;
-            background-color: rgba(255, 255, 255, 0.05);
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 5px solid var(--neon-pink);
-        }
-
-        /* ------------------------- منطقة التفاعل المعقدة (Multiple Clicks) ------------------------- */
-        .interactive-area {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-        }
-
-        .action-button {
-            width: 80%;
-            padding: 20px;
-            border: 2px solid var(--neon-blue);
-            background: none;
-            color: var(--text-light);
-            font-size: 1.4em;
-            font-weight: 800;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 0 15px var(--neon-blue);
-            margin-bottom: 20px;
-            text-decoration: none; /* لإزالة خطوط الـ <a> */
-            display: block; /* لضمان أخذ العرض بالكامل */
-        }
-        .action-button:hover {
-            box-shadow: 0 0 30px var(--neon-pink);
-            border-color: var(--neon-pink);
-            background-color: rgba(255, 0, 127, 0.1);
-        }
-
-        .unlocked {
-            animation: unlockSuccess 0.5s ease-in-out forwards;
-            border-color: var(--neon-pink) !important;
-            box-shadow: 0 0 30px var(--neon-pink) !important;
-        }
-
-        /* مؤشر مستوى الوصول */
-        .access-level {
-            width: 50%;
-            height: 10px;
-            background-color: var(--glass-base);
-            border-radius: 5px;
-            margin-top: 10px;
-            overflow: hidden;
+            width: 300px;
+            height: 300px;
+            background-color: var(--interface-color);
             border: 1px solid var(--neon-blue);
-        }
-        .access-progress {
-            height: 100%;
-            width: 0%;
-            background-color: var(--neon-pink);
-            transition: width 0.5s ease-in-out;
-        }
-        .level-text {
-             font-size: 0.9em;
-             margin-top: 5px;
-             color: var(--neon-blue);
-        }
-    </style>
-</head>
-<body>
-
-    <div class="system-interface" id="systemInterface">
-        
-        <div class="scan-line"></div>
-        
-        <h1>[وصول مشفر]</h1>
-        <p class="status-text">جاري تحليل بيانات المستلم... يرجى المصادقة.</p>
-
-        <div class="message-content">
-            <p><strong>رمز النظام:</strong> يتطلب هذا المستوى من المفاجأة سلسلة من التحققات المتتابعة لضمان الوصول الآمن. كل ضغطة صحيحة تفتح خطوة جديدة نحو المحتوى الخيالي.</p>
-        </div>
-
-        <div class="interactive-area">
-            <a href="#" class="action-button" id="step1">
-                الخطوة 1: تحليل البصمة الكونية (اضغط 1/4)
-            </a>
+            text-align: center;
+            line-height: 300px;
+            font-size: 1.5em;
+            color: var(--text-light);
+            /* إضاءة نيون قوية */
+            box-shadow: 0 0 10px var(--neon-blue);
+            backface-visibility: hidden; /* لإخفاء الوجه الخلفي عند الدوران */
             
-            <a href="#" class="action-button" id="step2" style="display: none;">
-                الخطوة 2: فك تشفير البيانات الزمنية (اضغط 2/4)
-            </a>
-            
-            <a href="#" class="action-button" id="step3" style="display: none;">
-                الخطوة 3: التحقق من التوقيع النجمي (اضغط 3/4)
-            </a>
-            
-            <a href="page2.html" class="action-button" id="step4" style="display: none;">
-                الخطوة 4: فتح قفل واجهة المفاجآت! (اضغط 4/4)
-            </a>
-            
-            <div class="access-level">
-                <div class="access-progress" id="progressBar"></div>
-            </div>
-            <p class="level-text" id="progressText">مستوى الوصول: 0%</p>
-        </div>
-
-    </div>
-
-    <script>
-        let currentStep = 1;
-        const totalSteps = 4;
-        const progressBar = document.getElementById('progressBar');
-        const progressText = document.getElementById('progressText');
-
-        function updateProgress() {
-            const progress = (currentStep - 1) / (totalSteps -1) * 100;
-            progressBar.style.width = progress + '%';
-            progressText.innerText = `مستوى الوصول: ${Math.round(progress)}%`;
+            /* تأثير التقطيع/الجليتش على المحتوى */
+            animation: glitch 0.5s infinite alternate; 
         }
 
-        document.getElementById('step1').addEventListener('click', function(e) {
-            e.preventDefault();
-            this.classList.add('unlocked');
-            currentStep = 2;
-            updateProgress();
-            this.style.display = 'none';
-            document.getElementById('step2').style.display = 'block';
-        });
+        /* تحديد مواضع وجوه المكعب (3D Transforms) */
+        .front  { transform: rotateY(0deg) translateZ(150px); }
+        .right  { transform: rotateY(90deg) translateZ(150px); }
+        .back   { transform: rotateY(180deg) translateZ(150px); }
+        .left   { transform: rotateY(-90deg) translateZ(150px); }
+        .top    { transform: rotateX(90deg) translateZ(150px); }
+        .bottom { transform: rotateX(-90deg) translateZ(150px); }
 
-        document.getElementById('step2').addEventListener('click', function(e) {
-            e.preventDefault();
-            this.classList.add('unlocked');
-            currentStep = 3;
-            updateProgress();
-            this.style.display = 'none';
-            document.getElementById('step3').style.display = 'block';
-        });
+        /* ------------------------- الواجهة المحيطة (الرسائل) ------------------------- */
+        .info-panel {
+            position: absolute;
+            z-index: 20;
+            background-color: var(--interface-color);
+            border: 2px solid var(--neon-pink);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 25px var(--neon-pink);
+            animation: pulseGlow 3
 
         document.getElementById('step3').addEventListener('click', function(e) {
             e.preventDefault();
