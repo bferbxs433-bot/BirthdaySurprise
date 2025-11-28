@@ -3,8 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سارة: قصة حب عبر النجوم</title>
-    <link rel="stylesheet" href="style.css">
+    <title>🌟 عيد ميلاد سارة 🌟</title>
+
+    <style>
+        /* ---------------------------------------------------- */
+        /* 1. التنسيق الأساسي والبدء بالخلفية السوداء */
+        /* ---------------------------------------------------- */
+        body {
+            background: #000; /* الخلفية السوداء للفضاء */
+            margin: 0;
+            overflow: hidden; /* إخفاء الأجزاء الزائدة من النجوم */
+            font-family: Tahoma, Arial, sans-serif;
+            min-height: 100vh; /* تغطية كاملة للشاشة */
+        }
+
+        /* ---------------------------------------------------- */
+        /* 2. إنشاء النجوم المتحركة باستخدام box-shadow */
+        /* ---------------------------------------------------- */
+        #stars, #stars2, #stars3 {
+            width: 1px;
+            height: 1px;
+            background: transparent;
+            position: absolute;
+            top: 0;
+            left: 0;
+            /* توليد النجوم: استخدمنا نقاط عشوائية تغطي مساحة كبيرة */
+            box-shadow: 
+                200px 100px #FFF, 400px 200px #EEE, 600px 300px #DDD, 800px 400px #CCC, 1000px 500px #BBB,
+                100px 600px #FFF, 300px 700px #EEE, 500px 800px #DDD, 700px 900px #CCC, 900px 1000px #BBB,
+                1200px 100px #FFF, 1400px 200px #EEE, 1600px 300px #DDD, 1800px 400px #CCC, 2000px 500px #BBB,
+                1100px 600px #FFF, 1300px 700px #EEE, 1500px 800px #DDD, 1700px 900px #CCC, 1900px 1000px #BBB,
+                50px 100px #FFF, 150px 250px #EEE, 250px 50px #DDD, 350px 400px #CCC, 450px 600px #BBB;
+        }
+
+        /* تحديد حجم طبقات النجوم وسرعتها */
+        #stars {
+            width: 1500px; 
+            height: 1500px;
+            animation: moveStar 100s linear infinite; /* أسرع طبقة */
+        }
+        #stars2 {
+            width: 2000px;
+            height: 2000px;
+            animation: moveStar 180s linear infinite; /* متوسطة السرعة */
+        }
+        #stars3 {
+            width: 3000px;
+            height: 3000px;
+            animation: moveStar 250s linear infinite; /* أبطأ طبقة للعمق */
+        }
+
+        /* تعريف حركة النجوم */
+        @keyframes moveStar {
+            from {
+                transform: translate(0, 0);
+            }
+            to {
+                /* تتحرك النجوم لتشبه السفر في الفضاء */
+                transform: translate(-3000px, 3000px); 
+            }
+        }
+
+        /* ---------------------------------------------------- */
+        /* 3. تنسيق المحتوى (النص والأزرار) */
+        /* ---------------------------------------------------- */
+        .content-container {
+            position: relative;
+            z-index: 10; /* ليكون المحتوى فوق الخلفية */
+            text-align: center;
+            padding-top: 25vh; /* ترك مسافة من الأعلى */
+            color: white;
+        }
+
+        .heading {
+            font-size: 2.5em;
+            color: gold;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.9); /* ظل ذهبي لامع */
+            margin-bottom: 5px;
+        }
+
+        .intro-text {
+            font-size: 1.2em;
+            margin-top: 10px;
+            color: #ccc;
+        }
+
+        .bday-button {
+            background: #FFD700; /* ذهبي لامع */
+            color: #000;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.1em;
+            margin-top: 40px;
+            transition: background 0.3s;
+            text-decoration: none;
+            display: inline-block; /* ليتصرف كزر في كل المتصفحات */
+        }
+        .bday-button:hover {
+            background: #FFF;
+        }
+
+    </style>
 </head>
 <body>
     <div id="stars"></div>
@@ -12,9 +113,10 @@
     <div id="stars3"></div>
     
     <div class="content-container">
-        <h1 class="elegant-text">عيد ميلاد سعيد يا سارة</h1>
-        <p class="elegant-text">أنتِ نجمتي التي تضيء هذا الكون.</p>
-        <button class="bday-button">ابدأ الرحلة 🚀</button>
+        <h1 class="heading">عيد ميلاد سعيد يا سارة</h1>
+        <p class="intro-text">يا من تضيء حياتي كنجوم هذا الكون... انطلقي في رحلتنا! 💖</p>
+        
+        <a href="#" class="bday-button">ابدأ المفاجأة 🚀</a>
     </div>
 </body>
 </html>
