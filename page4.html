@@ -1,91 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>4. Our Shared Dreams 💭</title>
+    <title>4. رسالة فيديو خاصة جداً 🎁</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Changa:wght@600;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
     
     <style>
-        :root {
-            --primary-pink: #ff69b4;
-            --secondary-pink: #f7a8c9;
-            --background-soft: #fff6e0;
-            --card-soft: #fcf9f3;
-        }
-        body { 
-            font-family: 'Poppins', sans-serif; 
-            background: linear-gradient(to bottom, #fff0f5, #ffe4e1); 
-            color: #333; 
-            text-align: center; 
-            min-height: 100vh; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center; 
-            margin: 0;
-            position: relative;
-        }
-
-        .card { 
-            width: 95%;
+        .page-content {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 40px 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
             max-width: 450px;
-            padding: 30px; 
-            background: linear-gradient(135deg, #ffffff, var(--card-soft)); 
-            border-radius: 25px; 
-            box-shadow: 0 10px 40px rgba(255, 105, 180, 0.4); 
-            border: 1px solid #f0e6f0;
+            width: 90%;
+            margin: 50px auto;
+            animation: fadeInUp var(--animation-duration) ease-out;
+        }
+
+        .video-box {
             position: relative;
-            z-index: 10;
+            width: 100%;
+            padding-bottom: 56.25%; /* نسبة 16:9 */
+            background: var(--primary-soft);
+            border-radius: 15px;
+            margin: 30px 0;
+            overflow: hidden;
+            box-shadow: 0 10px 30px var(--shadow-soft);
         }
-
-        h4 { 
-            font-size: 2.5em; 
-            color: #9c27b0;
-            margin: 10px 0;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-        }
-        .dream-list { border: 2px solid #9c27b0; padding: 25px; border-radius: 15px; margin: 20px 0; text-align: left; font-size: 1.1em; background-color: #f7f3ff; }
         
-        img { 
-            width: 90%; max-width: 400px; border-radius: 15px; margin: 20px 0; border: 4px solid #ffb6c1; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        .video-box iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            opacity: 0;
+            transition: opacity 1s;
+        }
+        
+        .video-box.loaded iframe {
+            opacity: 1;
         }
 
-        .next-btn { 
-            background-color: #9c27b0;
-            color: white; 
-            padding: 18px 40px; 
-            text-decoration: none; 
-            border-radius: 50px; 
-            font-size: 1.4em; 
-            display: inline-block; 
-            margin-top: 20px; 
-            transition: all 0.4s; 
-            box-shadow: 0 5px 15px rgba(156, 39, 176, 0.4);
-            border: none;
+        .cover-button {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 1.4em;
+            color: var(--accent-dark);
+            transition: opacity 0.5s;
+            font-weight: 700;
         }
-        .next-btn:hover { 
-            background-color: #8e24aa; 
-            transform: scale(1.05); 
+
+        .video-box.loaded .cover-button {
+            opacity: 0;
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
-    <div class="card">
-        <h4>🌈 Dreams We Will Achieve Together 🌈</h4>
-        <img src="https://i.pinimg.com/originals/7b/4b/3e/7b4b3e3e3e3e3e3e3e3e3e3e3e3e3e3e.gif" alt="Anime Couple Dreams" />
+    <div class="page-content">
         
-        <div class="dream-list">
-            <p><strong>My Love [Name],</strong> my future dreams are all about you:</p>
-            <ul>
-                <li>**Dream 1:** To travel to [Favorite Country] and eat [Favorite Meal] together.</li>
-                <li>**Dream 2:** To see ourselves in [Number of Years] years, being [Describe the scene].</li>
-                <li>**Dream 3:** To build [Type of project or joint work] we talked about.</li>
-            </ul>
+        <h2 style="color: var(--accent-dark); font-size: 2em; margin-bottom: 20px;">مشاهدة ممتعة! 🎬</h2>
+        
+        <p style="color: var(--text-color);">
+            هذه الأغنية/الرسالة تلخص مشاعري لكِ في يوم ميلادك. اضغطي على الصندوق!
+        </p>
+
+        <div class="video-box" id="videoContainer">
+            <iframe id="videoFrame" src="https://www.youtube.com/embed/YOUR_YOUTUBE_EMBED_LINK" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            
+            <div class="cover-button" onclick="loadVideo()">
+                اضغطي هنا لفتح الصندوق السري! 🎀
+            </div>
         </div>
         
-        <a href="final.html" class="next-btn">Time for the Grand Surprise! 🎁</a>
+        <a href="page5.html" class="action-button">
+            المفاجأة الأخيرة (5/5)
+        </a>
+        
     </div>
+    
+    <script>
+        function loadVideo() {
+            const container = document.getElementById('videoContainer');
+            const frame = document.getElementById('videoFrame');
+            
+            // التأكد من تشغيل الفيديو تلقائياً (قد يختلف حسب إعدادات المتصفح)
+            frame.src = frame.src + "?autoplay=1"; 
+            container.classList.add('loaded');
+        }
+    </script>
 </body>
 </html>
