@@ -9,21 +9,18 @@
     <style>
         /* ------------------------- الألوان الرئيسية (Cosmic Palette) ------------------------- */
         :root {
-            --dark-space: #05001a;       /* أسود/بنفسجي عميق جداً للخلفية */
-            --glow-pink: #ff007f;        
-            --glow-purple: #8a2be2;      
+            --dark-space: #05001a;       
+            --glow-pink: #ff007f;        /* وردي نيون قوي */
+            --glow-purple: #8a2be2;      /* بنفسجي نيون */
             --glass-bg: rgba(255, 255, 255, 0.08); 
             --text-light: #ffffff;
             --main-anim-duration: 1.8s;
-            --heart-color-anim: #ff4081; 
-
-            /* ألوان النجوم الجديدة */
             --star-white: #ffffff;
-            --star-pink: #ffd1dc; /* وردي باهت */
-            --star-blue: #add8e6; /* أزرق باهت */
+            --star-pink: #ffd1dc; 
+            --star-blue: #add8e6; 
         }
 
-        /* ------------------------- الأنميشن والنجوم (Glow and Twinkle) ------------------------- */
+        /* ------------------------- الأنميشن والشهب (أقوى وأوضح) ------------------------- */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -46,11 +43,9 @@
             0%, 100% { opacity: 0.2; }
             50% { opacity: 1; }
         }
-        @keyframes floatHeart { 
-            0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.7; }
-            25% { transform: translateY(-20px) translateX(5px) rotate(5deg); opacity: 1; }
-            50% { transform: translateY(0px) translateX(0px) rotate(0deg); opacity: 0.7; }
-            75% { transform: translateY(20px) translateX(-5px) rotate(-5deg); opacity: 1; }
+        @keyframes floatHeartNeon { /* حركة القلب النيون الأنيقة */
+            0%, 100% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.8; }
+            50% { transform: translateY(-15px) rotate(-5deg) scale(1.05); opacity: 1; }
         }
         @keyframes shootingStar { 
             0% { transform: translateX(100vw) translateY(-100vh) rotate(-45deg); opacity: 0; }
@@ -67,7 +62,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: var(--dark-space); /* خلفية داكنة جداً */
+            background-color: var(--dark-space); 
             overflow: hidden; 
             position: relative;
             animation: fadeIn 2s ease-out;
@@ -75,7 +70,7 @@
             text-align: center;
         }
 
-        /* ------------------------- نظام النجوم والشهب (أحجام وألوان وذيول) ------------------------- */
+        /* ------------------------- نظام النجوم والشهب (تحسين الذيل) ------------------------- */
         .star-field {
             position: absolute;
             top: 0;
@@ -88,7 +83,7 @@
         }
         .star {
             position: absolute;
-            background: var(--text-light); /* سيتم تغيير اللون عشوائياً بالـ JS */
+            background: var(--text-light); 
             border-radius: 50%;
             box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
             animation: twinkle 4s infinite;
@@ -96,28 +91,30 @@
 
         .shooting-star {
             position: absolute;
-            width: 5px; /* حجم أكبر قليلاً */
+            width: 5px; 
             height: 5px;
-            /* ذيل الشهاب: تدرج لوني طويل */
-            background: linear-gradient(to right, var(--glow-pink) 0%, transparent 100%);
+            background: var(--text-light); /* رأس الشهاب */
+            border-radius: 50%;
             box-shadow: 0 0 10px var(--glow-pink), 0 0 20px var(--glow-purple);
             animation: shootingStar 15s linear infinite; 
             z-index: 2; 
             transform: translateX(100vw) translateY(-100vh) rotate(-45deg); 
-            /* إضافة ذيل أطول كعنصر pseudo */
+            
+            /* الذيل الواضح والمبتهج (Neon Trail) */
             &::after {
                 content: '';
                 position: absolute;
-                top: 0;
+                top: 50%;
                 left: 0;
-                width: 100px; /* طول الذيل */
-                height: 5px;
-                background: linear-gradient(to right, transparent 0%, rgba(255,255,255,0.8) 100%);
-                transform: translateX(-90px); /* يبدأ الذيل قبل الشهاب */
-                border-radius: 5px;
-                filter: blur(2px);
+                width: 150px; /* طول الذيل أطول */
+                height: 3px;
+                /* تدرج لوني يعطي إحساس التلاشي النيون */
+                background: linear-gradient(to left, var(--glow-pink) 0%, rgba(255, 255, 255, 0) 100%);
+                transform: translate(5px, -50%) rotate(-45deg); /* لمحاذاة الذيل مع حركة الشهاب */
+                filter: blur(1px);
             }
         }
+        /* زيادة عدد الشهب بشكل كبير مع تأخيرات عشوائية */
         .shooting-star:nth-child(1) { top: 5%; left: 95%; animation-delay: 1s; animation-duration: 12s; }
         .shooting-star:nth-child(2) { top: 15%; left: 80%; animation-delay: 4s; animation-duration: 18s; }
         .shooting-star:nth-child(3) { top: 30%; left: 70%; animation-delay: 8s; animation-duration: 10s; }
@@ -125,6 +122,9 @@
         .shooting-star:nth-child(5) { top: 60%; left: 90%; animation-delay: 6s; animation-duration: 16s; }
         .shooting-star:nth-child(6) { top: 70%; left: 30%; animation-delay: 10s; animation-duration: 11s; }
         .shooting-star:nth-child(7) { top: 40%; left: 60%; animation-delay: 3s; animation-duration: 13s; }
+        .shooting-star:nth-child(8) { top: 85%; left: 10%; animation-delay: 5s; animation-duration: 9s; }
+        .shooting-star:nth-child(9) { top: 10%; left: 10%; animation-delay: 12s; animation-duration: 15s; }
+        .shooting-star:nth-child(10) { top: 55%; left: 45%; animation-delay: 7s; animation-duration: 10s; }
 
         /* ------------------------- البطاقة الرئيسية (Glassmorphism + Glow) ------------------------- */
         .main-card {
@@ -141,21 +141,43 @@
             border-left: 5px solid var(--glow-pink); 
         }
 
-        /* ------------------------- قلوب كرتونية عائمة (Animated Hearts) ------------------------- */
+        /* ------------------------- قلوب النيون الأنيقة (الاحترافية) ------------------------- */
         .floating-heart {
             position: absolute;
-            font-size: 3em;
-            color: var(--heart-color-anim);
-            opacity: 0.8;
-            filter: drop-shadow(0 0 5px var(--heart-color-anim));
-            animation: floatHeart 8s infinite ease-in-out; 
+            width: 30px; /* حجم القلب */
+            height: 30px;
+            background-color: var(--glow-pink);
+            transform: rotate(-45deg);
             z-index: 5; 
+            animation: floatHeartNeon 8s infinite ease-in-out;
+            
+            /* شكل القلب CSS */
+            &::before, &::after {
+                content: "";
+                position: absolute;
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                background-color: var(--glow-pink);
+            }
+            &::before {
+                top: -15px;
+                left: 0;
+            }
+            &::after {
+                top: 0;
+                left: 15px;
+            }
+            /* تأثير النيون الأنيق */
+            filter: drop-shadow(0 0 5px var(--glow-pink)) drop-shadow(0 0 15px var(--glow-purple));
+            opacity: 0.8;
         }
-        #heart1 { top: 5%; left: 2%; animation-delay: 0s; }
-        #heart2 { top: 20%; right: 5%; animation-delay: 3s; font-size: 2em; }
-        #heart3 { bottom: 10%; left: 10%; animation-delay: 6s; }
-        #heart4 { top: 60%; right: 2%; animation-delay: 9s; font-size: 2.5em; }
-        #heart5 { top: 40%; left: 20%; animation-delay: 1s; font-size: 1.8em; } 
+        /* تحديد مواضع القلوب المتحركة */
+        #heart1 { top: 5%; left: 5%; animation-delay: 0s; }
+        #heart2 { top: 25%; right: 10%; animation-delay: 3s; transform: scale(0.7) rotate(-45deg); }
+        #heart3 { bottom: 15%; left: 15%; animation-delay: 6s; }
+        #heart4 { top: 60%; right: 5%; animation-delay: 9s; transform: scale(0.8) rotate(-45deg); }
+        #heart5 { bottom: 30%; right: 20%; animation-delay: 1s; } 
 
         /* ------------------------- باقي تنسيقات المحتوى (كما هي) ------------------------- */
         h1 {
@@ -208,11 +230,11 @@
 </head>
 <body>
     
-    <div class="floating-heart" id="heart1">💖</div>
-    <div class="floating-heart" id="heart2">💖</div>
-    <div class="floating-heart" id="heart3">💖</div>
-    <div class="floating-heart" id="heart4">💖</div>
-    <div class="floating-heart" id="heart5">💖</div>
+    <div class="floating-heart" id="heart1"></div>
+    <div class="floating-heart" id="heart2"></div>
+    <div class="floating-heart" id="heart3"></div>
+    <div class="floating-heart" id="heart4"></div>
+    <div class="floating-heart" id="heart5"></div>
 
     <div class="star-field">
         <div class="shooting-star"></div>
@@ -225,10 +247,7 @@
         <div class="shooting-star"></div>
         <div class="shooting-star"></div>
         <div class="shooting-star"></div>
-        <div class="shooting-star"></div>
-        <div class="shooting-star"></div>
-        <div class="shooting-star"></div>
-    </div>
+        </div>
 
     <div class="main-card">
         
@@ -249,7 +268,7 @@
     </div>
 
     <script>
-        // سكريبت لإنشاء عدد كبير من النجوم عشوائياً (زيادة العدد لـ 250 نجمة)
+        // سكريبت لإنشاء عدد كبير من النجوم عشوائياً (250 نجمة بأحجام وألوان مختلفة)
         const starField = document.querySelector('.star-field');
         const numStars = 250; 
         const starColors = ['var(--star-white)', 'var(--star-pink)', 'var(--star-blue)'];
@@ -257,16 +276,15 @@
         function createStar() {
             const star = document.createElement('div');
             star.classList.add('star');
-            star.style.width = star.style.height = (Math.random() * 4 + 1) + 'px'; // أحجام مختلفة (1px - 5px)
+            star.style.width = star.style.height = (Math.random() * 4 + 1) + 'px';
             star.style.top = Math.random() * 100 + 'vh'; 
             star.style.left = Math.random() * 100 + 'vw'; 
-            star.style.animationDelay = (Math.random() * 5) + 's'; // تأخير عشوائي أكبر
-            star.style.opacity = Math.random() * 0.8 + 0.2; // شفافية عشوائية
-            star.style.backgroundColor = starColors[Math.floor(Math.random() * starColors.length)]; // لون عشوائي
+            star.style.animationDelay = (Math.random() * 5) + 's'; 
+            star.style.opacity = Math.random() * 0.8 + 0.2;
+            star.style.backgroundColor = starColors[Math.floor(Math.random() * starColors.length)];
             starField.appendChild(star);
         }
 
-        // إنشاء النجوم ديناميكياً
         for (let i = 0; i < numStars; i++) {
             createStar();
         }
