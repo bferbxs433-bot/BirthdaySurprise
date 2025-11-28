@@ -1,1 +1,91 @@
+body {
+    background: #000; /* خلفية سوداء للفضاء */
+    margin: 0;
+    overflow: hidden; /* إخفاء الأجزاء الزائدة من النجوم المتحركة */
+}
+
+/* ---------------------------------------------------- */
+/* 1. إنشاء النجوم باستخدام Box Shadow */
+/* ---------------------------------------------------- */
+
+#stars, #stars2, #stars3 {
+    width: 1px;
+    height: 1px;
+    background: transparent;
+    box-shadow: 
+        /* هنا تضع نقاط ظل (النجوم) التي ستتوزع عشوائياً */
+        /* (200px 100px #FFF, 500px 300px #FFF, ...) */
+        /* يفضل استخدام مولد CSS Stars Generator لإنشاء آلاف النقاط بسهولة */
+        200px 100px #FFF, 400px 200px #FFF, 600px 300px #FFF, 800px 400px #FFF, 1000px 500px #FFF,
+        100px 600px #EEE, 300px 700px #DDD, 500px 800px #CCC, 700px 900px #BBB, 900px 100px #AAA,
+        /* يمكنك إضافة مئات الأنماط هنا! */
+        /* ... */
+        1000px 900px #FFF, 100px 200px #FFF; /* مثال لنقطتين إضافيتين */
+    
+    /* تحديد الأبعاد التي تتوزع عليها النجوم */
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#stars {
+    width: 1000px;
+    height: 1000px;
+    animation: animateStar 150s linear infinite; /* حركة بطيئة جداً */
+}
+
+#stars2 {
+    width: 2000px;
+    height: 2000px;
+    animation: animateStar 250s linear infinite; /* حركة أبطأ للعمق */
+}
+
+#stars3 {
+    width: 3000px;
+    height: 3000px;
+    animation: animateStar 350s linear infinite; /* حركة أبطأ جداً */
+}
+
+/* ---------------------------------------------------- */
+/* 2. تحديد حركة النجوم (Keyframes) */
+/* ---------------------------------------------------- */
+
+@keyframes animateStar {
+    from {
+        transform: translate(0, 0);
+    }
+    to {
+        /* حركة النجوم لتشبه التحليق عبر الفضاء */
+        transform: translate(-2000px, 2000px); 
+    }
+}
+
+/* ---------------------------------------------------- */
+/* 3. تنسيق محتوى الموقع (لإظهار رسالتك فوق النجوم) */
+/* ---------------------------------------------------- */
+
+.content-container {
+    position: relative;
+    z-index: 10; /* يجب أن يكون المحتوى فوق النجوم */
+    text-align: center;
+    padding-top: 20vh;
+    color: white; /* لون النص ليكون مرئياً */
+}
+
+.elegant-text {
+    font-family: 'Arial', sans-serif; /* استخدم خطاً أنيقاً متوفراً */
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7); /* ظل خفيف للنص */
+}
+
+.bday-button {
+    background-color: gold;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+    margin-top: 20px;
+    transition: all 0.3s;
+}
 
