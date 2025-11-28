@@ -21,22 +21,16 @@
         }
 
         body { 
-            font-family: 'Changa', 'Amiri', sans-serif; 
-            background: var(--background-soft);
-            color: var(--text-color-dark); 
-            text-align: center; 
-            min-height: 100vh; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: flex-start; 
-            align-items: center; 
-            margin: 0;
-            overflow: hidden;
-            position: relative;
-            padding-top: 20px;
-            /* خلفية القلب العامة لتغطية المساحة البيضاء */
-            background-image: url('data:image/svg+xml;utf8,<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><g opacity="0.1"><path fill="%23FFC0CB" d="M100 0L125 75L200 75L138 125L162 200L100 150L38 200L62 125L0 75L75 75Z"/></g></svg>'); 
-            background-size: 60px; 
+    font-family: 'Changa', 'Amiri', sans-serif; 
+    /* ... كود سابق ... */
+    justify-content: center; /* **التعديل هنا: لتوسيط العناصر عمودياً** */
+    align-items: center; 
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+    /* تم حذف padding-top: 20px; */
+}
+
         }
         
         .container {
