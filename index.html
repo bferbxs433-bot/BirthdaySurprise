@@ -12,24 +12,18 @@
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
 
         body {
-            /* خلفية فضاء عميقة وأنيقة */
             background: #000412; 
             margin: 0;
             overflow-x: hidden;
             font-family: 'Cairo', sans-serif;
             min-height: 100vh;
-            color: #ddd; /* نصوص فاتحة */
+            color: #ddd; 
             text-align: center;
+            perspective: 1000px; /* تفعيل 3D */
         }
 
-        /* تفعيل منظور 3D للانتقالات */
-        body, .main-card {
-            perspective: 1000px; 
-        }
-
-        /* تنسيق البطاقة الرئيسية: عائمة ولامعة */
         .main-card {
-            background: rgba(255, 255, 255, 0.05); /* شفافية داكنة جداً */
+            background: rgba(255, 255, 255, 0.05); 
             backdrop-filter: blur(5px);
             border: 1px solid rgba(255, 255, 255, 0.1); 
             border-radius: 20px;
@@ -40,37 +34,30 @@
             max-width: 420px;
             position: relative;
             z-index: 10;
-            transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out; /* للتحولات السلسة وتأثير الانقلاب */
-            animation: fadeIn 0.8s ease-out backwards; 
+            transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
         }
         
-        /* أيقونة الصورة الدائرية (تم تصغيرها كما طلبت) */
         .profile-image {
-            width: 80px; height: 80px; /* حجم أصغر */
+            width: 80px; height: 80px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid #FFD700; /* إطار ذهبي */
+            border: 3px solid #FFD700; 
             margin-bottom: 25px;
             box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
         }
 
-        /* أيقونة المظروف (حجم متوسط) */
         .envelope-icon { 
-            font-size: 3.5em; /* حجم مناسب */
+            font-size: 3.5em;
             cursor: pointer; 
             margin: 20px 0 40px; 
             transition: transform 0.2s; 
-            color: #FFD700; /* لون ذهبي */
+            color: #FFD700; 
         }
         .envelope-icon:hover { transform: scale(1.1); }
 
-
-        /* تنسيق النصوص باللون الذهبي */
         .heading { font-size: 2em; color: #FFD700; font-weight: 900; margin-bottom: 10px; }
-        .sub-heading { font-size: 1.2em; color: #aaa; margin-bottom: 30px; }
         .intro-text { font-size: 1em; line-height: 1.6; color: #ccc; margin-bottom: 30px; }
 
-        /* الزر الاحترافي (Metallic Gold) */
         .modern-button {
             background: #FFD700; color: #333; border: none;
             padding: 16px 45px; border-radius: 50px;
@@ -78,7 +65,6 @@
             box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
             transition: all 0.3s; text-decoration: none; display: inline-block;
         }
-
         .modern-button:hover {
             transform: scale(1.05) translateY(-2px); 
             box-shadow: 0 10px 25px rgba(255, 215, 0, 0.6);
@@ -87,14 +73,25 @@
 
 
         /* ---------------------------------------------------- */
-        /* 2. التحريك المتقن (Staggered Animations) */
+        /* 2. الحركة (CSS Keyframes) - التحديث للتحريك الدقيق */
         /* ---------------------------------------------------- */
         
-        @keyframes fadeInMove {
-            from { opacity: 0; transform: translateY(30px); }
+        /* الحركة الاحترافية: انزلاق وظهور سلس */
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(50px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        /* كلاس تطبيق الحركة (الذي يتم إضافته بـ JavaScript) */
+        .slide-in-up {
+            animation: slideInUp 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        /* إخفاء العناصر التي ستظهر بالتتابع */
         .animated-element { opacity: 0; }
+        .gif-deco { position: fixed; z-index: 5; opacity: 0.85; transition: all 0.5s; animation: drift 18s ease-in-out infinite alternate; }
+        .gif-element { width: 120px; height: auto; border-radius: 10px; }
+        @keyframes drift { 0% { transform: translate(0, 0); } 100% { transform: translate(20px, 20px); } }
     </style>
 </head>
 <body>
@@ -148,14 +145,17 @@
             const targetStage = document.getElementById(targetId);
 
             if (currentStage) {
-                // 1. اختفاء الشاشة الحالية
+                // 1. إزالة الحركة الحالية والبدء في الاختفاء
+                const currentElements = currentStage.querySelectorAll('.animated-element');
+                currentElements.forEach(el => el.classList.remove('slide-in-up'));
+                
                 currentStage.style.opacity = 0;
-                currentStage.style.transform = 'translateY(-20px)';
+                currentStage.style.transform = 'translateY(-20px)'; // الحركة إلى الأعلى
                 
                 setTimeout(() => {
                     currentStage.classList.add('hidden');
                     
-                    // 2. إظهار الشاشة الهدف
+                    // 2. إظهار الشاشة الهدف والبدء في الحركة المتقطعة
                     if (targetStage) {
                         targetStage.classList.remove('hidden');
                         targetStage.style.opacity = 0; 
@@ -173,11 +173,15 @@
             }
         }
         
-        // دالة فتح المظروف بتأثير انقلاب ثلاثي الأبعاد
+        // دالة فتح المظروف بتأثير الانقلاب ثلاثي الأبعاد
         function openEnvelope() {
             const closedStage = document.getElementById('stage-envelope-closed');
             const openStage = document.getElementById('stage-message-open');
             
+            // إزالة حركة الظهور المتقطعة من العناصر أولاً
+            const closedElements = closedStage.querySelectorAll('.animated-element');
+            closedElements.forEach(el => el.classList.remove('slide-in-up'));
+
             // 1. حركة اختفاء المظروف المغلق مع انقلاب
             closedStage.style.opacity = 0;
             closedStage.style.transform = 'rotateY(90deg) scale(0.8)'; 
@@ -201,18 +205,19 @@
             }, 600);
         }
         
-        // دالة تطبيق الحركة المتقطعة (Staggered Animation)
+        // الدالة المسؤولة عن ظهور العناصر بالتتابع (التأخير الزمني)
         function animateContent(stage) {
             const elements = stage.querySelectorAll('.animated-element');
+            
             elements.forEach(el => {
-                const delay = parseFloat(el.getAttribute('data-delay')) * 1000;
-                
-                // إعادة تعيين الحركة لكي تعمل في كل مرة
-                el.style.animation = 'none';
+                // إزالة الحركة القديمة وإعادة تشغيل العنصر لضمان عمل الحركة
+                el.classList.remove('slide-in-up'); 
                 el.offsetHeight; 
                 
+                const delay = parseFloat(el.getAttribute('data-delay')) * 1000;
+                
                 setTimeout(() => {
-                    el.style.animation = 'fadeInMove 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards'; 
+                    el.classList.add('slide-in-up');
                 }, delay);
             });
         }
