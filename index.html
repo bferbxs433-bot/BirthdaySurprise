@@ -9,12 +9,13 @@
     <style>
         /* ------------------------- الألوان الرئيسية (Cosmic Palette) ------------------------- */
         :root {
-            --dark-space: #0f0023;       /* أسود/بنفسجي عميق للخلفية */
-            --glow-pink: #ff007f;        /* وردي نيون متوهج */
-            --glow-purple: #8a2be2;      /* بنفسجي متوهج */
-            --glass-bg: rgba(255, 255, 255, 0.08); /* خلفية زجاج بلوري شبه شفافة */
+            --dark-space: #0f0023;       
+            --glow-pink: #ff007f;        
+            --glow-purple: #8a2be2;      
+            --glass-bg: rgba(255, 255, 255, 0.08); 
             --text-light: #ffffff;
             --main-anim-duration: 1.8s;
+            --heart-color-anim: #ff4081; /* لون جديد للقلوب الكرتونية */
         }
 
         /* ------------------------- الأنميشن والنجوم (Glow and Twinkle) ------------------------- */
@@ -40,6 +41,16 @@
             0%, 100% { opacity: 0.2; }
             50% { opacity: 1; }
         }
+        @keyframes floatHeart { /* حركة القلب الكرتوني */
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+            50% { transform: translateY(-20px) rotate(5deg); opacity: 1; }
+        }
+        @keyframes shootingStar { /* حركة الشهاب الصغيرة */
+            0% { transform: translateX(0) translateY(0) scale(0); opacity: 0.2; }
+            10% { opacity: 1; transform: scale(1); }
+            80% { opacity: 0.8; }
+            100% { transform: translateX(-100vw) translateY(100vh) scale(0.5); opacity: 0; }
+        }
         
         /* ------------------------- تنسيقات الجسم والخلفية الفضائية الثابتة ------------------------- */
         body {
@@ -54,149 +65,4 @@
             position: relative;
             animation: fadeIn 2s ease-out;
             color: var(--text-light);
-            text-align: center;
-        }
-
-        /* ------------------------- نظام النجوم المتلألئة (CSS Stars) ------------------------- */
-        .star-field {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-        .star {
-            position: absolute;
-            background: var(--text-light);
-            border-radius: 50%;
-            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-            animation: twinkle 4s infinite;
-        }
-        /* كود JS سيقوم بتوليد النجوم، لكننا نضع بعضها يدوياً لتظهر فوراً */
-        .star:nth-child(1) { width: 3px; height: 3px; top: 15%; left: 85%; animation-delay: 0.5s; }
-        .star:nth-child(2) { width: 2px; height: 2px; top: 40%; left: 10%; animation-delay: 1.2s; }
-        .star:nth-child(3) { width: 4px; height: 4px; top: 70%; left: 55%; animation-delay: 2.5s; }
-        .star:nth-child(4) { width: 2px; height: 2px; top: 85%; left: 25%; animation-delay: 3s; }
-
-        /* ------------------------- البطاقة الرئيسية (Glassmorphism + Glow) ------------------------- */
-        .main-card {
-            background-color: var(--glass-bg);
-            border-radius: 25px;
-            padding: 50px;
-            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.2);
-            max-width: 550px;
-            width: 90%;
-            z-index: 10;
-            backdrop-filter: blur(10px); /* تأثير الزجاج الضبابي */
-            animation: slideInUp var(--main-anim-duration) ease-out;
-            position: relative;
-            border-left: 5px solid var(--glow-pink); /* خط فاخر */
-        }
-
-        /* ------------------------- العناوين والرسائل المتوهجة ------------------------- */
-        h1 {
-            font-size: 3em;
-            color: var(--text-light);
-            margin-bottom: 20px;
-            animation: neonGlow 2s infinite alternate; /* توهج نيون مستمر */
-        }
-
-        .subtitle {
-            font-size: 1.6em;
-            color: var(--glow-pink);
-            margin-bottom: 30px;
-            text-shadow: 0 0 10px var(--glow-pink);
-            animation: fadeIn 2s 0.5s ease-out both;
-        }
-
-        .message-text {
-            font-size: 1.1em;
-            line-height: 2.0;
-            color: var(--text-light);
-            animation: slideInUp var(--main-anim-duration) 0.8s ease-out both;
-        }
-
-        /* ------------------------- الزر الفاخر (Pulsing Button) ------------------------- */
-        .action-button {
-            background-color: var(--glow-pink);
-            color: var(--dark-space); /* نص داكن على الزر المتوهج */
-            padding: 20px 60px;
-            border-radius: 10px;
-            border: none;
-            font-size: 1.4em;
-            margin-top: 50px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            font-weight: 800;
-            animation: pulseGlow 3s infinite alternate; /* توهج نبضي فاخر */
-            transition: all 0.3s;
-        }
-        .action-button:hover {
-            background-color: var(--glow-purple);
-            color: var(--text-light);
-            transform: scale(1.05);
-        }
-        
-        /* ------------------------- الختم النجمي (رمز الابتداء) ------------------------- */
-        .initial-seal {
-            font-size: 5em;
-            color: var(--glow-pink);
-            display: block;
-            margin-bottom: 20px;
-            animation: neonGlow 2s infinite alternate, fadeIn 2s ease-out;
-        }
-    </style>
-</head>
-<body>
-    
-    <div class="star-field">
-        <div class="star"></div>
-        <div class="star"></div>
-        <div class="star"></div>
-        <div class="star"></div>
-    </div>
-
-    <div class="main-card">
-        
-        <span class="initial-seal">🌌</span>
-
-        <h1>أنتِ سحر هذا الكون!</h1>
-        <p class="subtitle">احتفال النجوم بيوم ميلاد أجمل ما خلق ربي.</p>
-
-        <p class="message-text">
-            إلى ملكة النور، تحت هذا السقف النجمي الذي يتوهج لأجلكِ، أضع لكِ بداية رحلة فريدة.
-            هذا التصميم الفاخر هو انعكاس لروعة حضوركِ في حياتي.
-            كوني مستعدة للمفاجأة الكبرى التي تنتظركِ.
-        </p>
-        
-        <a href="page2.html" class="action-button">
-            اكتشفي المفاجأة الكونية
-        </a>
-    </div>
-
-    <script>
-        // سكريبت لإنشاء عدد كبير من النجوم عشوائياً (لمزيد من الفخامة)
-        const starField = document.querySelector('.star-field');
-        const numStars = 100; // عدد النجوم المطلوب
-
-        function createStar() {
-            const star = document.createElement('div');
-            star.classList.add('star');
-            star.style.width = star.style.height = (Math.random() * 3 + 1) + 'px'; // حجم عشوائي
-            star.style.top = Math.random() * 100 + 'vh'; // موضع عمودي عشوائي
-            star.style.left = Math.random() * 100 + 'vw'; // موضع أفقي عشوائي
-            star.style.animationDelay = (Math.random() * 4) + 's'; // تأخير عشوائي
-            star.style.opacity = Math.random(); // شفافية عشوائية
-            starField.appendChild(star);
-        }
-
-        // إنشاء النجوم ديناميكياً
-        for (let i = 0; i < numStars; i++) {
-            createStar();
-        }
-    </script>
-</body>
-</html>
+            text-align: center
