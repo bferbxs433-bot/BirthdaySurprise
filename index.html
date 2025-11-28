@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>💌 رسالة عيد ميلاد سارة</title>
+    <title>💌 رسالة حب عيد ميلاد سارة</title>
 
     <style>
         /* ---------------------------------------------------- */
-        /* 1. التنسيق الأساسي والخلفية المتدرجة الأنيقة */
+        /* 1. الأساسيات والجمالية الأنيقة (CSS) */
         /* ---------------------------------------------------- */
         body {
-            /* تدرج لوني ناعم (مثل الذي في الفيديو) */
+            /* تدرج لوني ناعم للخلفية */
             background: linear-gradient(180deg, #fff7fa 0%, #ffedf3 100%);
             margin: 0;
             overflow-x: hidden;
@@ -20,90 +20,92 @@
             text-align: center;
         }
 
-        /* ---------------------------------------------------- */
-        /* 2. تصميم البطاقة البيضاء الأساسية (التي تحمل المحتوى) */
-        /* ---------------------------------------------------- */
+        /* تنسيق البطاقة الرئيسية: تأثير زجاجي خفيف (Glassmorphism) */
         .main-card {
-            background: white;
-            border-radius: 25px; /* حواف مستديرة جداً */
-            box-shadow: 0 15px 35px rgba(255, 94, 140, 0.2); /* ظل ناعم وردي */
-            padding: 30px 20px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(255, 94, 140, 0.4);
+            padding: 35px 20px;
             margin: 50px auto;
             width: 90%;
             max-width: 450px;
             position: relative;
             z-index: 10;
+            transition: opacity 0.5s ease-in-out; /* للتحولات السلسة */
         }
 
-        /* ---------------------------------------------------- */
-        /* 3. عناصر التحريك والخلفية (النجوم / الزخارف) */
-        /* ---------------------------------------------------- */
-        .decoration {
-            position: absolute;
-            opacity: 0.7;
-            animation: float 10s ease-in-out infinite; /* حركة عائمة بطيئة */
-            z-index: 1;
+        /* تنسيق الصورة الدائرية (الرسمة الرومانسية) */
+        .profile-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #ff5e8c;
+            margin-bottom: 20px;
+            box-shadow: 0 0 15px rgba(255, 94, 140, 0.4);
         }
 
-        /* تعريف الحركة العائمة */
-        @keyframes float {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            50% { transform: translate(20px, -20px) rotate(5deg); }
-            100% { transform: translate(0, 0) rotate(0deg); }
-        }
+        /* تنسيق النصوص */
+        .heading { font-size: 1.8em; color: #ff5e8c; font-weight: 900; margin-bottom: 5px; }
+        .sub-heading { font-size: 1.2em; color: #a0a0a0; margin-bottom: 25px; }
+        .intro-text { font-size: 1em; line-height: 1.6; margin-bottom: 30px; }
+        .footer-note { margin-top: 30px; color: #ff5e8c; font-size: 0.85em; }
 
-        /* مواقع وحجم الزخارف (النجوم، القلوب، السحاب) */
-        .dec-star1 { top: 10%; left: 5%; width: 40px; }
-        .dec-heart { top: 70%; right: 10%; width: 25px; animation-duration: 12s; }
-        .dec-cloud { top: 5%; right: 15%; width: 60px; animation-duration: 15s; }
-        .dec-star2 { bottom: 15%; left: 20%; width: 30px; animation-duration: 9s; }
-
-        /* ---------------------------------------------------- */
-        /* 4. تنسيق النصوص والأزرار */
-        /* ---------------------------------------------------- */
-        .heading {
-            font-size: 1.8em;
-            color: #ff5e8c; /* لون زهري أنيق */
-            font-weight: 900;
-            margin-bottom: 5px;
-        }
-        
-        .sub-heading {
-            font-size: 1.2em;
-            color: #a0a0a0;
-            margin-bottom: 25px;
-        }
-
-        .intro-text {
-            font-size: 1em;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-
+        /* تنسيق الزر الاحترافي (3D Look) */
         .modern-button {
-            background: #ff5e8c; /* لون زهري لامع (Hot Pink) */
+            background: #ff5e8c;
             color: white;
             border: none;
-            padding: 15px 40px;
+            padding: 16px 45px;
             border-radius: 50px;
             font-size: 1.2em;
             font-weight: bold;
-            box-shadow: 0 5px 15px rgba(255, 94, 140, 0.6); /* ظل مطابق للزر */
+            box-shadow: 0 5px 15px rgba(255, 94, 140, 0.6);
+            border-bottom: 4px solid #cc4e70; /* لجعل الزر يبدو مرفوعاً */
             transition: all 0.3s;
             text-decoration: none;
             display: inline-block;
         }
 
         .modern-button:hover {
-            background: #ff7aa5;
-            transform: scale(1.05);
-            box-shadow: 0 7px 20px rgba(255, 94, 140, 0.8);
+            transform: scale(1.02) translateY(2px);
+            box-shadow: 0 5px 10px rgba(255, 94, 140, 0.8);
+            border-bottom: 2px solid #cc4e70;
         }
+
+        /* تنسيق الـ GIFs المتحركة كزخارف */
+        .gif-deco {
+            position: fixed;
+            z-index: 5;
+            opacity: 0.85;
+            transition: all 0.5s;
+            animation: drift 15s ease-in-out infinite alternate;
+        }
+
+        .gif-element { width: 120px; height: auto; border-radius: 10px; }
+        #gif-patrick { animation-duration: 18s; } 
+        #gif-tom { animation-duration: 16s; }
+
+        /* تنسيق أيقونة المظروف في الشاشة الثانية */
+        .envelope-icon { font-size: 5em; cursor: pointer; margin: 40px 0; transition: transform 0.2s; }
+        .envelope-icon:hover { transform: scale(1.1); }
         
-        .footer-note {
-            margin-top: 30px;
-            color: #ff5e8c;
-            font-size: 0.85em;
+        /* إخفاء / إظهار العناصر */
+        .hidden { display: none !important; }
+
+        /* ---------------------------------------------------- */
+        /* 2. الحركة (CSS Keyframes) */
+        /* ---------------------------------------------------- */
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(20px, -20px) rotate(5deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+        @keyframes drift {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(15px, 15px); }
         }
 
     </style>
@@ -115,8 +117,17 @@
     <div class="decoration dec-cloud">☁️</div>
     <div class="decoration dec-star2">✨</div>
 
-    <div class="main-card">
+    <div class="gif-deco" id="gif-patrick" style="top: 10%; left: -5%;">
+        <img src="images/1000154382.gif" alt="باتريك سعيد" class="gif-element">
+    </div>
+    <div class="gif-deco" id="gif-tom" style="bottom: 5%; right: -5%;">
+        <img src="images/1000154383.gif" alt="توم خجول" class="gif-element">
+    </div>
+
+    <div class="main-card" id="stage-welcome"> 
         
+        <img src="images/1000154269.jpg" alt="سارة وهديتها" class="profile-image">
+
         <h2 class="sub-heading">مفاجأة عيد الميلاد!</h2>
         <h1 class="heading">عيد ميلاد سعيد، يا جميلة!</h1>
         
@@ -125,11 +136,69 @@
             هل أنتِ جاهزة للانطلاق في رحلة المفاجآت؟
         </p>
 
-        <a href="#" class="modern-button">انطلق الآن! 💖</a>
+        <a href="#" class="modern-button" onclick="goToStage('stage-envelope')">انطلق الآن! 💖</a> 
+    </div>
 
+    <div class="main-card hidden" id="stage-envelope">
+        <h2 class="heading" style="font-size: 1.5em;">💌 رسالة حب عيد الميلاد</h2>
+        
+        <div class="envelope-icon" onclick="openEnvelope()">✉️</div> 
+
+        <div id="letter-content" class="hidden" style="text-align: right; margin-top: 20px;">
+            <p style="color: #ff5e8c; font-weight: bold;">يا سارة الغالية،</p>
+            <p>كلماتي لا تكفي لوصف كم أنتِ تعنين لي. أتمنى لكِ سنة مليئة بالفرح والسعادة... أنتِ تستحقين كل هذا الكون وأكثر!</p>
+            <p style="margin-top: 20px;">**محبك للأبد، [اسمك]**</p>
+            
+            <a href="#" class="modern-button" style="margin-top: 40px;" onclick="goToStage('stage-cake')">اكمل المفاجآت</a>
+        </div>
+    </div>
+    
+    <div class="main-card hidden" id="stage-cake">
+        <h1 class="heading">حان وقت الكيك! 🎂</h1>
+        <p class="intro-text">سأحضر لكِ الكيكة الآن في الواقع، لكن الآن لنحتفل افتراضياً!</p>
+        <img src="images/cake_placeholder.png" alt="كيكة" style="width: 150px; margin: 20px auto;">
+        <a href="#" class="modern-button" onclick="goToStage('stage-welcome')">ابدأ من جديد</a>
     </div>
 
     <p class="footer-note">صُنعت بحب لا متناهي ليومكِ الخاص</p>
     
+    <script>
+        // دالة التنقل بين المراحل مع تأثير Fade-Out / Fade-In
+        function goToStage(targetId) {
+            const currentStage = document.querySelector('.main-card:not(.hidden)');
+            const targetStage = document.getElementById(targetId);
+
+            if (currentStage) {
+                // 1. اختفاء الشاشة الحالية (Fade Out)
+                currentStage.style.opacity = 0;
+                
+                setTimeout(() => {
+                    currentStage.classList.add('hidden');
+                    
+                    // 2. إظهار الشاشة الهدف (Fade In)
+                    if (targetStage) {
+                        targetStage.classList.remove('hidden');
+                        targetStage.style.opacity = 0; 
+                        
+                        setTimeout(() => {
+                            targetStage.style.opacity = 1;
+                        }, 50); 
+                    }
+                }, 500); // 500ms هو وقت التحول
+            }
+        }
+
+        // دالة لفتح المظروف في الشاشة الثانية
+        function openEnvelope() {
+            document.querySelector('#stage-envelope .envelope-icon').style.display = 'none';
+            document.getElementById('letter-content').classList.remove('hidden');
+            document.querySelector('#stage-envelope .heading').innerText = "رسالة حب مفتوحة";
+        }
+
+        // عند تحميل الصفحة، تأكد من أن شاشة الترحيب هي الظاهرة
+        window.onload = function() {
+            goToStage('stage-welcome');
+        };
+    </script>
 </body>
 </html>
