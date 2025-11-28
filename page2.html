@@ -2,63 +2,194 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>2. مفاجأة اليوم: رسالة من القلب 📝</title>
+    <title>💫 خريطة النجوم: حيث بدأ كل شيء 💫</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Changa:wght@600;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Changa:wght@700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
-        .page-header {
-            font-size: 1.5em;
-            color: var(--primary-color);
-            margin-bottom: 40px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--secondary-color);
-            animation: fadeInDown var(--animation-duration) ease-out;
+        /* ------------------------- الألوان الرئيسية (Cosmic Luxury Palette) ------------------------- */
+        :root {
+            --dark-galaxy-bg: #0d0124;    
+            --primary-neon-pink: #ff6bff; 
+            --secondary-neon-blue: #00e5ff; 
+            --gold-sparkle: #ffeb3b;      
+            --text-white-subtle: #f0f0f0; 
+            --glass-card-bg: rgba(255, 255, 255, 0.05); 
         }
-        .letter-content {
-            text-align: right;
-            line-height: 2.0;
-            font-size: 1.1em;
-            color: var(--text-dark);
-            padding: 0 10px;
+
+        /* ------------------------- الأنميشنات (Star Map Formation) ------------------------- */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
-        .signature {
+        @keyframes drawStarLine { /* لرسم خطوط الكوكبة تدريجياً */
+            from { stroke-dashoffset: 1000; }
+            to { stroke-dashoffset: 0; }
+        }
+        @keyframes flashPoint { /* لتوهج نقطة البداية */
+            0%, 100% { fill: var(--primary-neon-pink); box-shadow: 0 0 10px var(--primary-neon-pink); }
+            50% { fill: var(--secondary-neon-blue); box-shadow: 0 0 20px var(--secondary-neon-blue); }
+        }
+        @keyframes shimmerText { /* لمعان النص المحفور */
+            0%, 100% { text-shadow: 0 0 5px var(--gold-sparkle); }
+            50% { text-shadow: 0 0 15px var(--gold-sparkle); }
+        }
+        @keyframes buttonGlow {
+            0%, 100% { background: linear-gradient(45deg, var(--primary-neon-pink), var(--secondary-neon-blue)); }
+            50% { background: linear-gradient(45deg, var(--secondary-neon-blue), var(--primary-neon-pink)); }
+        }
+
+        /* ------------------------- الجسم والخلفية الكونية الفاخرة ------------------------- */
+        body {
+            font-family: 'Changa', 'Amiri', sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, var(--dark-galaxy-bg) 0%, #3a0050 100%); 
+            position: relative;
+            overflow: hidden;
+            color: var(--text-white-subtle);
             text-align: center;
-            margin-top: 50px;
+            animation: fadeIn 1.5s ease-out; 
+        }
+
+        /* ------------------------- حاوية خريطة النجوم (SVG Container) ------------------------- */
+        .star-map-container {
+            width: 700px;
+            max-width: 90%;
+            height: 500px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+            position: relative;
+            z-index: 10;
+        }
+        .star-map-svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* ------------------------- عناصر الكوكبة (SVG Elements) ------------------------- */
+        .star-point {
+            fill: var(--text-white-subtle);
+            stroke: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .star-point:hover {
+            transform: scale(1.5);
+            fill: var(--gold-sparkle);
+        }
+        /* نقطة البداية (الأهم) */
+        #start-point {
+            animation: flashPoint 3s infinite alternate;
+        }
+
+        .constellation-line {
+            fill: none;
+            stroke: var(--primary-neon-pink);
+            stroke-width: 2;
+            stroke-linecap: round;
+            /* تهيئة الأنميشن لرسم الخطوط */
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: drawStarLine 5s ease-out forwards; /* 'forwards' يحافظ على الحالة النهائية */
+        }
+        /* تأخير رسم الخطوط لتبدأ بعد ظهور النجوم */
+        .constellation-line:nth-child(1) { animation-delay: 2s; }
+        .constellation-line:nth-child(2) { animation-delay: 3s; }
+        .constellation-line:nth-child(3) { animation-delay: 4s; }
+        .constellation-line:nth-child(4) { animation-delay: 5s; }
+
+
+        /* ------------------------- الرسالة المحفورة بالضوء ------------------------- */
+        .engraved-message {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Amiri', serif;
+            font-size: 1.6em;
+            color: var(--gold-sparkle);
+            opacity: 0;
+            animation: fadeIn 1s 6s forwards, shimmerText 3s 7s infinite alternate;
+        }
+
+        /* ------------------------- زر الانتقال المداري (نفس نمط الصفحة الأولى) ------------------------- */
+        .navigation-section {
+            margin-top: 40px;
+            animation: fadeIn 1s 7.5s forwards;
+            opacity: 0;
+        }
+        .orbital-nav-btn {
+            background: linear-gradient(45deg, var(--primary-neon-pink), var(--secondary-neon-blue));
+            color: var(--dark-galaxy-bg); 
+            padding: 15px 45px;
+            border-radius: 40px;
+            border: none;
             font-size: 1.2em;
-            color: var(--text-light);
-            font-weight: 600;
+            font-weight: 800;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 0 15px var(--primary-neon-pink);
+            transition: all 0.4s ease-in-out;
+            animation: buttonGlow 3s infinite alternate;
+        }
+        .orbital-nav-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px var(--secondary-neon-blue);
+            animation: none; /* إيقاف التوهج التلقائي عند التفاعل */
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        
-        <div class="page-header">
-            عيد ميلاد سعيد يا ملاكي! 🎂
+    
+    <div class="star-map-container">
+        <h2 style="color: var(--secondary-neon-blue); margin-top: 15px; font-size: 1.8em; text-shadow: 0 0 5px var(--secondary-neon-blue);">
+            المجرة الشخصية: اللحظة التي غيرت الكون (التاريخ أو المناسبة هنا)
+        </h2>
+
+        <svg class="star-map-svg" viewBox="0 0 700 450" xmlns="http://www.w3.org/2000/svg">
+            <rect width="100%" height="100%" fill="url(#starGradient)"/>
+            <defs>
+                <radialGradient id="starGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                    <stop offset="0%" style="stop-color:rgba(255, 255, 255, 0.05);stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:rgba(0, 0, 0, 0.2);stop-opacity:1" />
+                </radialGradient>
+            </defs>
+
+            <circle class="star-point" cx="100" cy="150" r="4"/>
+            <circle class="star-point" cx="250" cy="80" r="5"/>
+            <circle class="star-point" cx="400" cy="180" r="6" id="start-point"/> <circle class="star-point" cx="550" cy="120" r="4"/>
+            <circle class="star-point" cx="600" cy="300" r="7"/>
+            <circle class="star-point" cx="300" cy="350" r="5"/>
+            <circle class="star-point" cx="150" cy="300" r="4"/>
+            
+
+            <line class="constellation-line" x1="400" y1="180" x2="250" y2="80"/>
+            <line class="constellation-line" x1="250" y1="80" x2="100" y2="150"/>
+            <line class="constellation-line" x1="400" y1="180" x2="550" y2="120"/>
+            <line class="constellation-line" x1="550" y1="120" x2="600" y2="300"/>
+            <line class="constellation-line" x1="600" y1="300" x2="300" y2="350"/>
+            <line class="constellation-line" x1="300" y1="350" x2="150" y2="300"/>
+
+            <text x="400" y="210" font-size="16" fill="var(--gold-sparkle)" text-anchor="middle" style="opacity: 0; animation: fadeIn 1s 5.5s forwards;">💖 أنتِ هنا</text>
+        </svg>
+
+        <div class="engraved-message">
+            "منذ هذه اللحظة بالذات، بدأ يتكون كل شيء جميل في حياتي."
         </div>
-        
-        <div class="letter-content">
-            <p><strong>حبيبتي [اسم حبيبتك]،</strong></p>
-            <p>
-                لا يمكن للكلمات أن تصف كم أنا محظوظ بوجودك في حياتي. في يوم ميلادك، أريد أن أحتفل بكِ وبكل لحظة صنعتِها مميزة. أنتِ النور والهدوء والجمال الذي يملأ عالمي. أتمنى لكِ عاماً مليئاً بالضحك، وتحقيق الأحلام، والحب اللامتناهي.
-            </p>
-            <p style="color: var(--primary-color); font-weight: bold;">
-                <span style="font-size: 1.2em;">الهدية الحقيقية هي أنتِ.</span>
-            </p>
-        </div>
-        
-        <div class="signature">
-            بكل الحب والامتنان،
-            <br>
-            حبيبك المفتون بكِ ❤️
-        </div>
-        
-        <a href="page3.html" class="action-button">
-            استكشاف المفاجأة التالية (3/5)
-        </a>
-        
     </div>
+
+    <div class="navigation-section">
+        <a href="page3.html" class="orbital-nav-btn">
+            عبور إلى المدار الثاني: كبسولات الذكريات
+        </a>
+    </div>
+
 </body>
 </html>
