@@ -12,176 +12,82 @@
             --secondary-pink: #f7a8c9;
             --background-soft: #fffafc; 
             --card-soft: #ffffff;
-            --envelope-color: #ffc0d0; /* لون الظرف الوردي */
-            --seal-color: #e91e63;
+            --button-pink: #e91e63; /* نفس لون الختم */
+            --button-shadow: rgba(233, 30, 99, 0.6);
             --text-color-dark: #333;
             --text-color-medium: #777;
             --text-color-light: #cc3366; 
-            --animation-duration: 2.2s; /* مدة الحركة الاحترافية */
         }
 
         body { 
-    font-family: 'Changa', 'Amiri', sans-serif; 
-    background: var(--background-soft);
-    color: var(--text-color-dark); 
-    text-align: center; 
-    min-height: 100vh; /* تأكد من ملء الشاشة بالكامل */
-    display: flex; 
-    flex-direction: column; 
-    justify-content: center; /* **التعديل الحاسم: لتوسيط البطاقة عمودياً في المنتصف تماماً** */
-    align-items: center; 
-    margin: 0;
-    overflow: hidden;
-    position: relative;
-    padding: 20px 0; /* إضافة بادينغ عمودي صغير لعدم الالتصاق بالحواف */
-    
-    /* خلفية القلب العامة لتغطية المساحة البيضاء */
-    background-image: url('data:image/svg+xml;utf8,<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><g opacity="0.1"><path fill="%23FFC0CB" d="M100 0L125 75L200 75L138 125L162 200L100 150L38 200L62 125L0 75L75 75Z"/></g></svg>'); 
-    background-size: 60px; 
-}
-
+            font-family: 'Changa', 'Amiri', sans-serif; 
+            background: var(--background-soft);
+            color: var(--text-color-dark); 
+            text-align: center; 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; /* توسيط عمودي */
+            align-items: center; 
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+            padding: 20px 0;
+            /* خلفية القلب العامة لتغطية المساحة البيضاء */
+            background-image: url('data:image/svg+xml;utf8,<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><g opacity="0.1"><path fill="%23FFC0CB" d="M100 0L125 75L200 75L138 125L162 200L100 150L38 200L62 125L0 75L75 75Z"/></g></svg>'); 
+            background-size: 60px; 
         }
         
-.container {
-    width: 95%;
-    max-width: 550px; 
-    /* تم تعديل min-height ليتناسب مع المحتوى داخل البطاقة */
-    min-height: auto; 
-    padding: 0 30px 30px 30px; 
-    /* ... بقية الكود ... */
-}
-        
-        /* القسم العلوي الذي يحمل الصورة كخلفية */
-        .header-bg-section {
-            width: calc(100% + 60px); 
-            height: 300px; 
-            margin-left: -30px; 
-            margin-right: -30px;
-            margin-top: -3px; 
-            border-radius: 40px 40px 0 0; 
+        .container {
+            width: 95%;
+            max-width: 550px; 
+            min-height: 70vh; /* لتظهر البطاقة بحجم مناسب */
+            background-color: var(--card-soft);
+            border-radius: 40px; 
             
-            /* استخدام الصورة كخلفية: هذا يضمن تطابق الرموز والنصوص العلوية 100% */
-            background-image: url('images/design_bg.jpg'); 
-            background-size: 100% 100%; /* تمدد الصورة لتغطي المنطقة */
-            background-repeat: no-repeat;
-            background-position: center top;
-            position: relative;
-        }
-
-        /* حاوية الظرف التي تحتاج إلى وضعه بشكل صحيح داخل الصورة الخلفية */
-        .envelope-placement {
-             position: absolute;
-             bottom: 5px; 
-             left: 50%;
-             transform: translateX(-50%);
-             width: 85%;
-             max-width: 380px;
-        }
-        
-        /* الظرف الثلاثي الأبعاد */
-        .envelope-wrap {
-            position: relative;
-            width: 100%;
-            height: 280px; 
-            cursor: pointer;
-            perspective: 1000px;
-            margin-bottom: 50px; 
-        }
-        
-        .envelope-body {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: var(--envelope-color);
-            border-radius: 15px; 
+            /* الظل الناعم المطابق للصورة */
             box-shadow: 
-                0 5px 15px rgba(0,0,0,0.1),
-                inset 0 -5px 15px rgba(0, 0, 0, 0.05); 
+                0 0 0 10px rgba(255, 255, 255, 0.5), 
+                0 10px 40px rgba(0, 0, 0, 0.1), 
+                0 25px 80px rgba(255, 105, 180, 0.15); 
+
+            border: 3px solid var(--secondary-pink);
+            position: relative;
+            z-index: 10;
+
+            /* **هنا نستخدم الصورة الكاملة كخلفية للبطاقة** */
+            background-image: url('images/full_design_index.jpg'); 
+            background-size: cover; /* لملء البطاقة بالصورة */
+            background-repeat: no-repeat;
+            background-position: center center;
+            
+            /* لإعطاء مساحة للزر في الأسفل */
+            padding-bottom: 90px; /* لتجنب تداخل الزر مع الصورة */
+            display: flex; /* لتوسيط الزر عمودياً */
+            flex-direction: column;
+            justify-content: flex-end; /* لدفع الزر إلى الأسفل */
+            align-items: center;
         }
 
-        .envelope-back-flap {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: #f7a8c9;
-            clip-path: polygon(0% 100%, 50% 50%, 100% 100%);
-            border-radius: 0 0 15px 15px;
-            z-index: 1;
+        /* تعطيل جميع عناصر الظرف والنصوص التي أصبحت جزءاً من الصورة */
+        .header-text, .envelope-wrap, .envelope-placement {
+            display: none; 
         }
         
-        /* الرسالة الداخلية - الحركة الاحترافية */
-        .card-inside {
-            position: absolute;
-            width: 90%; 
-            height: 80%; 
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.15);
-            z-index: 20;
-            top: 10%; 
-            left: 5%;
-            transform: translateY(0) rotateX(0);
-            transition: transform var(--animation-duration) cubic-bezier(0.42, 0, 0.58, 1.2), top var(--animation-duration) cubic-bezier(0.42, 0, 0.58, 1.2);
-            padding: 25px;
-            box-sizing: border-box;
-            text-align: center;
-            font-size: 1.2em;
-            color: var(--text-color-light); 
-            font-weight: bold;
-            line-height: 1.7;
-        }
-        
-        .envelope-flap {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 50%;
-            background-color: var(--secondary-pink); 
-            clip-path: polygon(0 0, 100% 0, 50% 100%);
-            border-radius: 15px 15px 0 0;
-            transform-origin: top;
-            transition: transform var(--animation-duration) ease-out; 
-            z-index: 30;
-            transform: rotateX(180deg); 
-            opacity: 0.9;
-        }
-
-        /* الختم الدائري */
-        .seal {
-            position: absolute;
-            width: 40px; height: 40px; 
-            background: var(--seal-color);
-            border-radius: 50%;
-            z-index: 40;
-            top: 70%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 3px 8px rgba(0,0,0,0.3);
-            transition: opacity 0.3s;
-        }
-        
-        /* حالة الفتح بالكامل */
-        .envelope-wrap.open .card-inside {
-            transform: translateY(-90px) scale(1.08); 
-            top: -10%; 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
-        .envelope-wrap.open .envelope-flap {
-             transform: rotateX(190deg); 
-        }
-        .envelope-wrap.open .seal {
-            opacity: 0; 
-        }
-
+        /* زر "حاول ماليغ فين" */
         .action-button {
-    /* ... كود سابق ... */
-    font-size: 1.4em; 
-    margin-top: 15px; /* **التعديل هنا: تقليل المسافة** */
-    cursor: pointer;
-    /* ... بقية الكود ... */
-}
- 
+            background-color: var(--button-pink); 
+            color: white;
+            padding: 18px 45px; 
+            border-radius: 50px; 
+            border: none;
+            font-size: 1.4em; 
+            margin-top: 20px; /* مسافة بسيطة من أسفل الصورة */
+            cursor: pointer;
+            box-shadow: 0 8px 20px var(--button-shadow); 
+            transition: all 0.3s;
+            font-family: 'Changa', sans-serif; 
+            font-weight: 700;
         }
         .action-button:hover {
             background-color: #d81b60;
@@ -192,52 +98,10 @@
 <body>
 
     <div class="container">
-        
-        <div class="header-bg-section">
-            <div class="envelope-placement">
-                <div class="envelope-wrap" id="envelope-wrap">
-                    <div class="envelope-body">
-                        <div class="envelope-back-flap"></div>
-                    </div>
-                    <div class="card-inside">
-                        <p>
-                            <span style="font-size: 1.6em; color: var(--text-color-light);">عدد هال المحجر؟</span>
-                            <br>
-                            <span style="font-size: 1.3em;">النت با كي</span>
-                            <br>
-                            <em style="color: var(--text-color-medium);">... درسيش يجد ان كنوي</em>
-                        </p>
-                    </div>
-                    <div class="envelope-flap"></div>
-                    <div class="seal"></div>
-                </div>
-            </div>
-        </div>
-
-        <button class="action-button" id="openBtn">حاول ماليغ فين</button>
+        <button class="action-button" onclick="window.location.href='page2.html'">
+            حاول ماليغ فين
+        </button>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const envelopeWrap = document.getElementById('envelope-wrap');
-            const openBtn = document.getElementById('openBtn');
-
-            const openEnvelope = () => {
-                 envelopeWrap.classList.add('open');
-            };
-
-            // عند الضغط على الظرف نفسه
-            envelopeWrap.addEventListener('click', openEnvelope);
-            
-            // عند الضغط على زر الانتقال
-            openBtn.addEventListener('click', () => {
-                openEnvelope();
-                // الانتقال يتم بعد 2.2 ثانية 
-                setTimeout(() => {
-                    window.location.href = 'page2.html'; 
-                }, 2200); 
-            });
-        });
-    </script>
 </body>
 </html>
