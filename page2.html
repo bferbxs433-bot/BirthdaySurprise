@@ -1,150 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>2. Happy Birthday, Beautiful ✨</title>
+    <title>2. مفاجأة اليوم: رسالة من القلب 📝</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Changa:wght@600;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
     
     <style>
-        :root {
-            --primary-pink: #ff69b4;
-            --secondary-pink: #f7a8c9;
-            --background-soft: #fff6e0;
-            --card-soft: #fcf9f3;
-        }
-        body { 
-            font-family: 'Poppins', sans-serif; 
-            background: var(--background-soft);
-            color: #333; 
-            text-align: center; 
-            min-height: 100vh; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center; 
-            margin: 0;
-            overflow: hidden;
-            position: relative;
-        }
-
-        /* Floating hearts (same as before) */
-        .heart-float {
-            position: absolute;
+        .page-header {
             font-size: 1.5em;
-            color: var(--primary-pink);
-            opacity: 0.7;
-            animation: heartFloat 10s linear infinite;
+            color: var(--primary-color);
+            margin-bottom: 40px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--secondary-color);
+            animation: fadeInDown var(--animation-duration) ease-out;
         }
-        .h1 { top: 10%; left: 5%; }
-        .h2 { top: 20%; right: 15%; animation-delay: 2s; }
-        .h3 { bottom: 10%; left: 30%; animation-delay: 4s; }
-        .h4 { bottom: 20%; right: 5%; animation-delay: 6s; }
-        
-        @keyframes heartFloat {
-            0% { transform: translateY(0) rotate(0); opacity: 0.7; }
-            50% { transform: translateY(-50px) rotate(5deg); opacity: 0.9; }
-            100% { transform: translateY(0) rotate(0); opacity: 0.7; }
-        }
-
-        .card { 
-            width: 95%;
-            max-width: 450px;
-            padding: 30px; 
-            background: linear-gradient(135deg, #ffffff, var(--card-soft)); 
-            border-radius: 25px; 
-            box-shadow: 0 10px 40px rgba(255, 105, 180, 0.4); 
-            border: 1px solid #f0e6f0;
-            position: relative;
-            z-index: 10;
-        }
-
-        .header-dots {
-            display: flex;
-            justify-content: flex-start;
-            gap: 8px;
-            margin-bottom: 20px;
-        }
-        .dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-        .dot.pink { background-color: var(--primary-pink); }
-        .dot.yellow { background-color: gold; }
-        .dot.green { background-color: lightgreen; }
-
-        h2 { 
-            font-size: 2.5em; 
-            color: var(--primary-pink); 
-            margin: 10px 0;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-        }
-        .message-body {
+        .letter-content {
+            text-align: right;
+            line-height: 2.0;
             font-size: 1.1em;
-            margin: 20px 0;
-            line-height: 1.7;
-            text-align: left; /* Changed alignment for English */
+            color: var(--text-dark);
+            padding: 0 10px;
         }
-        
-        .cat-image {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin: 20px auto;
-            border: 3px solid var(--secondary-pink);
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-
-        .ready-prompt {
-            color: var(--primary-pink);
-            font-weight: bold;
-            margin-top: 30px;
-        }
-
-        .next-btn { 
-            background-color: var(--primary-pink);
-            color: white; 
-            padding: 18px 40px; 
-            text-decoration: none; 
-            border-radius: 50px; 
-            font-size: 1.4em; 
-            display: inline-block; 
-            margin-top: 20px; 
-            transition: all 0.4s; 
-            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
-            border: none;
-        }
-        .next-btn:hover { 
-            background-color: #e91e63; 
-            transform: scale(1.05); 
+        .signature {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 1.2em;
+            color: var(--text-light);
+            font-weight: 600;
         }
     </style>
 </head>
 <body>
-    <span class="heart-float h1">💖</span>
-    <span class="heart-float h2">✨</span>
-    <span class="heart-float h3">🌟</span>
-    <span class="heart-float h4">💖</span>
-    
-    <div class="card">
-        <div class="header-dots">
-            <div class="dot pink"></div>
-            <div class="dot yellow"></div>
-            <div class="dot green"></div>
+    <div class="container">
+        
+        <div class="page-header">
+            عيد ميلاد سعيد يا ملاكي! 🎂
         </div>
         
-        <img src="https://i.ibb.co/6803k2j/cat-party-hat.png" alt="Cute Cat with Party Hat" class="cat-image" />
+        <div class="letter-content">
+            <p><strong>حبيبتي [اسم حبيبتك]،</strong></p>
+            <p>
+                لا يمكن للكلمات أن تصف كم أنا محظوظ بوجودك في حياتي. في يوم ميلادك، أريد أن أحتفل بكِ وبكل لحظة صنعتِها مميزة. أنتِ النور والهدوء والجمال الذي يملأ عالمي. أتمنى لكِ عاماً مليئاً بالضحك، وتحقيق الأحلام، والحب اللامتناهي.
+            </p>
+            <p style="color: var(--primary-color); font-weight: bold;">
+                <span style="font-size: 1.2em;">الهدية الحقيقية هي أنتِ.</span>
+            </p>
+        </div>
         
-        <h2>Happy Birthday, [Name]! 👑</h2>
-        <p class="message-body">
-            Today is the day we celebrate the most amazing person in my world. I created something magical just for you on your special day. This is our second stop, the beginning of the promises I want to keep...
-        </p>
+        <div class="signature">
+            بكل الحب والامتنان،
+            <br>
+            حبيبك المفتون بكِ ❤️
+        </div>
         
-        <p class="ready-prompt">Are you ready for the journey of promises and surprises?</p>
+        <a href="page3.html" class="action-button">
+            استكشاف المفاجأة التالية (3/5)
+        </a>
         
-        <a href="page3.html" class="next-btn">Let's Gooo! (Promises)</a>
     </div>
 </body>
 </html>
