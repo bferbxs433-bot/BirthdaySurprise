@@ -2,141 +2,58 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>1. رسالة حب بعيد ميلادك 💖</title>
+    <title>1. رسالة خاصة لروح قلبي 💌</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Changa:wght@600;800&family=Amiri:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Changa:wght@600;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
     
     <style>
-        :root {
-            --primary-pink: #ff69b4;
-            --secondary-pink: #f7a8c9;
-            --background-soft: #fffafc; 
-            --card-soft: #ffffff;
-            --envelope-color: #ffc0d0; /* لون الظرف الوردي */
-            --seal-color: #e91e63;
-            --text-color-dark: #333;
-            --text-color-medium: #777;
-            --text-color-light: #cc3366; 
-            --animation-duration: 2.2s; 
-        }
-
-        body { 
-            font-family: 'Changa', 'Amiri', sans-serif; 
-            background: var(--background-soft);
-            color: var(--text-color-dark); 
-            text-align: center; 
-            min-height: 100vh; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; /* توسيط عمودي */
-            align-items: center; 
-            margin: 0;
-            overflow: hidden;
-            position: relative;
-            padding: 20px 0; /* بادينغ للبطاقة لا تلتصق بالحواف */
-            
-            /* خلفية القلوب الشفافة */
-            background-image: url('data:image/svg+xml;utf8,<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><g opacity="0.1"><path fill="%23FFC0CB" d="M100 0L125 75L200 75L138 125L162 200L100 150L38 200L62 125L0 75L75 75Z"/></g></svg>'); 
-            background-size: 60px; 
-        }
-        
-        /* عناصر الزينة (القلوب، الكيك، الغيوم، النجوم) مع الحركة */
-        .decoration {
+        /* رموز أنمي متحركة */
+        .decoration-heart {
             position: absolute;
-            font-size: 2.5em; /* حجم كبير للرموز */
-            opacity: 0.9;
-            animation: float 10s ease-in-out infinite alternate;
-            z-index: 5;
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8); /* لجعل الرموز تبرز على الخلفية */
-            pointer-events: none; /* لمنع التفاعل مع الرموز */
+            width: 30px; height: 30px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            clip-path: polygon(50% 100%, 0% 40%, 10% 0%, 50% 10%, 90% 0%, 100% 40%);
+            animation: floatHeart 10s infinite ease-in-out;
         }
-        /* توزيع الرموز الكثيرة جداً (باستخدام رموز الأيقونات المطابقة للصورة) */
-        .deco-1 { top: 15px; right: 10px; animation-delay: 0s; transform: rotate(15deg); } 
-        .deco-2 { top: 10%; left: 5%; animation-delay: 2s; } /* غيمة زرقاء */
-        .deco-3 { bottom: 25px; right: 25px; animation-delay: 4s; transform: rotate(-10deg); } /* كيكة */
-        .deco-4 { top: 5%; right: 20%; animation-delay: 6s; transform: rotate(45deg); } /* نجمة زرقاء */
-        .deco-5 { bottom: 10%; left: 15%; animation-delay: 8s; } /* قلب وردي */
-        .deco-6 { bottom: 5%; right: 15%; animation-delay: 10s; } /* غيمة زرقاء */
-        .deco-7 { top: 10%; left: 80%; animation-delay: 1s; } /* كيكة */
-        .deco-8 { bottom: 20%; left: 5%; animation-delay: 3s; transform: rotate(-25deg); } /* نجمة زرقاء */
-        .deco-9 { top: 30%; right: 5%; animation-delay: 5s; transform: scale(0.8); } /* قلب وردي */
-        .deco-10 { bottom: 30%; left: 5%; animation-delay: 7s; } /* نجمة زرقاء */
-        .deco-11 { top: 3%; left: 30%; animation-delay: 9s; } /* كيكة */
-        .deco-12 { bottom: 3%; right: 30%; animation-delay: 11s; } /* غيمة زرقاء */
+        #heart1 { top: 10%; left: 5%; animation-delay: 0s; }
+        #heart2 { top: 25%; right: 15%; width: 40px; height: 40px; background-color: var(--secondary-color); animation-delay: 3s; }
+        #heart3 { bottom: 20%; left: 10%; animation-delay: 6s; }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0); }
-            50% { transform: translateY(-15px) rotate(-5deg); } 
-        }
-
-        .container {
-            width: 95%;
-            max-width: 550px; 
-            min-height: auto; /* ليتناسب مع المحتوى */
-            padding: 30px; 
-            background-color: var(--card-soft);
-            border-radius: 40px; 
-            
-            /* الظل الناعم جداً (المطابق للصورة) */
-            box-shadow: 
-                0 0 0 10px rgba(255, 255, 255, 0.5), 
-                0 10px 40px rgba(0, 0, 0, 0.1), 
-                0 25px 80px rgba(255, 105, 180, 0.15); 
-
-            border: 3px solid var(--secondary-pink);
-            position: relative;
-            z-index: 10;
-        }
-
-        .header-text {
-            margin-bottom: 25px; 
-            line-height: 1.2;
-        }
-        .header-text h1 {
-            font-family: 'Pacifico', cursive; 
-            color: var(--primary-pink);
-            font-size: 2.5em; 
-            margin-bottom: 0;
-            display: inline-block;
-            vertical-align: middle;
-        }
-        .header-text .arabic-name {
-            font-family: 'Changa', sans-serif;
-            font-weight: 800;
-            font-size: 2em; 
-            color: var(--primary-pink);
-            display: inline-block;
-            vertical-align: middle;
-            margin-right: 5px; 
-        }
-        .header-text .sparkle {
-            color: gold;
-            font-size: 1.8em;
-            vertical-align: middle;
-            margin: 0 8px;
-        }
-        .header-text .sub-info {
-            font-size: 1em;
-            color: var(--text-color-medium);
-            margin-top: 5px;
-            line-height: 1.5;
+        @keyframes floatHeart {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(15deg); }
         }
         
-        /* الظرف الثلاثي الأبعاد - تحسين الظل */
-        .envelope-wrap {
-            position: relative;
-            width: 85%; 
-            max-width: 380px;
-            height: 280px; 
-            margin: 40px auto;
-            cursor: pointer;
-            perspective: 1000px;
+        .main-message {
+            font-size: 1.3em;
+            color: var(--text-light);
+            margin-bottom: 40px;
         }
+    </style>
+</head>
+<body>
+
+    <div class="decoration-heart" id="heart1"></div>
+    <div class="decoration-heart" id="heart2"></div>
+    <div class="decoration-heart" id="heart3"></div>
+
+    <div class="container">
         
-        .envelope-body {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: var(--envelope-color);
-            border-radius: 15px; 
-            
+        <h1>أنتِ هدية الحياة! 💖</h1>
+        <h3>"إلى روح قلبي التي تحتفل بيوم ميلادها..."</h3>
+        
+        <p class="main-message">
+            اليوم ليس مجرد يوم ميلاد، بل هو احتفال بوجود أجمل إنسانة في حياتي. 
+            أعددت لكِ مفاجأة خاصة جداً، تبدأ بـ:
+        </p>
+
+        <a href="page2.html" class="action-button">
+            افتح رسالة الاحتفال
+        </a>
+        
+    </div>
+
+</body>
+</html>
