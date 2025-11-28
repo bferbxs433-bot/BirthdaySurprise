@@ -2,25 +2,22 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>عيد ميلاد سعيد يا نجمتي اللامعة! 🌟💖</title>
+    <title>🌟 احتفال النجوم بكِ يا قلبي 💖</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Changa:wght@600;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
-        /* الألوان الرئيسية */
+        /* ------------------------- الألوان الرئيسية (Cosmic Palette) ------------------------- */
         :root {
-            --primary-pink: #ff69b4; /* وردي أساسي */
-            --accent-purple: #8a2be2; /* بنفسجي للنجوم والتوهج */
-            --text-light: #ffffff; /* نص أبيض */
-            --text-dark: #333333; /* نص داكن للبطاقات الداخلية */
-            --star-color: #fffacd; /* لون ذهبي ناعم للنجوم */
-            --animation-speed-slow: 200s;
-            --animation-speed-medium: 100s;
-            --animation-speed-fast: 50s;
-            --main-anim-duration: 1.5s;
+            --dark-space: #0f0023;       /* أسود/بنفسجي عميق للخلفية */
+            --glow-pink: #ff007f;        /* وردي نيون متوهج */
+            --glow-purple: #8a2be2;      /* بنفسجي متوهج */
+            --glass-bg: rgba(255, 255, 255, 0.08); /* خلفية زجاج بلوري شبه شفافة */
+            --text-light: #ffffff;
+            --main-anim-duration: 1.8s;
         }
 
-        /* ------------------------- الأنميشن الأساسية ------------------------- */
+        /* ------------------------- الأنميشن والنجوم (Glow and Twinkle) ------------------------- */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -29,44 +26,22 @@
             from { opacity: 0; transform: translateY(50px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        @keyframes bounceIn {
-            0%, 20%, 40%, 60%, 80%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-30px); }
+        @keyframes neonGlow {
+            0% { text-shadow: 0 0 5px var(--glow-pink), 0 0 15px var(--glow-pink); }
+            50% { text-shadow: 0 0 10px var(--glow-pink), 0 0 30px var(--glow-pink); }
+            100% { text-shadow: 0 0 5px var(--glow-pink), 0 0 15px var(--glow-pink); }
         }
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-        @keyframes rotateStar {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 20px var(--glow-pink); }
+            50% { box-shadow: 0 0 40px var(--glow-purple); }
+            100% { box-shadow: 0 0 20px var(--glow-pink); }
         }
         @keyframes twinkle {
-            0%, 100% { opacity: 0.5; }
+            0%, 100% { opacity: 0.2; }
             50% { opacity: 1; }
         }
-        @keyframes meteor {
-            0% { transform: translateX(calc(-100vw - 100px)) translateY(-100px) rotate(45deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateX(calc(100vw + 100px)) translateY(calc(100vh + 100px)) rotate(45deg); opacity: 0; }
-        }
-        /* حركة الخلفية النجومية */
-        @keyframes starsScroll {
-            from { background-position: 0 0; }
-            to { background-position: -10000px -5000px; }
-        }
-        @keyframes starsScrollSlow {
-            from { background-position: 0 0; }
-            to { background-position: 10000px 5000px; }
-        }
-        @keyframes starGlow {
-            0% { text-shadow: 0 0 5px var(--star-color), 0 0 10px var(--star-color); }
-            50% { text-shadow: 0 0 10px var(--star-color), 0 0 20px var(--star-color); }
-            100% { text-shadow: 0 0 5px var(--star-color), 0 0 10px var(--star-color); }
-        }
-
-        /* ------------------------- تنسيقات الجسم والخلفية الفضائية ------------------------- */
+        
+        /* ------------------------- تنسيقات الجسم والخلفية الفضائية الثابتة ------------------------- */
         body {
             font-family: 'Changa', 'Amiri', sans-serif;
             margin: 0;
@@ -74,218 +49,154 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
-            overflow: hidden; /* لمنع شريط التمرير */
+            background-color: var(--dark-space);
+            overflow: hidden;
             position: relative;
-            background: 
-                radial-gradient(ellipse at bottom, #2d0047 0%, #0d0116 100%), /* تدرج لوني */
-                /* نجوم كبيرة */
-                repeating-radial-gradient(circle at center, var(--star-color) 0, rgba(255, 255, 255, 0) 1px) 0 0/1000px 1000px, 
-                /* نجوم صغيرة */
-                repeating-radial-gradient(circle at center, rgba(255, 255, 255, 0.8) 0, rgba(255, 255, 255, 0) 0.5px) 0 0/500px 500px; 
-            
-            background-color: #1f083b; /* لون أساسي للفضاء */
-            background-blend-mode: screen; /* مزج الخلفيات */
-            animation: fadeIn 2s ease-out, starsScroll var(--animation-speed-medium) linear infinite, starsScrollSlow var(--animation-speed-slow) linear infinite reverse;
+            animation: fadeIn 2s ease-out;
             color: var(--text-light);
             text-align: center;
-            padding: 20px;
         }
 
-        /* ------------------------- تأثيرات النجوم المتساقطة (Meteors) ------------------------- */
-        .meteor-shower {
+        /* ------------------------- نظام النجوم المتلألئة (CSS Stars) ------------------------- */
+        .star-field {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             pointer-events: none;
-            overflow: hidden;
             z-index: 1;
         }
-        .meteor {
+        .star {
             position: absolute;
-            width: 5px;
-            height: 5px;
-            background-color: var(--star-color);
+            background: var(--text-light);
             border-radius: 50%;
-            box-shadow: 0 0 10px var(--star-color), 0 0 20px var(--star-color);
-            animation: meteor 10s linear infinite;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+            animation: twinkle 4s infinite;
         }
-        .meteor:nth-child(1) { top: 10%; left: 20%; animation-delay: 0s; animation-duration: 8s; }
-        .meteor:nth-child(2) { top: 30%; left: 70%; animation-delay: 2s; animation-duration: 12s; }
-        .meteor:nth-child(3) { top: 50%; left: 10%; animation-delay: 4s; animation-duration: 7s; }
-        .meteor:nth-child(4) { top: 70%; left: 50%; animation-delay: 6s; animation-duration: 10s; }
-        .meteor:nth-child(5) { top: 20%; left: 90%; animation-delay: 8s; animation-duration: 9s; }
-        .meteor:nth-child(6) { top: 80%; left: 30%; animation-delay: 1s; animation-duration: 11s; }
+        /* كود JS سيقوم بتوليد النجوم، لكننا نضع بعضها يدوياً لتظهر فوراً */
+        .star:nth-child(1) { width: 3px; height: 3px; top: 15%; left: 85%; animation-delay: 0.5s; }
+        .star:nth-child(2) { width: 2px; height: 2px; top: 40%; left: 10%; animation-delay: 1.2s; }
+        .star:nth-child(3) { width: 4px; height: 4px; top: 70%; left: 55%; animation-delay: 2.5s; }
+        .star:nth-child(4) { width: 2px; height: 2px; top: 85%; left: 25%; animation-delay: 3s; }
 
-
-        /* ------------------------- البطاقة الرئيسية للمحتوى ------------------------- */
+        /* ------------------------- البطاقة الرئيسية (Glassmorphism + Glow) ------------------------- */
         .main-card {
-            background-color: rgba(255, 255, 255, 0.15); /* بطاقة شبه شفافة */
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 0 5px rgba(255, 255, 255, 0.3); /* ظل وتوهج */
-            max-width: 500px;
+            background-color: var(--glass-bg);
+            border-radius: 25px;
+            padding: 50px;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.2);
+            max-width: 550px;
             width: 90%;
             z-index: 10;
-            backdrop-filter: blur(5px); /* تأثير ضبابي جميل */
-            animation: fadeIn var(--main-anim-duration) ease-out;
-            border: 1px solid rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px); /* تأثير الزجاج الضبابي */
+            animation: slideInUp var(--main-anim-duration) ease-out;
             position: relative;
+            border-left: 5px solid var(--glow-pink); /* خط فاخر */
         }
 
-        /* ------------------------- العناوين والرسائل ------------------------- */
+        /* ------------------------- العناوين والرسائل المتوهجة ------------------------- */
         h1 {
-            font-size: 2.8em;
-            color: var(--primary-pink);
-            margin-bottom: 15px;
-            text-shadow: 0 0 10px var(--primary-pink), 0 0 20px var(--primary-pink);
-            animation: bounceIn 2s ease-out infinite alternate; /* العنوان ينبض */
+            font-size: 3em;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            animation: neonGlow 2s infinite alternate; /* توهج نيون مستمر */
         }
 
         .subtitle {
-            font-size: 1.5em;
-            color: var(--text-light);
+            font-size: 1.6em;
+            color: var(--glow-pink);
             margin-bottom: 30px;
-            animation: fadeIn 2s ease-out;
+            text-shadow: 0 0 10px var(--glow-pink);
+            animation: fadeIn 2s 0.5s ease-out both;
         }
 
         .message-text {
             font-size: 1.1em;
-            line-height: 1.8;
+            line-height: 2.0;
             color: var(--text-light);
-            animation: slideInUp 1.8s ease-out;
+            animation: slideInUp var(--main-anim-duration) 0.8s ease-out both;
         }
 
-        /* ------------------------- صور GIF والرموز المتحركة ------------------------- */
-        .gif-container {
-            margin: 30px 0;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            flex-wrap: wrap; /* لتنسيق الصور على أسطر متعددة على الشاشات الصغيرة */
-        }
-        .romantic-gif {
-            width: 120px;
-            height: 120px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
-            animation: pulse 2s infinite alternate; /* الـ GIF ينبض */
-            margin: 10px;
-            object-fit: cover;
-            border: 2px solid var(--primary-pink);
-        }
-        .star-icon {
-            font-size: 2.5em;
-            color: var(--star-color);
-            margin: 0 10px;
-            animation: rotateStar 5s linear infinite, starGlow 3s infinite alternate; /* النجوم تدور وتتوهج */
-            display: inline-block;
-        }
-
-        /* ------------------------- الزر (Action Button) ------------------------- */
+        /* ------------------------- الزر الفاخر (Pulsing Button) ------------------------- */
         .action-button {
-            background-color: var(--primary-pink);
-            color: var(--text-light);
-            padding: 18px 50px;
-            border-radius: 50px;
+            background-color: var(--glow-pink);
+            color: var(--dark-space); /* نص داكن على الزر المتوهج */
+            padding: 20px 60px;
+            border-radius: 10px;
             border: none;
             font-size: 1.4em;
             margin-top: 50px;
             cursor: pointer;
-            box-shadow: 0 10px 40px rgba(255, 105, 180, 0.6);
-            transition: all 0.3s ease-in-out;
             text-decoration: none;
             display: inline-block;
-            font-weight: 700;
-            animation: slideInUp var(--main-anim-duration) 0.5s ease-out; /* الزر ينبثق متأخراً */
+            font-weight: 800;
+            animation: pulseGlow 3s infinite alternate; /* توهج نبضي فاخر */
+            transition: all 0.3s;
         }
         .action-button:hover {
-            background-color: var(--accent-purple);
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 50px rgba(138, 43, 226, 0.8);
+            background-color: var(--glow-purple);
+            color: var(--text-light);
+            transform: scale(1.05);
         }
-
-        /* ------------------------- عناصر إضافية للزينة ------------------------- */
-        .floating-heart {
-            position: absolute;
-            font-size: 3em;
-            color: var(--primary-pink);
-            animation: floatHeart 8s infinite ease-in-out;
-            opacity: 0.8;
-            z-index: 5;
+        
+        /* ------------------------- الختم النجمي (رمز الابتداء) ------------------------- */
+        .initial-seal {
+            font-size: 5em;
+            color: var(--glow-pink);
+            display: block;
+            margin-bottom: 20px;
+            animation: neonGlow 2s infinite alternate, fadeIn 2s ease-out;
         }
-        #heart1 { top: 10%; left: 5%; animation-delay: 0s; }
-        #heart2 { top: 30%; right: 10%; animation-delay: 2s; font-size: 2em;}
-        #heart3 { bottom: 20%; left: 15%; animation-delay: 4s; }
-        #heart4 { top: 60%; right: 5%; animation-delay: 6s; font-size: 2.5em;}
-
-        @keyframes floatHeart {
-            0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.8; }
-            25% { transform: translateY(-15px) translateX(5px) rotate(5deg); opacity: 1; }
-            50% { transform: translateY(0px) translateX(0px) rotate(0deg); opacity: 0.8; }
-            75% { transform: translateY(15px) translateX(-5px) rotate(-5deg); opacity: 1; }
-        }
-
     </style>
 </head>
 <body>
-    <div class="meteor-shower">
-        <div class="meteor"></div>
-        <div class="meteor"></div>
-        <div class="meteor"></div>
-        <div class="meteor"></div>
-        <div class="meteor"></div>
-        <div class="meteor"></div>
+    
+    <div class="star-field">
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
     </div>
 
-    <div class="floating-heart" id="heart1">💖</div>
-    <div class="floating-heart" id="heart2">💖</div>
-    <div class="floating-heart" id="heart3">💖</div>
-    <div class="floating-heart" id="heart4">💖</div>
-
-
     <div class="main-card">
-        <h1>عيد ميلاد سعيد يا نجمتي اللامعة! ✨</h1>
-        <p class="subtitle">كل النجوم تتراقص احتفالاً بيوم ميلادك!</p>
+        
+        <span class="initial-seal">🌌</span>
+
+        <h1>أنتِ سحر هذا الكون!</h1>
+        <p class="subtitle">احتفال النجوم بيوم ميلاد أجمل ما خلق ربي.</p>
 
         <p class="message-text">
-            إلى أجمل فتاة في المجرة، كل عام وأنتِ الحب، الفرح، والأمل.
-            هذه الصفحة هي مجرد بداية لمفاجآت لا تُحصى، صُممت خصيصاً لابتسامتكِ الساحرة.
-            كل نجمة في السماء تتلألأ لأجلكِ اليوم!
+            إلى ملكة النور، تحت هذا السقف النجمي الذي يتوهج لأجلكِ، أضع لكِ بداية رحلة فريدة.
+            هذا التصميم الفاخر هو انعكاس لروعة حضوركِ في حياتي.
+            كوني مستعدة للمفاجأة الكبرى التي تنتظركِ.
         </p>
         
-        <div class="gif-container">
-            <img src="images/heart_anim.gif" alt="قلب ينبض" class="romantic-gif"> 
-            <span class="star-icon">🌟</span>
-            <img src="images/couple_anim.gif" alt="زوجين أنمي" class="romantic-gif"> 
-        </div>
-
-        <p class="message-text" style="margin-top: 20px;">
-            اضغطي على الزر أدناه لتنتقلي إلى مفاجأة المجرة التالية!
-        </p>
-
         <a href="page2.html" class="action-button">
-            انطلقي نحو المفاجأة! 🚀
+            اكتشفي المفاجأة الكونية
         </a>
     </div>
 
     <script>
-        // سكريبت إضافي لإنشاء نجوم متلألئة عشوائية في الخلفية (يمكن إضافتها إذا أردت المزيد)
-        // هذا مثال، يمكن إضافته إذا لم تكن الخلفية النجمية كافية
-        // function createStar() {
-        //     const star = document.createElement('div');
-        //     star.classList.add('floating-star');
-        //     star.style.left = Math.random() * 100 + 'vw';
-        //     star.style.top = Math.random() * 100 + 'vh';
-        //     star.style.animationDuration = (Math.random() * 2 + 1) + 's';
-        //     star.style.animationDelay = (Math.random() * 2) + 's';
-        //     document.body.appendChild(star);
-        // }
-        // for (let i = 0; i < 50; i++) {
-        //     createStar();
-        // }
+        // سكريبت لإنشاء عدد كبير من النجوم عشوائياً (لمزيد من الفخامة)
+        const starField = document.querySelector('.star-field');
+        const numStars = 100; // عدد النجوم المطلوب
+
+        function createStar() {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            star.style.width = star.style.height = (Math.random() * 3 + 1) + 'px'; // حجم عشوائي
+            star.style.top = Math.random() * 100 + 'vh'; // موضع عمودي عشوائي
+            star.style.left = Math.random() * 100 + 'vw'; // موضع أفقي عشوائي
+            star.style.animationDelay = (Math.random() * 4) + 's'; // تأخير عشوائي
+            star.style.opacity = Math.random(); // شفافية عشوائية
+            starField.appendChild(star);
+        }
+
+        // إنشاء النجوم ديناميكياً
+        for (let i = 0; i < numStars; i++) {
+            createStar();
+        }
     </script>
 </body>
 </html>
