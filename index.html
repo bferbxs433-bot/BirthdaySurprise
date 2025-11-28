@@ -7,20 +7,23 @@
 
     <style>
         /* ---------------------------------------------------- */
-        /* 1. الأساسيات والجمالية الأنيقة (CSS) */
+        /* 1. استيراد الخطوط والتصميم الأساسي */
         /* ---------------------------------------------------- */
+        /* 1.1 استيراد خط القاهرة (Cairo) العصري */
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
+
         body {
             /* تدرج لوني ناعم للخلفية */
             background: linear-gradient(180deg, #fff7fa 0%, #ffedf3 100%);
             margin: 0;
             overflow-x: hidden;
-            font-family: 'Tahoma', sans-serif;
+            font-family: 'Cairo', sans-serif; /* تطبيق الخط الجديد */
             min-height: 100vh;
             color: #333;
             text-align: center;
         }
 
-        /* تنسيق البطاقة الرئيسية: تأثير زجاجي خفيف (Glassmorphism) */
+        /* تنسيق البطاقة الرئيسية: تأثير زجاجي (Glassmorphism) مع حركة ظهور */
         .main-card {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(8px);
@@ -33,13 +36,13 @@
             max-width: 450px;
             position: relative;
             z-index: 10;
-            transition: opacity 0.5s ease-in-out; /* للتحولات السلسة */
+            transition: opacity 0.5s ease-in-out; 
+            animation: fadeIn 0.8s ease-out backwards; /* تطبيق حركة الظهور */
         }
-
+        
         /* تنسيق الصورة الدائرية (الرسمة الرومانسية) */
         .profile-image {
-            width: 100px;
-            height: 100px;
+            width: 100px; height: 100px;
             border-radius: 50%;
             object-fit: cover;
             border: 4px solid #ff5e8c;
@@ -55,57 +58,37 @@
 
         /* تنسيق الزر الاحترافي (3D Look) */
         .modern-button {
-            background: #ff5e8c;
-            color: white;
-            border: none;
-            padding: 16px 45px;
-            border-radius: 50px;
-            font-size: 1.2em;
-            font-weight: bold;
+            background: #ff5e8c; color: white; border: none;
+            padding: 16px 45px; border-radius: 50px;
+            font-size: 1.2em; font-weight: 700;
             box-shadow: 0 5px 15px rgba(255, 94, 140, 0.6);
-            border-bottom: 4px solid #cc4e70; /* لجعل الزر يبدو مرفوعاً */
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-block;
+            border-bottom: 4px solid #cc4e70; 
+            transition: all 0.3s; text-decoration: none; display: inline-block;
         }
-
         .modern-button:hover {
             transform: scale(1.02) translateY(2px);
             box-shadow: 0 5px 10px rgba(255, 94, 140, 0.8);
             border-bottom: 2px solid #cc4e70;
         }
 
-        /* تنسيق الـ GIFs المتحركة كزخارف */
-        .gif-deco {
-            position: fixed;
-            z-index: 5;
-            opacity: 0.85;
-            transition: all 0.5s;
-            animation: drift 15s ease-in-out infinite alternate;
-        }
-
+        /* تنسيق الـ GIFs والزخارف */
+        .gif-deco { position: fixed; z-index: 5; opacity: 0.85; transition: all 0.5s; animation: drift 15s ease-in-out infinite alternate; }
         .gif-element { width: 120px; height: auto; border-radius: 10px; }
-        #gif-patrick { animation-duration: 18s; } 
-        #gif-tom { animation-duration: 16s; }
-
-        /* تنسيق أيقونة المظروف في الشاشة الثانية */
+        #gif-patrick { animation-duration: 18s; } #gif-tom { animation-duration: 16s; }
         .envelope-icon { font-size: 5em; cursor: pointer; margin: 40px 0; transition: transform 0.2s; }
         .envelope-icon:hover { transform: scale(1.1); }
-        
-        /* إخفاء / إظهار العناصر */
         .hidden { display: none !important; }
 
         /* ---------------------------------------------------- */
         /* 2. الحركة (CSS Keyframes) */
         /* ---------------------------------------------------- */
-        @keyframes float {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            50% { transform: translate(20px, -20px) rotate(5deg); }
-            100% { transform: translate(0, 0) rotate(0deg); }
-        }
-        @keyframes drift {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(15px, 15px); }
+        @keyframes float { 0% { transform: translate(0, 0) rotate(0deg); } 50% { transform: translate(20px, -20px) rotate(5deg); } 100% { transform: translate(0, 0) rotate(0deg); } }
+        @keyframes drift { 0% { transform: translate(0, 0); } 100% { transform: translate(15px, 15px); } }
+
+        /* حركة الظهور للمحتوى الجديد */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
     </style>
@@ -132,11 +115,10 @@
         <h1 class="heading">عيد ميلاد سعيد، يا جميلة!</h1>
         
         <p class="intro-text">
-            اليوم هو يوم الاحتفال بأروع شخص في عالمي. لقد قمت بإعداد شيء مميز جداً. 
-            هل أنتِ جاهزة للانطلاق في رحلة المفاجآت؟
+            يا من تضيء حياتي كنجوم هذا الكون... هل أنتِ مستعد للانطلاق في رحلتنا الخاصة؟ 💖
         </p>
 
-        <a href="#" class="modern-button" onclick="goToStage('stage-envelope')">انطلق الآن! 💖</a> 
+        <a href="#" class="modern-button" onclick="goToStage('stage-envelope')">انطلق الآن!</a> 
     </div>
 
     <div class="main-card hidden" id="stage-envelope">
@@ -156,14 +138,13 @@
     <div class="main-card hidden" id="stage-cake">
         <h1 class="heading">حان وقت الكيك! 🎂</h1>
         <p class="intro-text">سأحضر لكِ الكيكة الآن في الواقع، لكن الآن لنحتفل افتراضياً!</p>
-        <img src="images/cake_placeholder.png" alt="كيكة" style="width: 150px; margin: 20px auto;">
+        <p class="intro-text">نتمنى أن تكون الرحلة قد أعجبتك. كل عام وأنتِ الحب ❤️</p>
         <a href="#" class="modern-button" onclick="goToStage('stage-welcome')">ابدأ من جديد</a>
     </div>
 
     <p class="footer-note">صُنعت بحب لا متناهي ليومكِ الخاص</p>
     
     <script>
-        // دالة التنقل بين المراحل مع تأثير Fade-Out / Fade-In
         function goToStage(targetId) {
             const currentStage = document.querySelector('.main-card:not(.hidden)');
             const targetStage = document.getElementById(targetId);
@@ -180,24 +161,28 @@
                         targetStage.classList.remove('hidden');
                         targetStage.style.opacity = 0; 
                         
+                        // إعادة تشغيل الحركة لجعلها تظهر من جديد بأناقة
+                        targetStage.style.animation = 'none';
+                        targetStage.offsetHeight; 
+                        targetStage.style.animation = '';
+                        
                         setTimeout(() => {
                             targetStage.style.opacity = 1;
                         }, 50); 
                     }
-                }, 500); // 500ms هو وقت التحول
+                }, 500);
             }
         }
 
-        // دالة لفتح المظروف في الشاشة الثانية
         function openEnvelope() {
             document.querySelector('#stage-envelope .envelope-icon').style.display = 'none';
             document.getElementById('letter-content').classList.remove('hidden');
             document.querySelector('#stage-envelope .heading').innerText = "رسالة حب مفتوحة";
         }
 
-        // عند تحميل الصفحة، تأكد من أن شاشة الترحيب هي الظاهرة
         window.onload = function() {
-            goToStage('stage-welcome');
+            // تأكد من أن الشاشة الترحيبية هي أول ما يظهر
+            document.getElementById('stage-welcome').style.opacity = 1;
         };
     </script>
 </body>
