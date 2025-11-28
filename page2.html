@@ -2,194 +2,289 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>💫 خريطة النجوم: حيث بدأ كل شيء 💫</title>
+    <title>🔒 المصادقة العاطفية: نظام C.E.A.I.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Changa:wght@700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Changa:wght@700&family=Nova+Mono&display=swap" rel="stylesheet">
     
     <style>
-        /* ------------------------- الألوان الرئيسية (Cosmic Luxury Palette) ------------------------- */
+        /* ------------------------- الألوان الرئيسية (AI Terminal Look) ------------------------- */
         :root {
-            --dark-galaxy-bg: #0d0124;    
+            --dark-terminal-bg: #0d0124;    /* نفس خلفية المجرة لتكامل التصميم */
             --primary-neon-pink: #ff6bff; 
             --secondary-neon-blue: #00e5ff; 
-            --gold-sparkle: #ffeb3b;      
-            --text-white-subtle: #f0f0f0; 
-            --glass-card-bg: rgba(255, 255, 255, 0.05); 
+            --accepted-green: #00ff00;      /* لون القبول والنجاح */
+            --text-terminal: #f0f0f0; 
         }
 
-        /* ------------------------- الأنميشنات (Star Map Formation) ------------------------- */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        /* ------------------------- الأنميشنات المعقدة ------------------------- */
+        @keyframes lineGlow { /* توهج خطوط الـ Terminal */
+            0% { text-shadow: 0 0 1px var(--primary-neon-pink); }
+            50% { text-shadow: 0 0 5px var(--primary-neon-pink); }
+            100% { text-shadow: 0 0 1px var(--primary-neon-pink); }
         }
-        @keyframes drawStarLine { /* لرسم خطوط الكوكبة تدريجياً */
-            from { stroke-dashoffset: 1000; }
-            to { stroke-dashoffset: 0; }
+        @keyframes heartbeatWave { /* أنميشن موجة نبض القلب */
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(1.5); }
         }
-        @keyframes flashPoint { /* لتوهج نقطة البداية */
-            0%, 100% { fill: var(--primary-neon-pink); box-shadow: 0 0 10px var(--primary-neon-pink); }
-            50% { fill: var(--secondary-neon-blue); box-shadow: 0 0 20px var(--secondary-neon-blue); }
+        @keyframes glitchEffect { /* تأثير التقطع البصري الخفيف */
+            0% { transform: translate(0); }
+            20% { transform: translate(-1px, 1px); }
+            40% { transform: translate(1px, -1px); }
+            60% { transform: translate(-1px, 1px); }
+            80% { transform: translate(1px, -1px); }
+            100% { transform: translate(0); }
         }
-        @keyframes shimmerText { /* لمعان النص المحفور */
-            0%, 100% { text-shadow: 0 0 5px var(--gold-sparkle); }
-            50% { text-shadow: 0 0 15px var(--gold-sparkle); }
-        }
-        @keyframes buttonGlow {
-            0%, 100% { background: linear-gradient(45deg, var(--primary-neon-pink), var(--secondary-neon-blue)); }
-            50% { background: linear-gradient(45deg, var(--secondary-neon-blue), var(--primary-neon-pink)); }
+        @keyframes focusBlink { /* وميض مؤشر التركيز */
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
 
-        /* ------------------------- الجسم والخلفية الكونية الفاخرة ------------------------- */
+        /* ------------------------- الجسم والخلفية ------------------------- */
         body {
-            font-family: 'Changa', 'Amiri', sans-serif;
+            font-family: 'Nova Mono', monospace; /* خط رقمي فاخر */
             margin: 0;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, var(--dark-galaxy-bg) 0%, #3a0050 100%); 
-            position: relative;
-            overflow: hidden;
-            color: var(--text-white-subtle);
+            background: linear-gradient(135deg, var(--dark-terminal-bg) 0%, #3a0050 100%); 
+            color: var(--text-terminal);
             text-align: center;
-            animation: fadeIn 1.5s ease-out; 
+            overflow: hidden;
+            position: relative;
         }
 
-        /* ------------------------- حاوية خريطة النجوم (SVG Container) ------------------------- */
-        .star-map-container {
-            width: 700px;
+        /* ------------------------- واجهة النظام (Terminal) ------------------------- */
+        .terminal-interface {
+            width: 800px;
             max-width: 90%;
-            height: 500px;
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid var(--secondary-neon-blue);
             border-radius: 10px;
-            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+            box-shadow: 0 0 30px var(--secondary-neon-blue);
+            animation: lineGlow 3s infinite alternate;
             position: relative;
             z-index: 10;
         }
-        .star-map-svg {
+        .terminal-title {
+            font-family: 'Changa', sans-serif;
+            font-size: 2.5em;
+            color: var(--primary-neon-pink);
+            text-shadow: 0 0 10px var(--primary-neon-pink);
+            margin-bottom: 20px;
+        }
+        .status-line {
+            color: var(--secondary-neon-blue);
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(0, 229, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        /* ------------------------- رسوم نبض القلب المتحركة ------------------------- */
+        .heartbeat-scan {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            height: 60px;
+            margin-bottom: 40px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        .heart-wave {
+            width: 5px;
+            height: 30px;
+            margin: 0 1px;
+            background-color: var(--secondary-neon-blue);
+            animation: heartbeatWave 0.8s infinite alternate;
+            opacity: 0.6;
+            transform-origin: bottom;
+        }
+        .heart-wave:nth-child(even) { animation-delay: 0.2s; background-color: var(--primary-neon-pink); }
+        .heart-wave:nth-child(3n) { animation-delay: 0.4s; }
+
+        /* ------------------------- حقول المصادقة العاطفية ------------------------- */
+        .auth-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+        .auth-input-group {
+            display: flex;
+            align-items: center;
+            width: 80%;
+            max-width: 500px;
+            position: relative;
+            animation: glitchEffect 0.2s infinite alternate; /* تقطع خفيف مستمر */
+        }
+        .auth-input-group label {
+            width: 150px;
+            text-align: right;
+            color: var(--secondary-neon-blue);
+        }
+        .auth-input-group input {
+            flex-grow: 1;
+            padding: 10px;
+            background: none;
+            border: none;
+            border-bottom: 2px dashed var(--primary-neon-pink);
+            color: var(--text-terminal);
+            font-size: 1.1em;
+            font-family: 'Nova Mono', monospace;
+            outline: none;
+            caret-color: var(--accepted-green); /* لون المؤشر */
+        }
+        .auth-input-group input:focus {
+             border-bottom-color: var(--accepted-green);
+        }
+        .input-status {
+            position: absolute;
+            left: 100%;
+            margin-left: 10px;
+            font-size: 1.5em;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        /* ------------------------- شاشة القبول الدرامية (مخفية) ------------------------- */
+        #success-display {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-        }
-
-        /* ------------------------- عناصر الكوكبة (SVG Elements) ------------------------- */
-        .star-point {
-            fill: var(--text-white-subtle);
-            stroke: none;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .star-point:hover {
-            transform: scale(1.5);
-            fill: var(--gold-sparkle);
-        }
-        /* نقطة البداية (الأهم) */
-        #start-point {
-            animation: flashPoint 3s infinite alternate;
-        }
-
-        .constellation-line {
-            fill: none;
-            stroke: var(--primary-neon-pink);
-            stroke-width: 2;
-            stroke-linecap: round;
-            /* تهيئة الأنميشن لرسم الخطوط */
-            stroke-dasharray: 1000;
-            stroke-dashoffset: 1000;
-            animation: drawStarLine 5s ease-out forwards; /* 'forwards' يحافظ على الحالة النهائية */
-        }
-        /* تأخير رسم الخطوط لتبدأ بعد ظهور النجوم */
-        .constellation-line:nth-child(1) { animation-delay: 2s; }
-        .constellation-line:nth-child(2) { animation-delay: 3s; }
-        .constellation-line:nth-child(3) { animation-delay: 4s; }
-        .constellation-line:nth-child(4) { animation-delay: 5s; }
-
-
-        /* ------------------------- الرسالة المحفورة بالضوء ------------------------- */
-        .engraved-message {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-family: 'Amiri', serif;
-            font-size: 1.6em;
-            color: var(--gold-sparkle);
+            background-color: rgba(0, 0, 0, 0.95);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             opacity: 0;
-            animation: fadeIn 1s 6s forwards, shimmerText 3s 7s infinite alternate;
+            transition: opacity 1s ease-in-out;
+            z-index: 20;
         }
-
-        /* ------------------------- زر الانتقال المداري (نفس نمط الصفحة الأولى) ------------------------- */
-        .navigation-section {
+        #success-display h1 {
+            font-family: 'Changa', sans-serif;
+            font-size: 4em;
+            color: var(--accepted-green);
+            text-shadow: 0 0 10px var(--accepted-green), 0 0 20px rgba(0, 255, 0, 0.5);
+            animation: lineGlow 0.5s infinite alternate;
+        }
+        #success-display .nav-btn {
             margin-top: 40px;
-            animation: fadeIn 1s 7.5s forwards;
-            opacity: 0;
-        }
-        .orbital-nav-btn {
-            background: linear-gradient(45deg, var(--primary-neon-pink), var(--secondary-neon-blue));
-            color: var(--dark-galaxy-bg); 
-            padding: 15px 45px;
-            border-radius: 40px;
-            border: none;
-            font-size: 1.2em;
-            font-weight: 800;
-            cursor: pointer;
+            padding: 15px 50px;
+            border-radius: 5px;
+            background-color: var(--primary-neon-pink);
+            color: var(--dark-terminal-bg);
             text-decoration: none;
-            display: inline-block;
-            box-shadow: 0 0 15px var(--primary-neon-pink);
-            transition: all 0.4s ease-in-out;
-            animation: buttonGlow 3s infinite alternate;
+            font-weight: 700;
+            font-size: 1.5em;
+            transition: transform 0.3s;
         }
-        .orbital-nav-btn:hover {
+        #success-display .nav-btn:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 25px var(--secondary-neon-blue);
-            animation: none; /* إيقاف التوهج التلقائي عند التفاعل */
         }
     </style>
 </head>
 <body>
-    
-    <div class="star-map-container">
-        <h2 style="color: var(--secondary-neon-blue); margin-top: 15px; font-size: 1.8em; text-shadow: 0 0 5px var(--secondary-neon-blue);">
-            المجرة الشخصية: اللحظة التي غيرت الكون (التاريخ أو المناسبة هنا)
-        </h2>
 
-        <svg class="star-map-svg" viewBox="0 0 700 450" xmlns="http://www.w3.org/2000/svg">
-            <rect width="100%" height="100%" fill="url(#starGradient)"/>
-            <defs>
-                <radialGradient id="starGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-                    <stop offset="0%" style="stop-color:rgba(255, 255, 255, 0.05);stop-opacity:1" />
-                    <stop offset="100%" style="stop-color:rgba(0, 0, 0, 0.2);stop-opacity:1" />
-                </radialGradient>
-            </defs>
+    <div class="terminal-interface" id="terminalInterface">
+        
+        <div class="terminal-title">مساعد الذكاء العاطفي الكوني (C.E.A.I.)</div>
+        <p class="status-line" id="statusLine">جاري فحص بروتوكول المصادقة العاطفية... يرجى إدخال البيانات.</p>
 
-            <circle class="star-point" cx="100" cy="150" r="4"/>
-            <circle class="star-point" cx="250" cy="80" r="5"/>
-            <circle class="star-point" cx="400" cy="180" r="6" id="start-point"/> <circle class="star-point" cx="550" cy="120" r="4"/>
-            <circle class="star-point" cx="600" cy="300" r="7"/>
-            <circle class="star-point" cx="300" cy="350" r="5"/>
-            <circle class="star-point" cx="150" cy="300" r="4"/>
-            
+        <div class="heartbeat-scan">
+            <div class="heart-wave"></div><div class="heart-wave"></div><div class="heart-wave"></div>
+            <div class="heart-wave"></div><div class="heart-wave"></div><div class="heart-wave"></div>
+            <div class="heart-wave"></div><div class="heart-wave"></div><div class="heart-wave"></div>
+            <div class="heart-wave"></div><div class="heart-wave"></div><div class="heart-wave"></div>
+        </div>
 
-            <line class="constellation-line" x1="400" y1="180" x2="250" y2="80"/>
-            <line class="constellation-line" x1="250" y1="80" x2="100" y2="150"/>
-            <line class="constellation-line" x1="400" y1="180" x2="550" y2="120"/>
-            <line class="constellation-line" x1="550" y1="120" x2="600" y2="300"/>
-            <line class="constellation-line" x1="600" y1="300" x2="300" y2="350"/>
-            <line class="constellation-line" x1="300" y1="350" x2="150" y2="300"/>
+        <div class="auth-section">
+            <div class="auth-input-group">
+                <label for="input1">المتغير 01 (الشوق):</label>
+                <input type="text" id="input1" placeholder="أدخل كلمة عاطفية..." data-secret="شوق" dir="rtl">
+                <span class="input-status" id="status1"></span>
+            </div>
+            <div class="auth-input-group">
+                <label for="input2">المتغير 02 (الحب):</label>
+                <input type="text" id="input2" placeholder="أدخل كلمة عاطفية..." data-secret="حب" dir="rtl">
+                <span class="input-status" id="status2"></span>
+            </div>
+            <div class="auth-input-group">
+                <label for="input3">المتغير 03 (السعادة):</label>
+                <input type="text" id="input3" placeholder="أدخل كلمة عاطفية..." data-secret="سعادة" dir="rtl">
+                <span class="input-status" id="status3"></span>
+            </div>
+        </div>
 
-            <text x="400" y="210" font-size="16" fill="var(--gold-sparkle)" text-anchor="middle" style="opacity: 0; animation: fadeIn 1s 5.5s forwards;">💖 أنتِ هنا</text>
-        </svg>
+        <button onclick="authenticate()" class="orbital-nav-btn" style="margin-top: 40px;">
+            [Encrypt & Authorize] - تفعيل المصادقة
+        </button>
 
-        <div class="engraved-message">
-            "منذ هذه اللحظة بالذات، بدأ يتكون كل شيء جميل في حياتي."
+        <div id="success-display">
+            <h1>ACCESS GRANTED</h1>
+            <p style="color: var(--accepted-green); font-size: 1.2em;">مستوى العاطفة: 100% - نظام C.E.A.I. مفتوح</p>
+            <a href="page3.html" class="nav-btn">
+                عبور إلى مولد الكنز الشخصي
+            </a>
         </div>
     </div>
 
-    <div class="navigation-section">
-        <a href="page3.html" class="orbital-nav-btn">
-            عبور إلى المدار الثاني: كبسولات الذكريات
-        </a>
-    </div>
+    <script>
+        const secrets = {
+            'input1': 'شوق',
+            'input2': 'حب',
+            'input3': 'سعادة'
+        };
+        const inputs = [document.getElementById('input1'), document.getElementById('input2'), document.getElementById('input3')];
+        let correctCount = 0;
 
+        function checkInput(inputElement) {
+            const secret = inputElement.getAttribute('data-secret');
+            const statusElement = document.getElementById('status' + inputElement.id.slice(-1));
+            
+            if (inputElement.value.trim() === secret) {
+                statusElement.innerHTML = '✅';
+                statusElement.style.color = 'var(--accepted-green)';
+                statusElement.style.opacity = '1';
+                return true;
+            } else {
+                statusElement.innerHTML = '❌';
+                statusElement.style.color = 'var(--primary-neon-pink)';
+                statusElement.style.opacity = '1';
+                return false;
+            }
+        }
+
+        inputs.forEach(input => {
+            input.addEventListener('input', () => {
+                checkInput(input); // تحديث الحالة أثناء الكتابة
+            });
+        });
+
+        function authenticate() {
+            correctCount = 0;
+            inputs.forEach(input => {
+                if (checkInput(input)) {
+                    correctCount++;
+                }
+            });
+
+            if (correctCount === 3) {
+                document.getElementById('statusLine').innerText = 'المصادقة العاطفية ناجحة. جاري فتح الواجهة...';
+                
+                // تأثير الفتح الدرامي
+                const successDisplay = document.getElementById('success-display');
+                successDisplay.style.display = 'flex';
+                setTimeout(() => {
+                    successDisplay.style.opacity = '1';
+                }, 100); 
+
+            } else {
+                document.getElementById('statusLine').innerText = 'خطأ في المصادقة. يرجى إدخال الكلمات العاطفية الصحيحة.';
+            }
+        }
+    </script>
 </body>
 </html>
