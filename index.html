@@ -22,35 +22,34 @@
 
         body { 
     font-family: 'Changa', 'Amiri', sans-serif; 
-    /* ... كود سابق ... */
-    justify-content: center; /* **التعديل هنا: لتوسيط العناصر عمودياً** */
+    background: var(--background-soft);
+    color: var(--text-color-dark); 
+    text-align: center; 
+    min-height: 100vh; /* تأكد من ملء الشاشة بالكامل */
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; /* **التعديل الحاسم: لتوسيط البطاقة عمودياً في المنتصف تماماً** */
     align-items: center; 
     margin: 0;
     overflow: hidden;
     position: relative;
-    /* تم حذف padding-top: 20px; */
+    padding: 20px 0; /* إضافة بادينغ عمودي صغير لعدم الالتصاق بالحواف */
+    
+    /* خلفية القلب العامة لتغطية المساحة البيضاء */
+    background-image: url('data:image/svg+xml;utf8,<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><g opacity="0.1"><path fill="%23FFC0CB" d="M100 0L125 75L200 75L138 125L162 200L100 150L38 200L62 125L0 75L75 75Z"/></g></svg>'); 
+    background-size: 60px; 
 }
 
         }
         
-        .container {
-            width: 95%;
-            max-width: 550px; 
-            min-height: 80vh; 
-            padding: 0 30px 30px 30px; 
-            background-color: var(--card-soft);
-            border-radius: 40px; 
-            
-            /* الظل الناعم جداً (المطابق للصورة) */
-            box-shadow: 
-                0 0 0 10px rgba(255, 255, 255, 0.5), 
-                0 10px 40px rgba(0, 0, 0, 0.1), 
-                0 25px 80px rgba(255, 105, 180, 0.15); 
-
-            border: 3px solid var(--secondary-pink);
-            position: relative;
-            z-index: 10;
-        }
+.container {
+    width: 95%;
+    max-width: 550px; 
+    /* تم تعديل min-height ليتناسب مع المحتوى داخل البطاقة */
+    min-height: auto; 
+    padding: 0 30px 30px 30px; 
+    /* ... بقية الكود ... */
+}
         
         /* القسم العلوي الذي يحمل الصورة كخلفية */
         .header-bg-section {
@@ -176,18 +175,13 @@
         }
 
         .action-button {
-            background-color: var(--seal-color); 
-            color: white;
-            padding: 18px 45px; 
-            border-radius: 50px; 
-            border: none;
-            font-size: 1.4em; 
-            margin-top: 20px; 
-            cursor: pointer;
-            box-shadow: 0 8px 20px rgba(233, 30, 99, 0.6); 
-            transition: all 0.3s;
-            font-family: 'Changa', sans-serif; 
-            font-weight: 700;
+    /* ... كود سابق ... */
+    font-size: 1.4em; 
+    margin-top: 15px; /* **التعديل هنا: تقليل المسافة** */
+    cursor: pointer;
+    /* ... بقية الكود ... */
+}
+ 
         }
         .action-button:hover {
             background-color: #d81b60;
