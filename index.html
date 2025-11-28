@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>🌟 احتفال سارة الذهبي 🌟</title>
+    <title>🌟 رسالة عيد ميلاد سارة الذهبية 🌟</title>
 
     <style>
         /* ---------------------------------------------------- */
@@ -22,32 +22,48 @@
             text-align: center;
         }
 
+        /* تفعيل منظور 3D للانتقالات */
+        body, .main-card {
+            perspective: 1000px; 
+        }
+
         /* تنسيق البطاقة الرئيسية: عائمة ولامعة */
         .main-card {
             background: rgba(255, 255, 255, 0.05); /* شفافية داكنة جداً */
             backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.1); /* إطار فضي خفيف */
+            border: 1px solid rgba(255, 255, 255, 0.1); 
             border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(255, 215, 0, 0.15); /* ظل ذهبي خفيف */
+            box-shadow: 0 10px 40px rgba(255, 215, 0, 0.15); 
             padding: 40px 25px;
             margin: 50px auto;
             width: 90%;
             max-width: 420px;
             position: relative;
             z-index: 10;
-            transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
-            animation: fadeIn 0.8s ease-out backwards; /* حركة الظهور الأساسية */
+            transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out; /* للتحولات السلسة وتأثير الانقلاب */
+            animation: fadeIn 0.8s ease-out backwards; 
         }
         
-        /* الصورة الدائرية بلمسة ذهبية */
+        /* أيقونة الصورة الدائرية (تم تصغيرها كما طلبت) */
         .profile-image {
-            width: 120px; height: 120px;
+            width: 80px; height: 80px; /* حجم أصغر */
             border-radius: 50%;
             object-fit: cover;
-            border: 4px solid #FFD700; /* إطار ذهبي */
+            border: 3px solid #FFD700; /* إطار ذهبي */
             margin-bottom: 25px;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
         }
+
+        /* أيقونة المظروف (حجم متوسط) */
+        .envelope-icon { 
+            font-size: 3.5em; /* حجم مناسب */
+            cursor: pointer; 
+            margin: 20px 0 40px; 
+            transition: transform 0.2s; 
+            color: #FFD700; /* لون ذهبي */
+        }
+        .envelope-icon:hover { transform: scale(1.1); }
+
 
         /* تنسيق النصوص باللون الذهبي */
         .heading { font-size: 2em; color: #FFD700; font-weight: 900; margin-bottom: 10px; }
@@ -64,29 +80,20 @@
         }
 
         .modern-button:hover {
-            transform: scale(1.05) translateY(-2px); /* حركة رفع عند التفاعل */
+            transform: scale(1.05) translateY(-2px); 
             box-shadow: 0 10px 25px rgba(255, 215, 0, 0.6);
         }
-
-        /* إخفاء / إظهار العناصر */
         .hidden { display: none !important; }
+
 
         /* ---------------------------------------------------- */
         /* 2. التحريك المتقن (Staggered Animations) */
         /* ---------------------------------------------------- */
         
-        /* حركة الظهور الأساسية (من أسفل لأعلى) */
         @keyframes fadeInMove {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
-        /* لضمان عمل حركة الـ GIF كعنصر زخرفي عائم */
-        .gif-deco { /* ... (باقي التنسيقات) ... */ animation: drift 18s ease-in-out infinite alternate; }
-        .gif-element { width: 120px; height: auto; border-radius: 10px; }
-        @keyframes drift { 0% { transform: translate(0, 0); } 100% { transform: translate(20px, 20px); } }
-
-        /* إخفاء المحتوى الافتراضي لتمكين التحكم في ترتيب الظهور */
         .animated-element { opacity: 0; }
     </style>
 </head>
@@ -99,64 +106,110 @@
         <img src="images/1000154383.gif" alt="توم خجول" class="gif-element">
     </div>
 
-    <div class="main-card" id="stage-welcome"> 
+    <div class="main-card" id="stage-envelope-closed"> 
         
         <img src="images/1000154269.jpg" alt="سارة وهديتها" class="profile-image animated-element" data-delay="0.1">
 
-        <h2 class="sub-heading animated-element" data-delay="0.4">احتفال النجوم</h2>
-        <h1 class="heading animated-element" data-delay="0.6">عيد ميلاد سعيد، يا أجمل ما في الكون!</h1>
+        <h1 class="heading animated-element" data-delay="0.4" style="font-size: 1.5em; margin-bottom: 20px;">كل عام وأنتِ بخير 🌟</h1>
         
-        <p class="intro-text animated-element" data-delay="0.8">
-            يا من تضيء حياتي، هذا الموقع صُنع خصيصاً ليومكِ المميز. استعدي لرحلة قصيرة عبر ذكرياتنا الذهبية.
-        </p>
+        <div class="envelope-icon animated-element" onclick="openEnvelope()" data-delay="0.6" style="cursor: pointer;">✉️</div> 
 
-        <a href="#" class="modern-button animated-element" onclick="goToStage('stage-envelope')" data-delay="1.2">اكتشف المفاجأة 💖</a> 
+        <p class="intro-text animated-element" data-delay="0.8">
+            اضغط على المظروف لترى رسالتك الذهبية.
+        </p>
     </div>
 
-    <div class="main-card hidden" id="stage-envelope">
-        <h2 class="heading animated-element" style="font-size: 1.5em;" data-delay="0.1">رسالة حب ذهبية</h2>
+    <div class="main-card hidden" id="stage-message-open">
+        <h2 class="heading" style="font-size: 1.8em; color: #FFD700;">رسالة حب ذهبية مفتوحة</h2>
         
-        <div class="envelope-icon animated-element" onclick="openEnvelope()" data-delay="0.3">✉️</div> 
-
-        <div id="letter-content" class="hidden">
+        <div id="letter-content" style="text-align: right; margin-top: 20px;">
+            <p style="color: #FFD700; font-weight: bold; font-size: 1.1em;">يا سارة الغالية،</p>
+            <p style="color: #ccc;">كلماتي لا تكفي لوصف كم أنتِ تعنين لي. أتمنى لكِ سنة مليئة بالفرح والسعادة... أنتِ تستحقين كل هذا الكون وأكثر!</p>
+            <p style="margin-top: 20px; color: #ccc;">**محبك للأبد، [اسمك]**</p>
+            
             <a href="#" class="modern-button" style="margin-top: 40px;" onclick="goToStage('stage-cake')">اكمل المفاجآت</a>
         </div>
     </div>
     
+    <div class="main-card hidden" id="stage-cake">
+        <h1 class="heading">حان وقت الكيك! 🎂</h1>
+        <p class="intro-text">سأحضر لكِ الكيكة الآن في الواقع، لكن الآن لنحتفل افتراضياً!</p>
+        <p class="intro-text">نتمنى أن تكون الرحلة قد أعجبتك. كل عام وأنتِ الحب ❤️</p>
+        <a href="#" class="modern-button" onclick="goToStage('stage-envelope-closed')">ابدأ من جديد</a>
+    </div>
+
     <p class="footer-note" style="color:#aaa;">صُنعت بحب، 2025</p>
     
     <script>
-        // دالة التنقل الرئيسية
+        
+        // دالة التنقل الرئيسية بين المراحل
         function goToStage(targetId) {
             const currentStage = document.querySelector('.main-card:not(.hidden)');
             const targetStage = document.getElementById(targetId);
 
             if (currentStage) {
-                // 1. اختفاء الشاشة الحالية (Fade Out and Move Up)
+                // 1. اختفاء الشاشة الحالية
                 currentStage.style.opacity = 0;
                 currentStage.style.transform = 'translateY(-20px)';
                 
                 setTimeout(() => {
                     currentStage.classList.add('hidden');
                     
-                    // 2. إظهار الشاشة الهدف (Fade In and Move Down)
+                    // 2. إظهار الشاشة الهدف
                     if (targetStage) {
                         targetStage.classList.remove('hidden');
                         targetStage.style.opacity = 0; 
                         targetStage.style.transform = 'translateY(20px)';
                         
+                        setTimeout(() => {
+                            targetStage.style.opacity = 1;
+                            targetStage.style.transform = 'translateY(0px)';
+                        }, 50); 
+
                         // تطبيق حركة الظهور المتقطعة (Staggered)
                         animateContent(targetStage);
                     }
-                }, 600); // زمن التحول
+                }, 600);
             }
         }
+        
+        // دالة فتح المظروف بتأثير انقلاب ثلاثي الأبعاد
+        function openEnvelope() {
+            const closedStage = document.getElementById('stage-envelope-closed');
+            const openStage = document.getElementById('stage-message-open');
+            
+            // 1. حركة اختفاء المظروف المغلق مع انقلاب
+            closedStage.style.opacity = 0;
+            closedStage.style.transform = 'rotateY(90deg) scale(0.8)'; 
 
+            setTimeout(() => {
+                closedStage.classList.add('hidden');
+                
+                // 2. إظهار رسالة الفتح مع انقلاب عكسي للظهور السلس
+                openStage.classList.remove('hidden');
+                openStage.style.opacity = 0; 
+                openStage.style.transform = 'rotateY(-90deg) scale(0.8)'; 
+
+                setTimeout(() => {
+                    openStage.style.opacity = 1;
+                    openStage.style.transform = 'rotateY(0deg) scale(1)'; // عودة للوضع الطبيعي
+                    
+                    // تطبيق حركة ظهور المحتوى
+                    animateContent(openStage);
+                }, 100); 
+                
+            }, 600);
+        }
+        
         // دالة تطبيق الحركة المتقطعة (Staggered Animation)
         function animateContent(stage) {
             const elements = stage.querySelectorAll('.animated-element');
             elements.forEach(el => {
                 const delay = parseFloat(el.getAttribute('data-delay')) * 1000;
+                
+                // إعادة تعيين الحركة لكي تعمل في كل مرة
+                el.style.animation = 'none';
+                el.offsetHeight; 
                 
                 setTimeout(() => {
                     el.style.animation = 'fadeInMove 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards'; 
@@ -164,22 +217,12 @@
             });
         }
         
-        // دالة فتح المظروف
-        function openEnvelope() {
-            document.querySelector('#stage-envelope .envelope-icon').style.display = 'none';
-            document.getElementById('letter-content').classList.remove('hidden');
-            document.querySelector('#stage-envelope .heading').innerText = "رسالة حب مفتوحة";
-            
-            // تطبيق حركة ظهور على محتوى الرسالة
-            const letterContent = document.getElementById('letter-content');
-            letterContent.style.animation = 'fadeInMove 0.8s ease-out forwards';
-        }
-
-        // عند تحميل الصفحة، ابدأ الحركة
+        // عند تحميل الصفحة، ابدأ الحركة في شاشة المظروف المغلق
         window.onload = function() {
-            document.getElementById('stage-welcome').classList.remove('hidden');
-            document.getElementById('stage-welcome').style.opacity = 1;
-            animateContent(document.getElementById('stage-welcome'));
+            const initialStage = document.getElementById('stage-envelope-closed');
+            initialStage.classList.remove('hidden');
+            initialStage.style.opacity = 1;
+            animateContent(initialStage);
         };
     </script>
 </body>
