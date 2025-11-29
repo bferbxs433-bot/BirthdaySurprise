@@ -10,255 +10,114 @@
 
 <style>
   :root{
-    --bg1:#09040f;
-    --bg2:#13041c;
+    --bg1:#0b0710;         /* deep */
+    --bg2:#150521;         /* deep purple */
     --neon-pink:#ff2fa6;
     --neon-pink-2:#ff70c1;
+    --glass: rgba(255,255,255,0.04);
     --muted:#bda6b7;
+    --card-radius:26px;
     --screen-w:320px;
     --screen-h:640px;
   }
   *{box-sizing:border-box}
-  html,body{
-    height:100%;margin:0;
-    font-family:'Cairo';
-    background: radial-gradient(circle at 10% 10%, #150928 0%, transparent 20%),
-                linear-gradient(180deg,var(--bg1),var(--bg2));
-    color:#fff;
-    overflow-x:hidden;
-  }
-
-  /* ▼▼ نجوم + شهب واقعية ▼▼ */
-  .space{
+  html,body{height:100%;margin:0;font-family:'Cairo',system-ui,-apple-system,Arial; background: radial-gradient(circle at 10% 10%, #0f0620 0%, transparent 20%), linear-gradient(180deg,var(--bg1),var(--bg2)); color:#fff; -webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  /* ---------- background decorations ---------- */
+  .space {
     position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;
+    background: radial-gradient(circle at 60% 10%, rgba(255,20,120,0.03), transparent 6%);
+  }
+  .star{ position:absolute; width:2px; height:2px; border-radius:50%; background:linear-gradient(180deg,#fff,#ffdff6); opacity:.9; filter:drop-shadow(0 0 6px rgba(255,120,180,0.06)); animation:tw 2.2s infinite ease-in-out; }
+  @keyframes tw{0%{opacity:.18}50%{opacity:1}100%{opacity:.18}}
+
+  .meteor{ position:absolute; width:180px; height:3px; background:linear-gradient(90deg, rgba(255,255,255,0.95), rgba(255,150,210,0.2)); transform:rotate(-28deg); filter:drop-shadow(0 0 12px rgba(255,100,170,0.25)); opacity:0; animation:shoot 6s linear infinite; }
+  @keyframes shoot{0%{transform:translate(-40vw,-20vh) rotate(-28deg);opacity:0}8%{opacity:1}100%{transform:translate(120vw,80vh) rotate(-28deg);opacity:0}}
+
+  /* floating hearts */
+  .heart{ position:fixed; font-size:22px; color:var(--neon-pink); text-shadow:0 8px 26px rgba(255,60,150,0.14); opacity:.9; animation:heartFloat 6s ease-in-out infinite; z-index:1 }
+  @keyframes heartFloat{0%{transform:translateY(8px)}50%{transform:translateY(-24px)}100%{transform:translateY(8px)}}
+
+  /* ---------- layout ---------- */
+  .wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 20px;position:relative;z-index:5;}
+  .panel{ width:100%; max-width:980px; border-radius:18px; padding:22px; display:flex; gap:18px; align-items:flex-start; justify-content:center; position:relative; }
+  .card {
+    width:100%; border-radius:20px; padding:14px; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    box-shadow: 0 18px 50px rgba(10,6,12,0.45);
+    overflow:hidden;
   }
 
-  .star{
-    position:absolute; width:2px;height:2px; border-radius:50%;
-    background:#fff; opacity:.8;
-    animation: twinkle 3s infinite ease-in-out;
-  }
-  @keyframes twinkle{
-    0%{opacity:.15; transform:scale(.6)}
-    50%{opacity:1; transform:scale(1)}
-    100%{opacity:.15; transform:scale(.6)}
-  }
+  /* phone mockup center */
+  .phone-wrap { width:var(--screen-w); height:var(--screen-h); border-radius:34px; background:linear-gradient(180deg,#0b0410,#12041a); padding:14px; box-shadow: 0 18px 60px rgba(10,6,12,0.7), inset 0 2px 20px rgba(255,255,255,0.02); border: 6px solid rgba(255,20,120,0.03); display:flex; align-items:center; justify-content:center; margin:14px auto; position:relative; }
+  .phone-screen { width:100%; height:100%; background:linear-gradient(180deg,#0f0716,#17071f); border-radius:26px; position:relative; overflow:hidden; box-shadow: inset 0 0 80px rgba(255,0,120,0.02); border: 2px solid rgba(255,255,255,0.02) }
 
-  .meteor{
-    position:absolute;
-    width:160px; height:2px;
-    background:linear-gradient(90deg,rgba(255,255,255,1),rgba(255,120,200,0));
-    border-radius:40px;
-    opacity:0;
-    transform:rotate(-40deg);
-    animation: meteorMove linear infinite;
-    filter:drop-shadow(0 0 14px rgba(255,90,180,0.4));
+  /* neon frame inside screen */
+  .neon-frame { position:absolute; inset:22px; border-radius:18px; pointer-events:none;
+    box-shadow: 0 0 40px rgba(255,30,140,0.07), inset 0 0 24px rgba(255,30,140,0.03);
   }
+  .neon-border { position:absolute; left:12px; right:12px; top:40px; bottom:96px; border-radius:14px; border:4px solid rgba(255,255,255,0.02); box-shadow: 0 0 60px rgba(255,30,140,0.18); pointer-events:none; }
 
-  @keyframes meteorMove{
-    0%{
-      opacity:0;
-      transform:translate(-20vw,-20vh) rotate(-40deg) scaleX(.3);
-    }
-    10%{
-      opacity:1;
-      transform:translate(0,0) rotate(-40deg) scaleX(1);
-    }
-    100%{
-      opacity:0;
-      transform:translate(80vw,70vh) rotate(-40deg) scaleX(.4);
-    }
-  }
+  /* content inside screen */
+  .screen-content { position:absolute; left:28px; right:28px; top:52px; bottom:110px; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; gap:8px; color:#ffdff3; text-align:center; padding:12px; }
+  .logo-neo{ width:64px; height:64px; border-radius:50%; display:flex;align-items:center;justify-content:center; color:var(--neon-pink); font-size:30px; filter:drop-shadow(0 8px 36px rgba(255,60,160,0.18)); }
+  .title-neo{ font-size:28px; font-weight:800; color: rgba(255,120,200,0.98); text-shadow: 0 6px 38px rgba(255,20,140,0.18); margin-top:6px; }
+  .sub-neo{ color:var(--muted); font-weight:600; margin-top:4px; font-size:14px; opacity:0.9; }
 
-  /* قلوب */
-  .heart{
-    position:fixed; color:var(--neon-pink);
-    font-size:24px; opacity:.85;
-    text-shadow:0 0 20px rgba(255,50,140,0.4);
-    animation: floatHeart 6s ease-in-out infinite;
-  }
-  @keyframes floatHeart{
-    0%{transform:translateY(0)}
-    50%{transform:translateY(-20px)}
-    100%{transform:translateY(0)}
-  }
+  .text-box { margin-top:8px; padding:12px 10px; background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02)); border-radius:14px; font-weight:600; color:#ffdfea; line-height:1.6; font-size:14px; box-shadow: inset 0 2px 12px rgba(255,255,255,0.01); border-left:4px solid rgba(255,120,180,0.06); }
 
-  /* layout */
-  .wrap{
-    min-height:100vh; display:flex; justify-content:center; padding:60px 10px; position:relative; z-index:4;
-  }
-  .panel{ width:100%; max-width:1000px; }
+  /* START envelope (on page1) */
+  .env-pro{ width:78%; max-width:300px; height:200px; position:relative; margin-top:14px; perspective:1200px; }
+  .env-body{ position:absolute; left:50%; transform:translateX(-50%); bottom:0; width:100%; height:68%; border-radius:12px; background:linear-gradient(180deg,#1b0210, #2a0718); border:4px solid rgba(255,255,255,0.02); box-shadow: inset 0 6px 18px rgba(255,255,255,0.02), 0 18px 48px rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center; overflow:visible; }
+  .env-flap{ position:absolute; left:50%; transform:translateX(-50%); top:-52px; width:220px; height:120px; background:linear-gradient(180deg,#ff7aa0,#ff4d8a); clip-path:polygon(50% 0, 100% 100%, 0 100%); border-radius:12px; transform-origin:top center; transition: transform .95s cubic-bezier(.2,.9,.2,1); box-shadow: inset 0 -12px 30px rgba(0,0,0,0.06); }
+  .env.open .env-flap{ transform:translateX(-50%) rotateX(-165deg) translateY(-6px); }
 
-  .card{
-    background:rgba(255,255,255,0.03);
-    border-radius:16px;
-    padding:20px;
-    box-shadow:0 20px 60px rgba(0,0,0,0.35);
-  }
+  .letter{ position:absolute; left:50%; transform:translateX(-50%) translateY(90px); top:12px; width:86%; height:66%; background:linear-gradient(180deg,#fff,#fffaf9); border-radius:10px; box-shadow:0 12px 30px rgba(20,20,40,0.08); opacity:0; transition: transform .95s cubic-bezier(.2,.9,.2,1), opacity .5s; padding:16px; color:#3b2a30; font-weight:700; text-align:center; line-height:1.6; }
+  .env.open .letter{ transform:translateX(-50%) translateY(-110px); opacity:1; }
 
-  /* phone mockup */
-  .phone-wrap{
-    width:var(--screen-w); height:var(--screen-h);
-    margin:auto;
-    padding:14px;
-    background:linear-gradient(180deg,#0b0410,#13041a);
-    border-radius:40px;
-    border:6px solid rgba(255,255,255,0.04);
-    box-shadow: 0 20px 90px rgba(0,0,0,0.8);
-  }
-  .phone-screen{
-    width:100%; height:100%;
-    background:linear-gradient(180deg,#12081a,#1a0822);
-    border-radius:28px; position:relative; overflow:hidden;
-  }
+  .seal{ position:absolute; bottom:14px; left:50%; transform:translateX(-50%); width:62px; height:62px; border-radius:50%; background:linear-gradient(180deg,#ff2fa6,#ff7aa0); display:flex;align-items:center;justify-content:center;color:white;font-weight:900; font-size:22px; box-shadow:0 12px 30px rgba(255,50,150,0.12); cursor:pointer; }
 
-  .neon-frame{
-    position:absolute; inset:18px;
-    border-radius:16px;
-    box-shadow:0 0 70px rgba(255,30,150,0.16);
-  }
+  /* neon vertical bars */
+  .vert-neon{ position:absolute; left:22px; top:120px; bottom:120px; width:6px; border-radius:10px; background: linear-gradient(180deg, rgba(255,50,160,0.9), rgba(255,120,200,0.6)); box-shadow:0 0 40px rgba(255,50,160,0.16); opacity:0.9; }
+  .vert-neon.right{ right:22px; left:auto; transform:translateX(0); }
 
-  .neon-border{
-    position:absolute; inset:40px 16px 100px 16px;
-    border-radius:12px;
-    border:3px solid rgba(255,255,255,0.04);
-    box-shadow:0 0 40px rgba(255,50,150,0.18);
-  }
+  /* glowing button inside screen bottom */
+  .screen-bottom { position:absolute; left:30px; right:30px; bottom:22px; display:flex; gap:12px; align-items:center; justify-content:center; }
+  .neon-btn { background: linear-gradient(90deg,var(--neon-pink),var(--neon-pink-2)); border:none; color:white; padding:14px 22px; border-radius:999px; font-weight:900; font-size:16px; box-shadow: 0 18px 48px rgba(255,60,150,0.16), 0 0 40px rgba(255,30,140,0.12) inset; cursor:pointer; transition: transform .14s ease; }
+  .neon-btn:active{ transform: translateY(2px) }
+  .neon-underline{ height:6px; width:60px; border-radius:999px; background:linear-gradient(90deg,var(--neon-pink-2),var(--neon-pink)); box-shadow:0 10px 40px rgba(255,30,140,0.12); margin-top:6px; }
 
-  .screen-content{
-    position:absolute; inset:60px 26px 120px 26px;
-    text-align:center;
-    color:#ffdef3;
-  }
+  /* small link / footer under phone */
+  .page-footer { margin-top:14px; text-align:center; color:var(--muted); font-weight:700; font-size:13px; }
 
-  .logo-neo{ font-size:38px; }
-  .title-neo{
-    margin-top:10px;
-    font-size:28px;
-    font-weight:900;
-    color:var(--neon-pink);
-    text-shadow:0 0 30px rgba(255,40,150,0.3);
-  }
-  .sub-neo{ color:var(--muted); font-weight:700; }
+  /* page container controls */
+  .controls { display:flex; gap:10px; justify-content:center; margin-top:12px; flex-wrap:wrap; }
 
-  /* صندوق النص */
-  .text-box{
-    background:rgba(255,255,255,0.03);
-    border-radius:14px;
-    padding:12px;
-    margin-top:10px;
-    font-weight:700;
-    line-height:1.6;
-  }
+  .link-btn { background:transparent; border:1px dashed rgba(255,255,255,0.06); color:var(--muted); padding:8px 12px; border-radius:10px; font-weight:700; cursor:pointer; }
 
-  /* ▼▼ الظرف الاحترافي ▼▼ */
-  .env-pro{
-    width:80%; max-width:300px; height:200px;
-    margin:20px auto;
-    perspective:1000px;
-    position:relative;
-  }
-
-  .env-body{
-    position:absolute; inset:0;
-    border-radius:14px;
-    background:linear-gradient(180deg,#1c0412,#2d0719);
-    border:3px solid rgba(255,255,255,0.04);
-    box-shadow:inset 0 4px 20px rgba(255,255,255,0.05);
-  }
-
-  .env-flap{
-    position:absolute; left:50%; transform:translateX(-50%);
-    top:-50px; width:220px; height:120px;
-    background:linear-gradient(180deg,#ff7a9f,#ff4d8a);
-    clip-path:polygon(50% 0,100% 100%,0 100%);
-    border-radius:12px;
-    transform-origin:top center;
-    transition:.9s cubic-bezier(.24,1,.26,1);
-    box-shadow:inset 0 -12px 30px rgba(0,0,0,0.1);
-  }
-
-  .env.shake .env-flap{
-    animation: flapShake .4s ease;
-  }
-  @keyframes flapShake{
-    0%{transform:translateX(-50%) rotateX(0deg)}
-    25%{transform:translateX(-50%) rotateX(8deg)}
-    50%{transform:translateX(-50%) rotateX(-8deg)}
-    75%{transform:translateX(-50%) rotateX(4deg)}
-    100%{transform:translateX(-50%) rotateX(0deg)}
-  }
-
-  .env.open .env-flap{
-    transform:translateX(-50%) rotateX(-170deg);
-  }
-
-  .letter{
-    position:absolute; top:40px; left:50%;
-    transform:translateX(-50%) translateY(90px);
-    width:85%; height:65%;
-    background:#fff; border-radius:10px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.18);
-    opacity:0;
-    transition:.9s cubic-bezier(.24,1,.26,1);
-    padding:16px;
-    font-weight:700;
-    color:#442a33;
-  }
-  .env.open .letter{
-    transform:translateX(-50%) translateY(-120px) rotateX(0deg);
-    opacity:1;
-  }
-
-  .seal{
-    position:absolute; bottom:10px; left:50%;
-    transform:translateX(-50%);
-    width:60px;height:60px;border-radius:50%;
-    background:linear-gradient(180deg,#ff2fa6,#ff70c1);
-    color:#fff;font-size:26px;font-weight:900;
-    display:flex;align-items:center;justify-content:center;
-    cursor:pointer;
-    box-shadow:0 0 30px rgba(255,80,150,0.3);
-  }
-
-  /* زر أسفل الشاشة */
-  .screen-bottom{
-    position:absolute; left:20px; right:20px; bottom:20px;
-    text-align:center;
-  }
-  .neon-btn{
-    background:linear-gradient(90deg,var(--neon-pink),var(--neon-pink-2));
-    color:#fff;
-    padding:14px 22px;
-    border-radius:999px;
-    font-weight:900;
-    box-shadow:0 0 30px rgba(255,50,150,0.25);
-    border:none; cursor:pointer;
-  }
-
-  /* الصفحات */
-  .page{ display:none; }
+  /* pages (SPA) */
+  .page{ display:none; padding:24px 10px; }
   .page.active{ display:block; }
 
-  .controls{
-    text-align:center;margin-top:14px;
-  }
-  .link-btn{
-    background:transparent;
-    border:1px dashed rgba(255,255,255,0.1);
-    padding:8px 14px; color:#ddd;
-    border-radius:10px;
+  /* responsive */
+  @media (max-width:560px){
+    :root{ --screen-w:300px; --screen-h:620px }
+    .title-neo{ font-size:20px }
+    .neon-btn{ padding:12px 16px; font-size:14px }
   }
 </style>
 </head>
-
 <body>
 
-<div class="space"></div>
+<div class="space" aria-hidden="true">
+  <div class="meteor" style="top:8vh; left:-40vw; animation-delay:1s"></div>
+  <div class="meteor" style="top:28vh; left:-60vw; animation-delay:3.4s"></div>
+  <div class="meteor" style="top:6vh; left:-85vw; animation-delay:5.8s"></div>
+</div>
 
-<div class="heart" style="left:8vw; top:30vh">❤</div>
-<div class="heart" style="left:80vw; top:50vh">❤</div>
-<div class="heart" style="left:15vw; top:70vh">❤</div>
+<!-- floating hearts -->
+<div class="heart" style="left:6vw; top:34vh; font-size:26px; animation-delay:.4s">❤</div>
+<div class="heart" style="left:86vw; top:44vh; font-size:30px; animation-delay:1.2s">❤</div>
+<div class="heart" style="left:10vw; top:64vh; font-size:18px; animation-delay:2.1s">❤</div>
 
 <div class="wrap">
   <div class="panel">
@@ -266,80 +125,115 @@
 
       <!-- PAGE 1 -->
       <div class="page active" id="page1">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+          <div class="phone-wrap" role="region" aria-label="شاشة الهاتف">
+            <div class="phone-screen">
+              <div class="neon-frame"></div>
+              <div class="neon-border"></div>
 
-        <div class="phone-wrap">
-          <div class="phone-screen">
+              <div class="screen-content" aria-hidden="false">
+                <div class="logo-neo">🌙</div>
+                <div class="title-neo">أنتِ صُنِعتِ للحب!</div>
+                <div class="sub-neo">العنوان: مفاجأة كونية وردية</div>
+                <div class="text-box" style="margin-top:12px">قلبكِ يسطع كالنجوم — هذا يوم خاص نحتفل به معًا 💗</div>
 
-            <div class="neon-frame"></div>
-            <div class="neon-border"></div>
-
-            <div class="screen-content">
-              <div class="logo-neo">🌙</div>
-              <div class="title-neo">أنتِ صُنِعتِ للحب!</div>
-              <div class="sub-neo">مفاجأة كونية وردية</div>
-
-              <div class="text-box">
-                قلبكِ يشبه النجوم… يلمع بلا توقف 💗
-              </div>
-
-              <!-- Envelope -->
-              <div class="env-pro env" id="env">
-                <div class="env-body"></div>
-                <div class="env-flap" id="flap"></div>
-                <div class="letter" id="letter">
-                  إلى سارة الغالية 💖  
-                  <br><br>
-                  كل سنة وأنتِ أجمل شيء بحياتي.
+                <!-- envelope inside phone -->
+                <div class="env-pro env" id="env1" style="margin-top:16px">
+                  <div class="env-body"></div>
+                  <div class="env-flap" id="flap1"></div>
+                  <div class="letter" id="letter1">
+                    <div style="font-weight:800;font-size:16px">إلى سارة 💖</div>
+                    <div style="margin-top:8px;font-weight:700;color:#4a3340;line-height:1.5;font-size:14px">كل سنة وأنتِ بخير. أتمنى أيامك كلها ضحك وحب.</div>
+                  </div>
+                  <div class="seal" id="seal1">❤</div>
                 </div>
-                <div class="seal" id="seal">❤</div>
+
+              </div> <!-- screen-content -->
+
+              <div class="screen-bottom">
+                <button class="neon-btn" id="openNow">أفتح هدية الحب</button>
               </div>
 
-            </div>
+            </div> <!-- phone-screen -->
+          </div> <!-- phone-wrap -->
 
-            <div class="screen-bottom">
-              <button class="neon-btn" id="openBtn">افتحي المفاجأة</button>
-            </div>
+          <div class="vert-neon" aria-hidden="true"></div>
+          <div class="vert-neon right" aria-hidden="true"></div>
 
+          <div class="controls">
+            <button class="link-btn" id="link1">نسخ رابط الصفحة</button>
+            <button class="link-btn" onclick="gotoPage(2)">الصفحة التالية</button>
           </div>
-        </div>
 
-        <div class="controls">
-          <button class="link-btn" onclick="gotoPage(2)">التالي</button>
+          <div class="page-footer">صفحة 1 / 5</div>
         </div>
       </div>
 
       <!-- PAGE 2 -->
       <div class="page" id="page2">
-        <h2 class="title-neo" style="text-align:center">الصفحة الثانية</h2>
-        <div class="controls">
-          <button class="link-btn" onclick="gotoPage(1)">رجوع</button>
-          <button class="link-btn" onclick="gotoPage(3)">التالي</button>
+        <div style="text-align:center">
+          <div class="title-neo">تهنئة خاصة</div>
+          <div class="text-box" style="margin:18px auto;max-width:720px">حبيبتي سارة — هذه كلمات من القلب: أتمنى لك سنة مليئة بالضحك والحب والنجاح.</div>
+
+          <div class="controls">
+            <button class="link-btn" id="link2">نسخ رابط الصفحة</button>
+            <button class="link-btn" onclick="gotoPage(3)">التالي</button>
+          </div>
+          <div class="page-footer">صفحة 2 / 5</div>
         </div>
       </div>
 
       <!-- PAGE 3 -->
       <div class="page" id="page3">
-        <h2 class="title-neo" style="text-align:center">الصفحة الثالثة</h2>
-        <div class="controls">
-          <button class="link-btn" onclick="gotoPage(2)">رجوع</button>
-          <button class="link-btn" onclick="gotoPage(4)">التالي</button>
+        <div style="text-align:center">
+          <div class="title-neo">صور وذكريات</div>
+          <div style="display:flex;gap:12px;justify-content:center;margin-top:18px;flex-wrap:wrap">
+            <div style="width:160px;height:120px;border-radius:12px;background:linear-gradient(180deg,#1b0612,#2a0718);border:4px solid rgba(255,255,255,0.02)"></div>
+            <div style="width:160px;height:120px;border-radius:12px;background:linear-gradient(180deg,#1b0612,#2a0718);border:4px solid rgba(255,255,255,0.02)"></div>
+            <div style="width:160px;height:120px;border-radius:12px;background:linear-gradient(180deg,#1b0612,#2a0718);border:4px solid rgba(255,255,255,0.02)"></div>
+          </div>
+
+          <div class="controls" style="margin-top:18px">
+            <button class="link-btn" id="link3">نسخ رابط الصفحة</button>
+            <button class="link-btn" onclick="gotoPage(4)">التالي</button>
+          </div>
+          <div class="page-footer">صفحة 3 / 5</div>
         </div>
       </div>
 
       <!-- PAGE 4 -->
       <div class="page" id="page4">
-        <h2 class="title-neo" style="text-align:center">الصفحة الرابعة</h2>
-        <div class="controls">
-          <button class="link-btn" onclick="gotoPage(3)">رجوع</button>
-          <button class="link-btn" onclick="gotoPage(5)">التالي</button>
+        <div style="text-align:center">
+          <div class="title-neo">تحدي لطيف</div>
+          <div class="text-box" style="margin-top:12px;max-width:680px">أجبِ على سؤال صغير لتحصلي على مفاجأة!</div>
+
+          <div style="display:flex;gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap">
+            <button class="neon-btn" style="background:linear-gradient(90deg,#fff,#fff);color:var(--neon-pink)" onclick="quizAns(false)">أ</button>
+            <button class="neon-btn" style="background:linear-gradient(90deg,var(--neon-pink),var(--neon-pink-2))" onclick="quizAns(true)">ب</button>
+            <button class="neon-btn" style="background:linear-gradient(90deg,#fff,#fff);color:var(--neon-pink)" onclick="quizAns(false)">ج</button>
+          </div>
+
+          <div id="quizResult" style="margin-top:14px;font-weight:800;color:var(--muted)"></div>
+
+          <div class="controls" style="margin-top:18px">
+            <button class="link-btn" id="link4">نسخ رابط الصفحة</button>
+            <button class="link-btn" onclick="gotoPage(5)">التالي</button>
+          </div>
+          <div class="page-footer">صفحة 4 / 5</div>
         </div>
       </div>
 
       <!-- PAGE 5 -->
       <div class="page" id="page5">
-        <h2 class="title-neo" style="text-align:center">الصفحة الخامسة</h2>
-        <div class="controls">
-          <button class="link-btn" onclick="gotoPage(1)">رجوع للبداية</button>
+        <div style="text-align:center">
+          <div class="title-neo">الهدية النهائية 🎁</div>
+          <div class="text-box" style="margin-top:18px;max-width:720px">رمز مفاجأة: <strong style="color:var(--neon-pink)">SARA-LOVE</strong></div>
+
+          <div class="controls" style="margin-top:18px">
+            <button class="link-btn" id="link5">نسخ رابط الصفحة</button>
+            <button class="link-btn" onclick="gotoPage(1)">العودة للبداية</button>
+          </div>
+          <div class="page-footer">صفحة 5 / 5</div>
         </div>
       </div>
 
@@ -347,60 +241,119 @@
   </div>
 </div>
 
-
 <script>
-/* ---------------------- صفحات ---------------------- */
-function gotoPage(n){
+/* ---------- SPA navigation + hash handling ---------- */
+function showPageById(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page'+n).classList.add('active');
-  window.scrollTo(0,0);
+  const el = document.getElementById(id);
+  if(el) el.classList.add('active');
+  history.replaceState(null,'', '#' + id);
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
-/* ---------------------- شهب واقعية ---------------------- */
-function createStars(){
-  const space = document.querySelector('.space');
+const initial = location.hash ? location.hash.replace('#','') : 'page1';
+showPageById(initial);
 
-  for(let i=0;i<120;i++){
-    const s = document.createElement('div');
-    s.className='star';
-    s.style.left=Math.random()*100+'vw';
-    s.style.top=Math.random()*100+'vh';
-    s.style.animationDelay=Math.random()*3+'s';
-    space.appendChild(s);
-  }
+function gotoPage(n){
+  showPageById('page' + n);
+}
 
-  for(let i=0;i<8;i++){
-    const m = document.createElement('div');
-    m.className='meteor';
-    m.style.top = Math.random()*60+'vh';
-    m.style.left = (-20 - Math.random()*30)+'vw';
-    m.style.animationDuration = (3 + Math.random()*3)+'s';
-    m.style.animationDelay = Math.random()*8+'s';
-    space.appendChild(m);
+/* ---------- copy link buttons ---------- */
+for(let i=1;i<=5;i++){
+  const btn = document.getElementById('link'+i);
+  if(btn){
+    btn.addEventListener('click', ()=> {
+      const url = location.origin + location.pathname + '#page' + i;
+      if(navigator.clipboard) navigator.clipboard.writeText(url).then(()=> alert('تم نسخ الرابط للصفحة ' + i));
+      else prompt('انسخ الرابط', url);
+    });
   }
 }
-createStars();
 
-/* ---------------------- حركة الظرف ---------------------- */
-const env = document.getElementById('env');
-const seal = document.getElementById('seal');
-const openBtn = document.getElementById('openBtn');
+/* ---------- envelope open animation (page1) ---------- */
+const env = document.getElementById('env1');
+const flap = document.getElementById('flap1');
+const letter = document.getElementById('letter1');
+const seal = document.getElementById('seal1');
+const openNowBtn = document.getElementById('openNow');
+
+const letterText = "إلى سارة 💖\nكل سنة وأنتِ بخير. أتمنى أيامك كلها ضحك وحب.";
+
+function typeTextInto(el, text, speed=28){
+  el.innerHTML = '';
+  const chars = Array.from(text);
+  chars.forEach((ch, idx) => {
+    const s = document.createElement('span');
+    s.textContent = ch;
+    s.style.opacity = '0';
+    s.style.display = 'inline-block';
+    s.style.transform = 'translateY(6px)';
+    s.style.transition = 'all .08s linear';
+    el.appendChild(s);
+    setTimeout(()=> { s.style.opacity='1'; s.style.transform='translateY(0)'; }, idx*speed + 260);
+  });
+}
 
 function openEnvelope(){
-  if(env.classList.contains('open')) return;
-
-  env.classList.add('shake');  // اهتزاز خفيف
-
-  setTimeout(()=>{
-    env.classList.remove('shake');
+  if(!env.classList.contains('open')){
     env.classList.add('open');
-    confetti({particleCount:120,spread:120,origin:{y:0.4}});
-  },400);
+    typeTextInto(letter, letterText, 30);
+    setTimeout(()=> {
+      confetti({ particleCount: 80, spread: 100, origin: { y: 0.35 }});
+    }, 500);
+  } else {
+    env.classList.remove('open');
+    letter.innerHTML = '';
+  }
 }
 
-seal.onclick = openEnvelope;
-openBtn.onclick = openEnvelope;
+env.addEventListener('click', openEnvelope);
+seal.addEventListener('click', openEnvelope);
+openNowBtn.addEventListener('click', openEnvelope);
+env.addEventListener('keydown', (e)=> { if(e.key === 'Enter' || e.key === ' ') openEnvelope(); });
 
+/* ---------- decorative stars & hearts & meteors ---------- */
+function populate() {
+  const space = document.querySelector('.space');
+  // stars
+  for(let i=0;i<140;i++){
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.left = (Math.random()*100) + 'vw';
+    s.style.top = (Math.random()*100) + 'vh';
+    const sz = (Math.random()*2 + 1).toFixed(2);
+    s.style.width = sz + 'px';
+    s.style.height = sz + 'px';
+    s.style.animationDelay = (Math.random()*2) + 's';
+    s.style.opacity = (0.2 + Math.random()*0.9);
+    space.appendChild(s);
+  }
+  // meteors delays randomized
+  document.querySelectorAll('.meteor').forEach((m)=> {
+    m.style.animationDuration = (3 + Math.random()*3) + 's';
+    m.style.animationDelay = (Math.random()*8) + 's';
+  });
+}
+populate();
+
+/* ---------- quiz answer ---------- */
+function quizAns(ok){
+  const res = document.getElementById('quizResult');
+  if(ok){
+    res.textContent = 'ممتاز! إجابة صحيحة 🎉';
+    res.style.color = 'var(--neon-pink)';
+    confetti({ particleCount: 120, spread: 140, origin:{ y:0.4 } });
+  } else {
+    res.textContent = 'قريب جدًا — جربي مرة أخرى 🙂';
+    res.style.color = 'var(--muted)';
+  }
+}
+
+/* ---------- hashchange ---------- */
+window.addEventListener('hashchange', ()=> {
+  const id = location.hash ? location.hash.replace('#','') : 'page1';
+  showPageById(id);
+});
 </script>
 
 </body>
