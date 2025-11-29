@@ -1,513 +1,346 @@
-<!doctype html>
-<html lang="ar">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>عيد ميلاد سارة — مفاجأة! 🎉</title>
+<meta charset="UTF-8">
+<title>Happy Birthday Sara</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- خط عربي جميل -->
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;500;700;900&display=swap" rel="stylesheet">
+<style>
 
-  <!-- confetti -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+/* ---------------------------------------
+   خلفية الفضاء + نجوم + شهب + قلوب
+----------------------------------------*/
 
-  <style>
-    :root{
-      --bg1: linear-gradient(135deg,#fff7fb 0%, #f9f0ff 50%, #fffaf0 100%);
-      --accent:#ff6b9a;
-      --accent2:#6b8bff;
-      --glass: rgba(255,255,255,0.78);
-      --card-radius:22px;
-      --shadow: 0 14px 35px rgba(20,20,40,0.08);
-      --font: 'Cairo', system-ui, sans-serif;
-      --accent-contrast: #fff;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:var(--font);background:var(--bg1);color:#202028;direction:rtl;}
-    a{color:inherit;text-decoration:none}
-    .app{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:18px;position:relative;}
-    .container{width:100%;max-width:1100px;background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,255,0.92));border-radius:24px;padding:16px;box-shadow:var(--shadow);overflow:hidden}
-    .nav{display:flex;gap:8px;align-items:center;justify-content:space-between;margin-bottom:12px}
-    .logo{display:flex;gap:10px;align-items:center;font-weight:900;font-size:18px;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
-    .nav-btn{background:transparent;border:1px solid rgba(30,30,60,0.06);padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:700}
-    .nav-btn.active{ background:linear-gradient(90deg,var(--accent),var(--accent2)); color:var(--accent-contrast); border:none; box-shadow:0 8px 20px rgba(100,60,120,0.08); }
-    .grid{display:grid;grid-template-columns:1fr 420px;gap:18px;align-items:start}
-    @media(max-width:980px){ .grid{grid-template-columns:1fr} .right{order:-1} }
-    .left{padding:12px 6px}
-    .title-block{display:flex;gap:12px;align-items:center;margin-bottom:8px}
-    .title-block h1{margin:0;font-size:30px;line-height:1.05;font-weight:900}
-    .subtitle{color:#666;margin:6px 0 16px 0}
-    .card{background:var(--glass);border-radius:18px;padding:16px;box-shadow:0 8px 30px rgba(20,20,40,0.04)}
-    .emoji-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:20px;margin-top:10px}
-    .countdown{display:flex;gap:10px;align-items:center;margin-top:14px}
-    .circle{width:84px;height:84px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:22px;background:linear-gradient(180deg,#fff,rgba(255,255,255,0.86));box-shadow:0 10px 25px rgba(30,20,60,0.06)}
-    .label{font-size:13px;color:#666}
-    .right{display:flex;flex-direction:column;gap:12px;align-items:center;padding:6px}
-    .hero-photo{width:100%;max-width:360px;border-radius:18px;overflow:hidden;border:6px solid rgba(255,255,255,0.6);box-shadow:0 14px 40px rgba(0,0,0,0.08)}
-    .hero-photo img{width:100%;display:block}
-    .big-btn{width:100%;padding:12px 16px;border-radius:12px;border:none;font-weight:800;cursor:pointer;font-size:16px;background:linear-gradient(90deg,var(--accent),#ff9ab6);color:white;box-shadow:0 12px 30px rgba(255,107,154,0.12)}
-    .big-btn.secondary{background:linear-gradient(90deg,#7da4ff,#6b8bff);box-shadow:0 12px 30px rgba(107,139,255,0.08)}
-    .carousel{position:relative;overflow:hidden;border-radius:14px;margin-top:12px}
-    .slides{display:flex;transition:transform .42s cubic-bezier(.2,.9,.2,1);gap:10px;padding:12px}
-    .slide{min-width:220px;border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 8px 24px rgba(20,20,40,0.04)}
-    .slide img{width:100%;height:150px;object-fit:cover;display:block}
-    .carousel-controls{display:flex;gap:8px;margin-top:8px;align-items:center}
-    .quiz-list{display:flex;flex-direction:column;gap:10px;margin-top:12px}
-    .q-card{padding:12px;border-radius:12px;background:linear-gradient(180deg,#fff,#fffaf2);box-shadow:0 8px 20px rgba(30,20,60,0.04)}
-    .answers{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-    .answer-btn{padding:8px 10px;border-radius:10px;border:1px solid rgba(30,30,60,0.06);cursor:pointer;font-weight:700;background:transparent}
-    .points{font-weight:900;font-size:20px;color:var(--accent)}
-    .print-only{display:none}
-    @media print{
-      body *{visibility:visible}
-      .no-print, .nav, .right, .carousel-controls, .big-btn, .no-print *{display:none !important;visibility:hidden !important}
-      .container{box-shadow:none;border-radius:0}
-      .print-only{display:block}
-    }
-    .muted{color:#7a7a8a;font-size:13px}
-    .center{text-align:center}
-    .hidden{display:none !important}
-    .wiggle{display:inline-block;animation:wig 1.6s infinite;transform-origin:center}
-    @keyframes wig{0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
-    .modal-back{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:120;background:linear-gradient(180deg, rgba(3,3,12,0.45), rgba(3,3,12,0.6));backdrop-filter: blur(4px)}
-    .modal{width:calc(100% - 40px);max-width:760px;background:linear-gradient(180deg,#fff,#fff);border-radius:16px;padding:20px;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,0.45);transform:translateY(20px);opacity:0;transition:all .26s}
-    .modal.show{transform:none;opacity:1}
-    .small{font-size:13px;color:#666}
-    /* helpers for editing */
-    .hint{font-size:13px;color:#666;margin-top:6px}
-  </style>
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    font-family: "Cairo", sans-serif;
+    background: black;
+    color: white;
+}
+
+/* طبقة النجوم */
+.stars {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top:0; left:0;
+    background: transparent;
+    z-index: -3;
+}
+
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 2s infinite ease-in-out;
+    opacity: 0.6;
+}
+
+@keyframes twinkle {
+    0% { opacity: 0.3; }
+    50% { opacity: 1; }
+    100% { opacity: 0.3; }
+}
+
+/* الشهب */
+.shooting-star {
+    position: absolute;
+    width: 120px;
+    height: 2px;
+    background: linear-gradient(90deg, white, transparent);
+    transform: rotate(-45deg);
+    opacity: 0.7;
+    animation: shoot 3s infinite;
+}
+
+@keyframes shoot {
+    0% { transform: translateX(-200px) translateY(-200px) rotate(-45deg); opacity: 0; }
+    30% { opacity: 1; }
+    100% { transform: translateX(800px) translateY(800px) rotate(-45deg); opacity: 0; }
+}
+
+/* القلوب المتوهجة */
+.heart {
+    position: fixed;
+    color: #ff4d6d;
+    font-size: 25px;
+    animation: floatUp 6s infinite ease-in-out;
+    opacity: 0.7;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(20px) scale(1); opacity: 0.4; }
+    50% { transform: translateY(-30px) scale(1.2); opacity: 1; }
+    100% { transform: translateY(20px) scale(1); opacity: 0.4; }
+}
+
+/* ---------------------------------------
+   Navbar
+----------------------------------------*/
+
+nav {
+    background: rgba(0,0,0,0.6);
+    padding: 12px;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    position: fixed;
+    top:0; left:0;
+    width: 100%;
+    backdrop-filter: blur(6px);
+    z-index: 999;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #ff4d6d;
+}
+
+/* ---------------------------------------
+   الصفحات
+----------------------------------------*/
+
+section {
+    min-height: 100vh;
+    padding: 100px 20px 40px;
+    display: none;
+}
+
+.active {
+    display: block;
+}
+
+/* ---------------------------------------
+   معرض الصور
+----------------------------------------*/
+
+.carousel {
+    width: 90%;
+    margin: auto;
+    overflow: hidden;
+    border-radius: 15px;
+    border: 2px solid white;
+}
+
+.carousel img {
+    width: 100%;
+    display: none;
+}
+
+.carousel img.active-img {
+    display: block;
+}
+
+/* ---------------------------------------
+   صفحة الرسالة – الظرف
+----------------------------------------*/
+
+.envelope {
+    width: 300px;
+    height: 200px;
+    margin: auto;
+    background: #ffb3c6;
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+    transition: 0.4s;
+    border: 2px solid white;
+}
+
+.envelope:hover {
+    transform: scale(1.05);
+}
+
+.envelope::before {
+    content:"";
+    position: absolute;
+    top:0; left:0;
+    width: 100%;
+    height: 100%;
+    background: #ff8fab;
+    clip-path: polygon(0 0, 50% 50%, 100% 0);
+}
+
+.letter {
+    width: 280px;
+    height: 150px;
+    background: white;
+    position: absolute;
+    top: 25px;
+    left: 10px;
+    padding: 15px;
+    border-radius: 10px;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: 0.8s;
+    color: black;
+    font-size: 16px;
+}
+
+.letter-show {
+    opacity: 1;
+    transform: translateY(-20px);
+}
+
+</style>
 </head>
+
 <body>
 
-<div class="app">
-  <div class="container" role="application" aria-label="موقع مفاجأة عيد ميلاد">
+<!-- طبقات النجوم -->
+<div class="stars" id="stars"></div>
+<div class="stars" id="shooting"></div>
+<div id="hearts"></div>
 
-    <!-- NAV -->
-    <div class="nav no-print">
-      <div style="display:flex;gap:12px;align-items:center">
-        <div class="logo">🎂 مفاجأة سارة</div>
-        <div class="muted">تصميم عصري • مناسب للجوال</div>
-      </div>
-      <div style="display:flex;gap:8px;align-items:center">
-        <button class="nav-btn active" data-view="home" id="navHome">الغلاف</button>
-        <button class="nav-btn" data-view="gallery" id="navGallery">المعرض</button>
-        <button class="nav-btn" data-view="games" id="navGames">التحديات</button>
-        <button class="nav-btn" id="printBtn">🖨️ طباعة بطاقة</button>
-      </div>
+<!-- Navbar -->
+<nav>
+    <a onclick="showPage('home')">الرئيسية</a>
+    <a onclick="showPage('gallery')">المعرض</a>
+    <a onclick="showPage('game')">اللعبة</a>
+    <a onclick="showPage('letter')">الرسالة</a>
+    <a onclick="showPage('gift')">الهدية</a>
+</nav>
+
+<!-- الصفحة 1 -->
+<section id="home" class="active">
+    <h1 style="text-align:center; font-size:35px;">عيد ميلاد سعيد يا سارة 💖✨</h1>
+    <p style="text-align:center; font-size:20px;">مرحباً بكِ في عالم صغير صنع خصيصاً لكِ…</p>
+</section>
+
+<!-- الصفحة 2 -->
+<section id="gallery">
+    <h2 style="text-align:center;">معرض الصور 📸</h2>
+
+    <div class="carousel">
+        <img class="active-img" id="img1" src="PUT-IMAGE-URL-HERE">
+        <img id="img2" src="PUT-IMAGE-URL-HERE">
+        <img id="img3" src="PUT-IMAGE-URL-HERE">
     </div>
+</section>
 
-    <!-- GRID -->
-    <div class="grid">
+<!-- الصفحة 3 -->
+<section id="game">
+    <h2 style="text-align:center;">🎮 تحدي بسيط</h2>
+    <p>سؤال: ما هو لون سارة المفضل؟</p>
+    <button onclick="answer('red')">أحمر</button>
+    <button onclick="answer('pink')">وردي</button>
+    <button onclick="answer('blue')">أزرق</button>
+    <p id="result"></p>
+</section>
 
-      <!-- LEFT (views) -->
-      <div class="left">
+<!-- الصفحة 4 -->
+<section id="letter">
+    <h2 style="text-align:center;">📨 اضغطي على الظرف لفتح الرسالة</h2>
 
-        <!-- HOME -->
-        <div id="view-home" class="view">
-          <div class="title-block">
-            <h1 id="mainTitle">عيد ميلاد سعيد يا سارة! 🎉</h1>
-            <div class="muted">— مفاجأة خاصة</div>
-          </div>
-          <p class="subtitle">عدّاد 10 ثوانٍ يفتح المفاجأة تلقائيًا — أو اضغطي "افتح الآن".</p>
-
-          <div class="card center">
-            <div style="font-size:46px">🎈</div>
-            <div class="muted" style="margin-top:6px">العدّاد يعمل الآن</div>
-
-            <div class="countdown" style="justify-content:center;margin-top:12px">
-              <div class="circle" id="countCircle">10</div>
-              <div class="label">
-                <div style="font-weight:800">ثوانٍ</div>
-                <div class="muted">حتى المفاجأة</div>
-              </div>
-            </div>
-
-            <div class="emoji-row" style="margin-top:12px">
-              <span class="wiggle">💖</span><span class="wiggle">🎂</span><span class="wiggle">🎶</span><span class="wiggle">✨</span>
-            </div>
-
-            <div style="margin-top:12px;display:flex;gap:8px;justify-content:center" class="no-print">
-              <button class="big-btn" id="openNow">افتح الآن</button>
-              <button class="big-btn secondary" id="toggleVoice">▶ تشغيل الرسالة الصوتية</button>
-            </div>
-
-            <div class="hint">تلميح: انتقلي إلى "المعرض" وابحثي عن القلب — اضغطيه 7 مرات لمفاجأة سرية.</div>
-          </div>
+    <div class="envelope" onclick="openLetter()">
+        <div class="letter" id="letterBox">
+            <h3>إلى سارة 💖</h3>
+            <p>
+            أنتِ دائماً الأجمل، والأقرب، والأغلى…  
+            هذه الرسالة كتبتها لكِ لتبقى ذكرى صغيرة من حب كبير.
+            </p>
         </div>
-
-        <!-- GALLERY -->
-        <div id="view-gallery" class="view hidden">
-          <div class="title-block"><h1>معرض الصور</h1><div class="muted">اسحبي الصور أو انتظري التبديل التلقائي</div></div>
-
-          <div class="card">
-            <div class="carousel" id="carousel">
-              <div class="slides" id="slides">
-                <!-- أماكن فارغة للصور: استبدل الروابط داخل المصفوفة في السكربت -->
-                <!-- Default placeholders (يمكنك استبدالها لاحقاً) -->
-                <div class="slide"><img src="https://via.placeholder.com/600x400?text=صورة+1" alt="pic1"></div>
-                <div class="slide"><img src="https://via.placeholder.com/600x400?text=صورة+2" alt="pic2"></div>
-                <div class="slide"><img src="https://via.placeholder.com/600x400?text=صورة+3" alt="pic3"></div>
-              </div>
-            </div>
-
-            <div class="carousel-controls no-print" style="justify-content:space-between;align-items:center;margin-top:8px">
-              <div>
-                <button class="nav-btn" id="prevSlide">◀</button>
-                <button class="nav-btn" id="nextSlide">▶</button>
-              </div>
-              <div class="muted">اسحب بالإصبع على الجوال • يتم التبديل تلقائياً</div>
-            </div>
-
-            <div style="margin-top:12px;text-align:center">
-              <button id="galleryHeart" class="nav-btn">💗 اضغطي القلب (سر)</button>
-              <div id="gallerySecret" class="muted" style="margin-top:8px;display:none">تم الكشف! استبدل هذه المساحة بصورك الخاصة.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- GAMES -->
-        <div id="view-games" class="view hidden">
-          <div class="title-block"><h1>التحديات والألعاب</h1><div class="muted">أجبِ على الأسئلة لكسب نقاط</div></div>
-
-          <div class="card">
-            <div style="display:flex;justify-content:space-between;align-items:center">
-              <div>
-                <div style="font-weight:900">نقاطك: <span class="points" id="points">0</span></div>
-                <div class="muted">اجمع نقاطًا لتحصلي على مكافأة</div>
-              </div>
-              <div><button class="nav-btn" id="resetGame">إعادة اللعب</button></div>
-            </div>
-
-            <div class="quiz-list" id="quizList">
-              <!-- الأسئلة ستُنشأ أوتوماتيكياً -->
-            </div>
-
-            <div style="margin-top:12px;text-align:center">
-              <button class="big-btn" id="claimReward">ادّعي جائزتك</button>
-              <div id="rewardBox" style="margin-top:10px"></div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- RIGHT -->
-      <div class="right no-print">
-        <div class="hero-photo" title="صورة سارة">
-          <img id="heroImg" src="https://via.placeholder.com/800x800?text=صورة+سارة" alt="sara photo">
-        </div>
-
-        <div style="width:100%">
-          <button class="big-btn" id="surpriseBtn">🎁 افتح المفاجأة</button>
-          <button class="big-btn secondary" id="playVoice">🔊 تشغيل/إيقاف الرسالة</button>
-        </div>
-
-        <div style="margin-top:8px;width:100%;display:flex;gap:8px">
-          <button class="nav-btn" id="shareBtn">🔗 مشاركة</button>
-          <button class="nav-btn" id="downloadBtn">📸 صور/تحميل</button>
-        </div>
-
-        <div style="margin-top:12px;font-size:13px;color:#666;text-align:center">يمكنك تعديل الصور والرسالة الصوتية بسهولة في أعلى السكربت.</div>
-      </div>
-
     </div>
+</section>
 
-    <!-- footer -->
-    <div style="margin-top:12px;display:flex;justify-content:space-between;align-items:center" class="no-print">
-      <div class="muted">مصمم بحب — أضف صورك ورسالتك الصوتية بسهولة</div>
-      <div class="muted">جاهز للرفع على GitHub Pages</div>
-    </div>
+<!-- الصفحة 5 -->
+<section id="gift">
+    <h2 style="text-align:center;">🎁 الهدية</h2>
+    <p style="font-size:20px; text-align:center;">
+        هذه الصفحة ستكون الهدية النهائية.  
+        أخبرني فقط ماذا تريد أن أضع هنا. ❤️
+    </p>
+</section>
 
-  </div>
-</div>
-
-<!-- Modal (المفاجأة) -->
-<div id="modalBack" class="modal-back" role="dialog" aria-modal="true" aria-hidden="true">
-  <div class="modal" id="modalBox" role="document" aria-labelledby="modalTitle">
-    <div style="font-size:56px">🎉</div>
-    <h2 id="modalTitle">مفاجأة! كل سنة وانتي طيبة يا سارة 🎂</h2>
-    <p id="modalMessage">أتمنى لكِ سنة مليانة حب ونجاحات وذكريات جميلة!</p>
-
-    <div style="margin-top:12px;display:flex;gap:10px;justify-content:center">
-      <button class="big-btn" id="confettiBtn">انثري الكونفيتي ✨</button>
-      <button class="big-btn secondary" id="closeModal">إغلاق</button>
-    </div>
-
-    <div id="modalReward" style="margin-top:14px;display:none"></div>
-  </div>
-</div>
-
-<!-- audio message: استبدل الـ src برابط ملف mp3 خاص بك -->
-<audio id="voiceMessage" preload="auto">
-  <source src="https://cdn.pixabay.com/download/audio/2021/09/16/audio_8a4d7c0b82.mp3?filename=happy-birthday-song-10928.mp3" type="audio/mpeg">
-  <!-- ضع هنا رابط ملفك الصوتي إن أردت -->
-</audio>
 
 <script>
-  /* ---------------------- Configuration (عدّل هنا بسهولة) ---------------------- */
-  const GIRL_NAME = "سارة";
-  const HERO_IMAGE = "https://via.placeholder.com/800x800?text=صورة+سارة"; // استبدل برابط صورتك
-  // مصفوفة صور المعرض: ضع روابطك هنا لاحقًا (أو اترك placeholders)
-  const CAROUSEL_IMAGES = [
-    "https://via.placeholder.com/900x600?text=صورة+1",
-    "https://via.placeholder.com/900x600?text=صورة+2",
-    "https://via.placeholder.com/900x600?text=صورة+3"
-  ];
-  // أسئلة اللعبة (حرّر النصوص والخيارات كما تشاء)
-  const QUIZ_QUESTIONS = [
-    { q: "ما هي حلوى " + GIRL_NAME + " المفضلة؟", opts: ["تورتة الشوكولا","آيس كريم","مافن"], a: 0 },
-    { q: "ما لون " + GIRL_NAME + " المفضل؟", opts: ["أحمر","وردي","أزرق"], a: 1 },
-    { q: "أي نشاط تحبه أكثر؟", opts: ["رحلات","قراءة","رقص"], a: 0 }
-  ];
-  /* --------------------------------------------------------------------------- */
 
-  // تطبيق الإعدادات السهلة
-  document.getElementById('mainTitle').textContent = "عيد ميلاد سعيد يا " + GIRL_NAME + "!";
-  document.getElementById('heroImg').src = HERO_IMAGE;
-  document.getElementById('modalMessage').textContent = "أتمنى لكِ سنة مليانة حب وفرح يا " + GIRL_NAME + " ❤️";
+/* -----------------------------
+   التنقّل بين الصفحات
+------------------------------*/
+function showPage(id){
+    document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+}
 
-  // ---------- SPA navigation ----------
-  const views = document.querySelectorAll('.view');
-  function showView(name){
-    views.forEach(v => {
-      if(v.id === 'view-' + name) v.classList.remove('hidden'); else v.classList.add('hidden');
-    });
-    document.querySelectorAll('.nav-btn').forEach(b => {
-      if(b.dataset && b.dataset.view === name) b.classList.add('active'); else b.classList.remove('active');
-    });
-  }
-  document.getElementById('navHome').addEventListener('click', ()=> showView('home'));
-  document.getElementById('navGallery').addEventListener('click', ()=> showView('gallery'));
-  document.getElementById('navGames').addEventListener('click', ()=> showView('games'));
+/* -----------------------------
+   معرض الصور
+------------------------------*/
+let currentImg = 1;
 
-  // print button
-  document.getElementById('printBtn').addEventListener('click', ()=> window.print());
+setInterval(()=>{
+    document.querySelectorAll(".carousel img").forEach(img => img.classList.remove("active-img"));
+    currentImg++;
+    if(currentImg > 3) currentImg = 1;
+    document.getElementById("img"+currentImg).classList.add("active-img");
+}, 2500);
 
-  // ---------- Countdown 10s ----------
-  let countdown = 10;
-  const countCircle = document.getElementById('countCircle');
-  let countdownInterval = null;
-  function startCountdown(){
-    clearInterval(countdownInterval);
-    countdown = 10;
-    countCircle.textContent = countdown;
-    countdownInterval = setInterval(() => {
-      countdown--;
-      if(countdown <= 0){
-        clearInterval(countdownInterval);
-        countCircle.textContent = 0;
-        openSurprise();
-      } else {
-        countCircle.textContent = countdown;
-      }
-    }, 1000);
-  }
-
-  // open now
-  document.getElementById('openNow').addEventListener('click', () => {
-    clearInterval(countdownInterval);
-    openSurprise();
-  });
-
-  window.addEventListener('load', () => {
-    startCountdown();
-    initCarousel();
-    initQuiz();
-    autoSlideHandle = setInterval(nextSlide, 4200);
-    setTimeout(()=> updateCarousel(), 300);
-  });
-
-  // ---------- Modal logic ----------
-  const modalBack = document.getElementById('modalBack');
-  const modalBox = document.getElementById('modalBox');
-  document.getElementById('surpriseBtn').addEventListener('click', openSurprise);
-  document.getElementById('closeModal').addEventListener('click', closeModal);
-  modalBack.addEventListener('click', (e)=> { if(e.target===modalBack) closeModal(); });
-  function openSurprise(){
-    modalBack.style.display = 'flex';
-    setTimeout(()=> modalBox.classList.add('show'), 20);
-    modalBack.setAttribute('aria-hidden','false');
-    confetti({ particleCount: 120, spread: 160, origin: { y: 0.2 } });
-    confetti({ particleCount: 80, spread: 120, origin: { x: 0.6, y: 0.4 } });
-    focusClose();
-  }
-  function closeModal(){
-    modalBox.classList.remove('show');
-    setTimeout(()=> { modalBack.style.display = 'none'; modalBack.setAttribute('aria-hidden','true'); }, 260);
-  }
-  document.addEventListener('keydown', (e)=> { if(e.key === 'Escape') closeModal(); });
-
-  document.getElementById('confettiBtn').addEventListener('click', ()=> confetti({ particleCount: 200, spread: 200 }));
-
-  // ---------- Audio message ----------
-  const voice = document.getElementById('voiceMessage');
-  const playVoiceBtn = document.getElementById('playVoice');
-  const toggleVoiceBtn = document.getElementById('toggleVoice');
-
-  playVoiceBtn.addEventListener('click', async () => {
-    try{
-      if(voice.paused){
-        await voice.play();
-        playVoiceBtn.textContent = "⏸️ إيقاف الرسالة";
-      } else {
-        voice.pause();
-        playVoiceBtn.textContent = "🔊 تشغيل/إيقاف الرسالة";
-      }
-    }catch(e){ alert("المتصفح قد يمنع التشغيل التلقائي — اضغطي مرة أخرى للسماح."); }
-  });
-  toggleVoiceBtn.addEventListener('click', ()=> playVoiceBtn.click());
-
-  // ---------- Carousel ----------
-  const slidesEl = document.getElementById('slides');
-  let currentIndex = 0;
-  let autoSlideHandle = null;
-
-  function initCarousel(){
-    // populate from CAROUSEL_IMAGES if placeholders present
-    const existing = slidesEl.querySelectorAll('.slide');
-    if(existing.length === 0){
-      CAROUSEL_IMAGES.forEach(src => {
-        const s = document.createElement('div'); s.className='slide';
-        const img = document.createElement('img'); img.src = src;
-        s.appendChild(img); slidesEl.appendChild(s);
-      });
+/* -----------------------------
+   لعبة بسيطة
+------------------------------*/
+function answer(c){
+    if(c === 'pink'){
+        document.getElementById("result").innerHTML = "رائع! الإجابة صحيحة 💖";
     } else {
-      // replace placeholder images with CAROUSEL_IMAGES if provided
-      const imgs = slidesEl.querySelectorAll('img');
-      CAROUSEL_IMAGES.forEach((src,i) => { if(imgs[i]) imgs[i].src = src; });
+        document.getElementById("result").innerHTML = "هممم… ليست الإجابة الصحيحة 😅";
     }
+}
 
-    // touch handling
-    let startX = 0, isDown=false;
-    slidesEl.addEventListener('pointerdown', (e)=> { isDown=true; startX = e.clientX; slidesEl.style.transition = 'none'; });
-    window.addEventListener('pointerup', (e)=> {
-      if(!isDown) return;
-      isDown=false; slidesEl.style.transition = '';
-      const diff = e.clientX - startX;
-      if(diff < -30) nextSlide(); else if(diff > 30) prevSlide();
-    });
-    updateCarousel();
-  }
+/* -----------------------------
+   فتح الرسالة من الظرف
+------------------------------*/
+function openLetter(){
+    document.getElementById("letterBox").classList.toggle("letter-show");
+}
 
-  function updateCarousel(){
-    const child = slidesEl.children[0];
-    if(!child) return;
-    const slideWidth = child.offsetWidth + 10;
-    slidesEl.style.transform = `translateX(${-currentIndex * slideWidth}px)`;
-  }
+/* -----------------------------
+   إنشاء النجوم
+------------------------------*/
+for(let i=0;i<120;i++){
+    let star = document.createElement("div");
+    star.className = "star";
+    star.style.left = Math.random()*100 + "%";
+    star.style.top = Math.random()*100 + "%";
+    star.style.animationDelay = Math.random()*2 + "s";
+    document.getElementById("stars").appendChild(star);
+}
 
-  function nextSlide(){
-    currentIndex = Math.min(currentIndex + 1, slidesEl.children.length - 1);
-    if(currentIndex >= slidesEl.children.length) currentIndex = 0;
-    updateCarousel();
-  }
-  function prevSlide(){
-    currentIndex = Math.max(currentIndex - 1, 0);
-    updateCarousel();
-  }
-  document.getElementById('nextSlide').addEventListener('click', ()=> { nextSlide(); resetAutoSlide(); });
-  document.getElementById('prevSlide').addEventListener('click', ()=> { prevSlide(); resetAutoSlide(); });
+/* -----------------------------
+   إنشاء الشهب
+------------------------------*/
+for(let i=0;i<3;i++){
+    let sh = document.createElement("div");
+    sh.className = "shooting-star";
+    sh.style.left = Math.random()*100 + "%";
+    sh.style.top = Math.random()*50 + "%";
+    sh.style.animationDelay = Math.random()*5 + "s";
+    document.getElementById("shooting").appendChild(sh);
+}
 
-  function resetAutoSlide(){
-    clearInterval(autoSlideHandle);
-    autoSlideHandle = setInterval(nextSlide, 4200);
-  }
-  window.addEventListener('resize', updateCarousel);
+/* -----------------------------
+   قلوب متوهجة
+------------------------------*/
+for(let i=0;i<15;i++){
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤";
+    heart.style.left = Math.random()*100 + "%";
+    heart.style.top = Math.random()*100 + "%";
+    heart.style.animationDelay = Math.random()*3 + "s";
+    document.getElementById("hearts").appendChild(heart);
+}
 
-  // ---------- Gallery secret heart ----------
-  let galleryHeartCount = 0;
-  document.getElementById('galleryHeart').addEventListener('click', ()=> {
-    galleryHeartCount++;
-    if(galleryHeartCount >= 7){
-      document.getElementById('gallerySecret').style.display = 'block';
-      confetti({ particleCount: 140, spread: 180 });
-      document.getElementById('galleryHeart').textContent = "💗 تم الكشف!";
-    } else {
-      document.getElementById('galleryHeart').textContent = `💗 اضغطي القلب (${galleryHeartCount})`;
-    }
-  });
-
-  // ---------- Sharing / download placeholders ----------
-  document.getElementById('shareBtn').addEventListener('click', ()=> {
-    if(navigator.share){
-      navigator.share({ title: 'مفاجأة لـ ' + GIRL_NAME, text: 'افتحوا المفاجأة لـ ' + GIRL_NAME, url: location.href }).catch(()=>{});
-    } else {
-      navigator.clipboard?.writeText(location.href).then(()=> alert('تم نسخ رابط الصفحة! شاركه مع الأصدقاء.'));
-    }
-  });
-  document.getElementById('downloadBtn').addEventListener('click', ()=> {
-    alert('ضع هنا رابط تحميل ألبوم الصور أو استبدل هذا الزر برابط التنزيل.');
-  });
-
-  // ---------- QUIZ / GAME ----------
-  const quizList = document.getElementById('quizList');
-  let points = 0;
-  function initQuiz(){
-    quizList.innerHTML = '';
-    QUIZ_QUESTIONS.forEach((item, idx) => {
-      const qcard = document.createElement('div'); qcard.className='q-card';
-      const qh = document.createElement('div'); qh.style.fontWeight='800'; qh.textContent = (idx+1)+'. '+item.q;
-      qcard.appendChild(qh);
-      const answers = document.createElement('div'); answers.className='answers';
-      item.opts.forEach((opt,i)=>{
-        const b = document.createElement('button'); b.className='answer-btn'; b.textContent = opt;
-        b.addEventListener('click', ()=> handleAnswer(idx,i,b));
-        answers.appendChild(b);
-      });
-      qcard.appendChild(answers);
-      quizList.appendChild(qcard);
-    });
-    updatePoints();
-  }
-  function handleAnswer(qIdx, chosen, btn){
-    const q = QUIZ_QUESTIONS[qIdx];
-    const parent = btn.parentElement;
-    Array.from(parent.children).forEach(b=> b.disabled = true);
-    if(chosen === q.a){
-      points += 10;
-      btn.style.borderColor = 'rgba(50,180,100,0.5)';
-      btn.textContent += ' ✓';
-      confetti({ particleCount: 40, spread: 80, origin: { y: 0.4 } });
-    } else {
-      points -= 2;
-      btn.style.borderColor = 'rgba(200,30,30,0.15)';
-      btn.textContent += ' ✕';
-    }
-    updatePoints();
-  }
-  function updatePoints(){ document.getElementById('points').textContent = points; }
-
-  document.getElementById('resetGame').addEventListener('click', ()=> { points = 0; initQuiz(); });
-  document.getElementById('claimReward').addEventListener('click', ()=> {
-    const rewardBox = document.getElementById('rewardBox');
-    if(points >= 20){
-      rewardBox.innerHTML = `<div style="padding:12px;border-radius:12px;background:linear-gradient(90deg,var(--accent),var(--accent2));color:white;font-weight:900">🎉 مبروك! حصلتِ على مفاجأة خاصة — رمز: SARA-LOVE</div>`;
-      confetti({ particleCount: 220, spread: 220 });
-      document.getElementById('modalReward').innerHTML = `<div style="padding:12px;border-radius:10px;background:linear-gradient(90deg,var(--accent),var(--accent2));color:white;font-weight:800">مكافأتك: رسالة صوتية خاصة + بطاقة قابلة للطباعة</div>`;
-      document.getElementById('modalReward').style.display = 'block';
-    } else {
-      rewardBox.innerHTML = `<div class="muted">اجمعي نقاطًا أكثر (20 نقطة على الأقل) للحصول على الجائزة.</div>`;
-    }
-  });
-
-  // ---------- small helpers ----------
-  // focus management for accessibility
-  const closeModalBtn = document.getElementById('closeModal');
-  function focusClose(){ setTimeout(()=> closeModalBtn.focus(), 300); }
-
-  // ensure carousel positioning after images load
-  window.addEventListener('load', ()=> { setTimeout(updateCarousel, 300); });
-
-  // keyboard: Enter to open surprise when focus on button
-  document.getElementById('surpriseBtn').addEventListener('keydown', (e)=> { if(e.key === 'Enter') openSurprise(); });
-
-  // ensure function openSurprise focuses close button
-  const origOpen = openSurprise;
-  // override safe: we already defined openSurprise; ensure focusClose called inside it (done above)
-
-  // orientation change
-  window.addEventListener('orientationchange', updateCarousel);
 </script>
 
 </body>
-  </html>
+</html>
