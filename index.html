@@ -1,449 +1,154 @@
-<!doctype html>
-<html lang="ar" dir="rtl">
+<!DOCTYPE html>
+<html lang="ar">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>مفاجأة سارة — Kawaii Envelope</title>
-
-<!-- Cairo -->
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;800&display=swap" rel="stylesheet">
-
-<!-- confetti (lightweight CDN) -->
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+<meta charset="UTF-8">
+<title>عيد ميلاد سارة</title>
 
 <style>
-  :root{
-    --bg:#fff3f7;
-    --panel:#ffffff;
-    --pink1:#ffb6d0;
-    --pink2:#ff7aa7;
-    --accent:#6b8bff;
-    --muted:#8b6b7b;
-    --glass: rgba(255,255,255,0.75);
-    --radius:20px;
-    --page-pad:28px;
-  }
-  *{box-sizing:border-box}
-  html,body{height:100%;margin:0;font-family:'Cairo',system-ui,-apple-system,'Segoe UI',Roboto; background:var(--bg); color:#3b2a34; -webkit-font-smoothing:antialiased}
-  a{color:inherit;text-decoration:none}
-  button{font-family:inherit}
+body {
+  margin: 0;
+  padding: 0;
+  direction: rtl;
+  font-family: "Cairo", sans-serif;
+  background: radial-gradient(circle at center, #0b0f26, #000111 70%);
+  height: 100vh;
+  overflow-x: hidden;
+}
 
-  /* global layout */
-  .wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;position:relative;overflow:hidden}
-  .stage{width:100%;max-width:980px;margin:0 auto}
+/* حاوية الظرف */
+.envelope-pro {
+  width: 360px;
+  max-width: 90vw;
+  height: 260px;
+  position: relative;
+  cursor: pointer;
+  perspective: 1200px;
+  margin: 80px auto;
+}
 
-  /* background decorative scene */
-  .space {
-    position:fixed; inset:0; z-index:-10; pointer-events:none;
-    background: radial-gradient(circle at 20% 20%, rgba(255,250,252,0.9), transparent 6%),
-                radial-gradient(circle at 80% 80%, rgba(250,250,255,0.95), transparent 8%),
-                linear-gradient(180deg,#fff3f7,#fffafc 60%);
-  }
+/* جسم الظرف */
+.env-body {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 70%;
+  background: linear-gradient(180deg, #ffb7d1, #ff9ec1);
+  border-radius: 0 0 20px 20px;
+  box-shadow: 
+      0 10px 25px rgba(255,120,160,0.18),
+      inset 0 0 20px rgba(255,255,255,0.4);
+  border: 5px solid #ffdfeb;
+  z-index: 2;
+}
 
-  /* small twinkling stars */
-  .star {
-    position:absolute;width:2px;height:2px;border-radius:50%;background:linear-gradient(180deg,#fff,#ffecf5);opacity:0.9;
-    filter:drop-shadow(0 0 6px rgba(255,255,255,0.08));
-    animation: twinkle 2s infinite ease-in-out;
-  }
-  @keyframes twinkle{0%{opacity:.2}50%{opacity:1}100%{opacity:.2}}
+/* الغطاء */
+.env-flap {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 60%;
+  background: linear-gradient(180deg, #ffdbe6, #ffbfd6);
+  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+  transform-origin: top center;
+  border-radius: 20px;
+  transition: transform 1.1s cubic-bezier(.17,.88,.35,1.28);
+  box-shadow: inset 0 -20px 40px rgba(0,0,0,0.06);
+  z-index: 3;
+}
 
-  /* shooting meteors */
-  .meteor {
-    position:absolute;width:160px;height:3px;background:linear-gradient(90deg,#fff,#ffd4ea00);
-    transform:rotate(-30deg);opacity:0.9;filter:drop-shadow(0 0 8px rgba(255,200,220,0.5));
-    animation: shoot 5s linear infinite;
-  }
-  @keyframes shoot{
-    0%{ transform:translate(-40vw,-20vh) rotate(-30deg); opacity:0}
-    10%{ opacity:1 }
-    100%{ transform:translate(120vw,80vh) rotate(-30deg); opacity:0 }
-  }
+/* الورقة داخل الظرف */
+.env-letter {
+  width: 82%;
+  height: 78%;
+  background: #fff;
+  border-radius: 14px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) translateY(65%);
+  top: 5%;
+  transition: transform 1.1s cubic-bezier(.17,.88,.35,1.28);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.07);
+  opacity: 0;
+  z-index: 1;
+}
 
-  /* floating hearts */
-  .heart {
-    position:fixed;font-size:20px;color:var(--pink2);text-shadow:0 8px 20px rgba(255,120,160,0.12);
-    animation: heartFloat 6s ease-in-out infinite;
-    z-index:-5;
-  }
-  @keyframes heartFloat{0%{transform:translateY(6px)}50%{transform:translateY(-18px)}100%{transform:translateY(6px)}}
+/* محتوى الورقة */
+.letter-inner {
+  padding: 22px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #503442;
+  line-height: 1.7;
+  text-align: center;
+  white-space: pre-line;
+  opacity: 0;
+  transition: opacity .8s ease;
+}
 
-  /* card panel (page container) */
-  .card {
-    background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.98));
-    border-radius:24px; padding:var(--page-pad); box-shadow:0 18px 48px rgba(20,20,40,0.08);
-    position:relative; overflow:hidden;
-  }
+/* عند الفتح */
+.envelope-pro.open .env-flap {
+  transform: rotateX(-160deg);
+}
 
-  /* page */
-  .page { display:none; min-height:70vh; padding:12px 10px; }
-  .page.active { display:block; }
+.envelope-pro.open .env-letter {
+  transform: translateX(-50%) translateY(-30%);
+  opacity: 1;
+}
 
-  .title { font-size:34px; font-weight:800; color:var(--pink2); margin-bottom:6px; }
-  .subtitle { color:var(--muted); margin-bottom:18px; font-weight:600; }
+.envelope-pro.open .letter-inner {
+  opacity: 1;
+}
 
-  /* envelope area (center) */
-  .envelope-wrap { display:flex; align-items:center; justify-content:center; margin:18px 0 8px; }
-  .envelope {
-    width:360px; max-width:84vw; height:250px; position:relative; border-radius:18px; cursor:pointer;
-    perspective:900px;
-  }
+/* رسائل */
+h1 {
+  color: #fff;
+  text-align: center;
+  margin-top: 40px;
+  font-size: 32px;
+}
 
-  /* envelope body */
-  .env-body {
-    width:100%; height:100%; border-radius:14px; background:linear-gradient(180deg,var(--pink1),var(--pink2));
-    border:6px solid rgba(255,230,240,0.9); position:relative; overflow:visible; box-shadow:0 18px 50px rgba(250,120,170,0.08);
-  }
-
-  /* flap (triangle) */
-  .flap {
-    position:absolute; left:50%; top:-56px; transform:translateX(-50%); width:260px; height:120px;
-    background:linear-gradient(180deg,#ffd9e6,#ffb1cf); clip-path:polygon(50% 0, 100% 100%, 0 100%);
-    border-radius:16px; transform-origin:top center;
-    transition: transform .9s cubic-bezier(.2,.9,.2,1);
-    box-shadow:inset 0 -6px 18px rgba(0,0,0,0.03);
-  }
-  .env.open .flap { transform: translateX(-50%) rotateX(-160deg) translateY(-6px); }
-
-  /* paper (letter) */
-  .paper {
-    position:absolute; left:50%; transform:translateX(-50%) translateY(120px); top:12px;
-    width:86%; height:65%; background:#fff; border-radius:12px; padding:18px; box-shadow:0 12px 30px rgba(20,20,40,0.06);
-    opacity:0; transition: transform .9s cubic-bezier(.2,.9,.2,1), opacity .6s;
-  }
-  .env.open .paper { transform:translateX(-50%) translateY(-96px); opacity:1; }
-
-  /* message text (typing reveal) */
-  .msg { font-weight:700; color:#443241; font-size:16px; line-height:1.5; text-align:center; opacity:0; }
-  .msg.show { opacity:1; transition: opacity 0.9s ease; }
-
-  .msg .char { opacity:0; display:inline-block; transform:translateY(4px); transition: all .08s linear; }
-
-  /* seal button */
-  .seal {
-    position:absolute; bottom:18px; left:50%; transform:translateX(-50%); width:72px; height:72px; border-radius:50%;
-    background: linear-gradient(180deg,var(--pink2),var(--pink1)); display:flex; align-items:center; justify-content:center;
-    color:white; font-weight:900; font-size:22px; box-shadow:0 12px 34px rgba(255,120,160,0.12); cursor:pointer;
-  }
-
-  /* controls area (next + link) */
-  .controls { display:flex; gap:12px; justify-content:center; align-items:center; margin-top:18px; flex-wrap:wrap; }
-  .btn {
-    background:linear-gradient(90deg,var(--pink2),var(--pink1)); color:white; padding:12px 18px; border-radius:999px; border:0; font-weight:800; cursor:pointer;
-    box-shadow:0 12px 30px rgba(255,120,160,0.12);
-  }
-  .link {
-    background:transparent; border:2px dashed rgba(120,90,110,0.08); padding:10px 14px; border-radius:10px; color:var(--muted);
-    font-weight:700; cursor:pointer;
-  }
-
-  /* little footer note */
-  .foot { text-align:center; color:var(--muted); margin-top:18px; font-size:13px; }
-
-  /* small responsive tweaks */
-  @media (max-width:520px){
-    .title{font-size:24px}
-    .env-body{border-width:4px}
-    .flap{width:200px;height:96px;top:-48px}
-    .seal{width:60px;height:60px}
-  }
+p {
+  color: #bbb;
+  text-align: center;
+  font-size: 18px;
+}
 </style>
+
 </head>
 <body>
 
-<div class="space" aria-hidden="true">
-  <!-- programmatic stars & meteors added by JS -->
-  <div class="meteor" style="top:12vh; left:-30vw; animation-delay:2s"></div>
-  <div class="meteor" style="top:30vh; left:-50vw; animation-delay:5s"></div>
+<h1>🎀 مفاجأة صغيرة لسارة 🎀</h1>
+<p>اضغطي على الظرف لفتح الرسالة 💌</p>
+
+<!-- الظرف -->
+<div class="envelope-pro" id="envPro">
+  <div class="env-flap"></div>
+
+  <div class="env-letter" id="envLetter">
+    <div class="letter-inner">
+      إلى سارة 💖  
+      هذا يومك الجميل…  
+      كل سنة وأنتِ بخير يا قلبي 🌸  
+      أتمنى لكِ فرحة لا تنتهي.
+    </div>
+  </div>
+
+  <div class="env-body"></div>
 </div>
 
-<div class="wrap">
-  <div class="stage card">
-
-    <!-- Page 1 -->
-    <div class="page active" id="page1" aria-label="صفحة 1">
-      <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
-        <div>
-          <div class="title">عيد ميلاد سعيد يا سارة 🎂</div>
-          <div class="subtitle">لمسة رومانسية—اضغطي على الظرف لفتح الرسالة بهدوء</div>
-        </div>
-        <div style="min-width:110px;text-align:center">
-          <!-- small pastel cake svg -->
-          <svg width="80" height="80" viewBox="0 0 64 64" aria-hidden="true">
-            <ellipse cx="32" cy="50" rx="22" ry="8" fill="#ffd9e4"/>
-            <rect x="10" y="22" width="44" height="28" rx="6" fill="#fff4f7" stroke="#ffd1e0" stroke-width="1.6"/>
-            <path d="M22 26c2-3 6-4 10-4s8 1 10 4" fill="#ffd9e4"/>
-            <circle cx="32" cy="20" r="4" fill="#ff6b9a"/>
-          </svg>
-        </div>
-      </div>
-
-      <div class="envelope-wrap" style="margin-top:18px">
-        <div class="envelope" id="envelope1" role="button" tabindex="0" aria-pressed="false" aria-label="ظرف رسالة">
-          <div class="env-body">
-            <div class="flap" id="flap1" aria-hidden="true"></div>
-            <div class="paper" id="paper1" aria-hidden="true">
-              <div class="msg" id="msg1" aria-live="polite"></div>
-            </div>
-            <div class="seal" id="seal1" title="اضغطي لفتح">❤</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="controls">
-        <button class="btn" id="openNow1">افتح الظرف</button>
-        <button class="link" id="link1" title="نسخ رابط الصفحة">رابط الصفحة</button>
-      </div>
-
-      <div class="foot">كل صفحة تحتوي زر التالي ورابط خاص بالصفحة — يمكنك مشاركته مباشرة.</div>
-    </div>
-
-    <!-- Page 2 -->
-    <div class="page" id="page2" aria-label="صفحة 2">
-      <div class="title">صفحة 2 — تهنئة</div>
-      <div class="subtitle">نص جميل أو صورة أو رسالة صوتية</div>
-
-      <div style="margin-top:18px; text-align:center">
-        <div style="width:88%;max-width:640px;margin:0 auto;background:linear-gradient(180deg,#fff,#fffaf2);padding:18px;border-radius:14px;box-shadow:0 10px 30px rgba(20,20,40,0.04)">
-          <p style="font-weight:700;color:#5b3b46">حبيبتي سارة — كل سنة وانتي بخير. أتمنى لكِ سنة مليئة بابتسامات لا تنتهي.</p>
-        </div>
-      </div>
-
-      <div class="controls">
-        <button class="btn" onclick="gotoPage(3)">التالي</button>
-        <button class="link" id="link2">رابط الصفحة</button>
-      </div>
-    </div>
-
-    <!-- Page 3 -->
-    <div class="page" id="page3" aria-label="صفحة 3">
-      <div class="title">صفحة 3 — صور وذكريات</div>
-      <div class="subtitle">ضع هنا صوركما الخاصة لاحقًا</div>
-
-      <div style="margin-top:18px; display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
-        <div style="width:160px;height:120px;border-radius:12px;background:#fff;border:4px solid rgba(255,230,240,0.9);box-shadow:0 10px 30px rgba(20,20,40,0.04)"></div>
-        <div style="width:160px;height:120px;border-radius:12px;background:#fff;border:4px solid rgba(255,230,240,0.9);box-shadow:0 10px 30px rgba(20,20,40,0.04)"></div>
-        <div style="width:160px;height:120px;border-radius:12px;background:#fff;border:4px solid rgba(255,230,240,0.9);box-shadow:0 10px 30px rgba(20,20,40,0.04)"></div>
-      </div>
-
-      <div class="controls">
-        <button class="btn" onclick="gotoPage(4)">التالي</button>
-        <button class="link" id="link3">رابط الصفحة</button>
-      </div>
-    </div>
-
-    <!-- Page 4 -->
-    <div class="page" id="page4" aria-label="صفحة 4">
-      <div class="title">صفحة 4 — تحديات صغيرة</div>
-      <div class="subtitle">اختبار بسيط لكسب مفاجأة</div>
-
-      <div style="margin-top:18px;max-width:680px;margin-left:auto;margin-right:auto">
-        <div style="background:linear-gradient(180deg,#fff,#fffaf2);padding:14px;border-radius:12px;box-shadow:0 10px 30px rgba(20,20,40,0.04)">
-          <div style="font-weight:800;margin-bottom:8px">ما لون سارة المفضل؟</div>
-          <div style="display:flex;gap:8px;flex-wrap:wrap">
-            <button class="btn small" style="padding:8px 12px;background:#fff;color:var(--pink2);border:1px solid rgba(255,200,220,0.4)" onclick="quizAns(false)">أحمر</button>
-            <button class="btn small" style="padding:8px 12px;background:#fff;color:var(--pink2);border:1px solid rgba(255,200,220,0.4)" onclick="quizAns(true)">وردي</button>
-            <button class="btn small" style="padding:8px 12px;background:#fff;color:var(--pink2);border:1px solid rgba(255,200,220,0.4)" onclick="quizAns(false)">أزرق</button>
-          </div>
-          <div id="quizRes" style="margin-top:10px;font-weight:700;color:var(--muted)"></div>
-        </div>
-      </div>
-
-      <div class="controls">
-        <button class="btn" onclick="gotoPage(5)">التالي</button>
-        <button class="link" id="link4">رابط الصفحة</button>
-      </div>
-    </div>
-
-    <!-- Page 5 -->
-    <div class="page" id="page5" aria-label="صفحة 5">
-      <div class="title">الهدية النهائية 🎁</div>
-      <div class="subtitle">هنا تظهر الهدية أو رمز الخصم</div>
-
-      <div style="margin-top:18px;display:flex;justify-content:center">
-        <div style="background:linear-gradient(90deg,var(--pink2),var(--pink1));padding:20px;border-radius:12px;color:white;font-weight:900;box-shadow:0 12px 34px rgba(255,110,160,0.12)">هدية حب: رمز SARA-LOVE</div>
-      </div>
-
-      <div class="controls">
-        <button class="btn" onclick="gotoPage(1)">العودة للبداية</button>
-        <button class="link" id="link5">رابط الصفحة</button>
-      </div>
-    </div>
-
-  </div> <!-- end card -->
-</div> <!-- end wrap -->
-
-<!-- optional background music (free sample). استبدلي بالرابط الخاص بكِ إن رغبت -->
-<audio id="bgMusic" loop preload="auto">
-  <source src="https://cdn.pixabay.com/download/audio/2021/10/29/audio_7d2c3e9f07.mp3?filename=light-cafe-ambient-10839.mp3" type="audio/mpeg">
-</audio>
-
 <script>
-/* ------------- helper: show page by id (hash aware) ------------- */
-function showPageById(id){
-  document.querySelectorAll('.page').forEach(p=> p.classList.remove('active'));
-  const el = document.getElementById(id);
-  if(el) el.classList.add('active');
-  // update URL hash
-  history.replaceState(null, '', '#' + id);
-  // focus top
-  window.scrollTo({top:0,behavior:'smooth'});
-}
+const envPro   = document.getElementById("envPro");
+const envLetter = document.getElementById("envLetter");
 
-/* parse initial hash */
-const initial = location.hash ? location.hash.replace('#','') : 'page1';
-showPageById(initial);
-
-/* goto page */
-function gotoPage(n){
-  showPageById('page' + n);
-}
-
-/* add copy-link behavior for each page link button */
-for(let i=1;i<=5;i++){
-  const btn = document.getElementById('link'+i);
-  if(btn){
-    btn.addEventListener('click', ()=> {
-      const url = location.origin + location.pathname + '#page' + i;
-      // try clipboard
-      if(navigator.clipboard){
-        navigator.clipboard.writeText(url).then(()=> alert('تم نسخ رابط الصفحة ' + i + ' إلى الحافظة!'));
-      } else {
-        prompt('انسخ رابط الصفحة:', url);
-      }
-    });
-  }
-}
-
-/* ------------- beautiful envelope open (page1) ------------- */
-const envelope1 = document.getElementById('envelope1');
-const flap1 = document.getElementById('flap1');
-const paper1 = document.getElementById('paper1');
-const msg1 = document.getElementById('msg1');
-const openNow1 = document.getElementById('openNow1');
-const seal1 = document.getElementById('seal1');
-
-const letterText1 = "إلى سارة الغالية 💖\nكل سنة وأنتِ فرحتي. أتمنى أيامك كلها ضحك وحب ونجاحات. هذه مفاجأة صغيرة لأجمل قلب.";
-// function to reveal typing-like
-function showTypedText(target, text, speed=35){
-  target.innerHTML = '';
-  const chars = Array.from(text);
-  chars.forEach((ch,i)=>{
-    const span = document.createElement('span');
-    span.className = 'char';
-    span.textContent = ch === '\n' ? '\n' : ch;
-    target.appendChild(span);
-    setTimeout(()=> { span.style.opacity = '1'; span.style.transform = 'translateY(0)'; }, i*speed + 300);
-  });
-  // finally add class show after a slight delay
-  setTimeout(()=> target.classList.add('show'), chars.length*speed + 350);
-}
-
-function openEnvelopeAnim(){
-  // toggle open state
-  const isOpen = envelope1.classList.contains('open');
-  if(!isOpen){
-    envelope1.classList.add('open');
-    envelope1.setAttribute('aria-pressed','true');
-    // reveal typed text
-    showTypedText(msg1, letterText1, 28);
-    // small confetti burst
-    setTimeout(()=> confetti({
-      particleCount: 80,
-      spread: 90,
-      origin: { y: 0.3 }
-    }), 550);
+envPro.addEventListener("click", () => {
+  const isOpen = envPro.classList.contains("open");
+  
+  if (!isOpen) {
+    envPro.classList.add("open");
   } else {
-    // close
-    envelope1.classList.remove('open');
-    envelope1.setAttribute('aria-pressed','false');
-    // clear text
-    msg1.innerHTML = '';
-    msg1.classList.remove('show');
-  }
-}
-
-// attach events
-envelope1.addEventListener('click', openEnvelopeAnim);
-envelope1.addEventListener('keydown', (e)=> { if(e.key === 'Enter' || e.key === ' ') openEnvelopeAnim(); });
-openNow1.addEventListener('click', openEnvelopeAnim);
-seal1.addEventListener('click', openEnvelopeAnim);
-
-/* ------------- page1 keyboard accessibility: close on Escape ------------- */
-document.addEventListener('keydown', (e)=>{
-  if(e.key === 'Escape'){
-    if(location.hash === '' || location.hash === '#page1'){
-      if(envelope1.classList.contains('open')) openEnvelopeAnim();
-    }
+    envPro.classList.remove("open");
   }
 });
-
-/* ------------- generate decorative stars and hearts ------------- */
-function populateDecor(){
-  // stars
-  for(let i=0;i<120;i++){
-    const s = document.createElement('div');
-    s.className = 'star';
-    const l = Math.random()*100; const t = Math.random()*100;
-    s.style.left = l + 'vw'; s.style.top = t + 'vh';
-    const size = (Math.random()*2 + 1);
-    s.style.width = size + 'px'; s.style.height = size + 'px';
-    s.style.animationDelay = (Math.random()*2) + 's';
-    s.style.opacity = (0.3 + Math.random()*0.7);
-    document.querySelector('.space').appendChild(s);
-  }
-  // hearts floating (decorative)
-  for(let i=0;i<10;i++){
-    const h = document.createElement('div');
-    h.className = 'heart';
-    h.innerHTML = '❤';
-    const l = 4 + Math.random()*88; const t = 8 + Math.random()*70;
-    h.style.left = l + 'vw'; h.style.top = t + 'vh';
-    h.style.fontSize = (12 + Math.random()*22) + 'px';
-    h.style.animationDelay = (Math.random()*3) + 's';
-    document.body.appendChild(h);
-  }
-}
-populateDecor();
-
-/* ------------- meteors randomize ------------- */
-document.querySelectorAll('.meteor').forEach((m)=>{
-  m.style.animationDuration = (3 + Math.random()*3) + 's';
-  m.style.animationDelay = (Math.random()*8) + 's';
-});
-
-/* ------------- quiz page response ------------- */
-function quizAns(correct){
-  const res = document.getElementById('quizRes');
-  if(correct){
-    res.textContent = 'ممتاز! إجابة صحيحة 🎉';
-    res.style.color = 'var(--pink2)';
-    confetti({ particleCount: 100, spread: 140 });
-  } else {
-    res.textContent = 'قريب جداً 😅 جربي مرة أخرى';
-    res.style.color = 'var(--muted)';
-  }
-}
-
-/* ------------- optional background music control (toggle by user) ------------- */
-const bg = document.getElementById('bgMusic');
-let musicOn = false;
-function toggleMusic(){
-  if(!musicOn){
-    bg.play().catch(()=>{});
-    musicOn = true;
-  } else {
-    bg.pause();
-    musicOn = false;
-  }
-}
-
-/* ------------- handle direct hash navigation (if user opens with #pageX) ------------- */
-window.addEventListener('hashchange', ()=> {
-  const id = location.hash ? location.hash.replace('#','') : 'page1';
-  showPageById(id);
-});
-
 </script>
 
 </body>
