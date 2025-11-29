@@ -1,240 +1,406 @@
-<!DOCTYPE html>
-<html lang="ar">
-
+<!doctype html>
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<title>مفاجأة سارة 💖</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>مفاجأة سارة — Neon Cosmic</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 
 <style>
-/* الخلفية */
-body {
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background: radial-gradient(circle at center, #0b0f26, #000111 75%);
-  height: 100vh;
-  font-family: "Cairo", sans-serif;
-  position: relative;
-  direction: rtl;
-}
-
-/* ⭐ النجوم */
-.stars {
-  width: 2px;
-  height: 2px;
-  background: white;
-  box-shadow:
-    100px 200px white,
-    300px 100px white,
-    500px 600px white,
-    800px 300px white,
-    1200px 500px white,
-    150px 700px white,
-    900px 900px white,
-    1300px 200px white;
-  opacity: 0.7;
-  position: absolute;
-  animation: twinkle 3s infinite alternate;
-}
-
-@keyframes twinkle {
-  0% { opacity: .4; }
-  100% { opacity: 1; }
-}
-
-/* ⭐ الشهب */
-.shooting-star {
-  position: absolute;
-  width: 3px;
-  height: 3px;
-  background: rgba(255, 120, 200, 1);
-  border-radius: 50%;
-  box-shadow: 0 0 15px 6px rgba(255, 70, 255, 0.7);
-  opacity: 0;
-  animation: shoot 1.8s linear forwards;
-}
-
-@keyframes shoot {
-  0% {
-    transform: translate(0, 0) scale(1);
-    opacity: 1;
+  :root{
+    --bg1:#09040f;
+    --bg2:#13041c;
+    --neon-pink:#ff2fa6;
+    --neon-pink-2:#ff70c1;
+    --muted:#bda6b7;
+    --screen-w:320px;
+    --screen-h:640px;
   }
-  60% {
-    opacity: 1;
-    transform: translate(-350px, 450px) scale(1.6);
-    box-shadow: 0 0 25px 10px rgba(255, 90, 255, 1);
+  *{box-sizing:border-box}
+  html,body{
+    height:100%;margin:0;
+    font-family:'Cairo';
+    background: radial-gradient(circle at 10% 10%, #150928 0%, transparent 20%),
+                linear-gradient(180deg,var(--bg1),var(--bg2));
+    color:#fff;
+    overflow-x:hidden;
   }
-  100% {
-    transform: translate(-500px, 700px) scale(0.6);
-    opacity: 0;
+
+  /* ▼▼ نجوم + شهب واقعية ▼▼ */
+  .space{
+    position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;
   }
-}
 
-/* 💗 القلوب */
-.heart {
-  position: absolute;
-  color: #ff4fa6;
-  font-size: 20px;
-  opacity: 0.4;
-  animation: floatHeart 6s infinite ease-in-out;
-}
+  .star{
+    position:absolute; width:2px;height:2px; border-radius:50%;
+    background:#fff; opacity:.8;
+    animation: twinkle 3s infinite ease-in-out;
+  }
+  @keyframes twinkle{
+    0%{opacity:.15; transform:scale(.6)}
+    50%{opacity:1; transform:scale(1)}
+    100%{opacity:.15; transform:scale(.6)}
+  }
 
-@keyframes floatHeart {
-  0% { transform: translateY(0) scale(1); opacity: .3; }
-  50% { transform: translateY(-25px) scale(1.2); opacity: .6; }
-  100% { transform: translateY(0) scale(1); opacity: .3; }
-}
+  .meteor{
+    position:absolute;
+    width:160px; height:2px;
+    background:linear-gradient(90deg,rgba(255,255,255,1),rgba(255,120,200,0));
+    border-radius:40px;
+    opacity:0;
+    transform:rotate(-40deg);
+    animation: meteorMove linear infinite;
+    filter:drop-shadow(0 0 14px rgba(255,90,180,0.4));
+  }
 
-/* عنوان */
-h1 {
-  color: #ff80d5;
-  text-align: center;
-  margin-top: 35px;
-  font-size: 32px;
-  text-shadow: 0 0 10px #ff38c7;
-}
+  @keyframes meteorMove{
+    0%{
+      opacity:0;
+      transform:translate(-20vw,-20vh) rotate(-40deg) scaleX(.3);
+    }
+    10%{
+      opacity:1;
+      transform:translate(0,0) rotate(-40deg) scaleX(1);
+    }
+    100%{
+      opacity:0;
+      transform:translate(80vw,70vh) rotate(-40deg) scaleX(.4);
+    }
+  }
 
-/* 💌— الظرف —💌 */
+  /* قلوب */
+  .heart{
+    position:fixed; color:var(--neon-pink);
+    font-size:24px; opacity:.85;
+    text-shadow:0 0 20px rgba(255,50,140,0.4);
+    animation: floatHeart 6s ease-in-out infinite;
+  }
+  @keyframes floatHeart{
+    0%{transform:translateY(0)}
+    50%{transform:translateY(-20px)}
+    100%{transform:translateY(0)}
+  }
 
-.envelope-pro {
-  width: 360px;
-  max-width: 90vw;
-  height: 260px;
-  position: relative;
-  cursor: pointer;
-  perspective: 1200px;
-  margin: 40px auto;
-}
+  /* layout */
+  .wrap{
+    min-height:100vh; display:flex; justify-content:center; padding:60px 10px; position:relative; z-index:4;
+  }
+  .panel{ width:100%; max-width:1000px; }
 
-.env-body {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 70%;
-  background: linear-gradient(180deg, #ffb7d1, #ff9ec1);
-  border-radius: 0 0 20px 20px;
-  box-shadow:
-    0 10px 25px rgba(255,120,160,0.18),
-    inset 0 0 20px rgba(255,255,255,0.4);
-  border: 5px solid #ffdfeb;
-  z-index: 2;
-}
+  .card{
+    background:rgba(255,255,255,0.03);
+    border-radius:16px;
+    padding:20px;
+    box-shadow:0 20px 60px rgba(0,0,0,0.35);
+  }
 
-.env-flap {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 60%;
-  background: linear-gradient(180deg, #ffdbe6, #ffbfd6);
-  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
-  transform-origin: top center;
-  border-radius: 20px;
-  transition: transform 1.1s cubic-bezier(.17,.88,.35,1.28);
-  box-shadow: inset 0 -20px 40px rgba(0,0,0,0.06);
-  z-index: 3;
-}
+  /* phone mockup */
+  .phone-wrap{
+    width:var(--screen-w); height:var(--screen-h);
+    margin:auto;
+    padding:14px;
+    background:linear-gradient(180deg,#0b0410,#13041a);
+    border-radius:40px;
+    border:6px solid rgba(255,255,255,0.04);
+    box-shadow: 0 20px 90px rgba(0,0,0,0.8);
+  }
+  .phone-screen{
+    width:100%; height:100%;
+    background:linear-gradient(180deg,#12081a,#1a0822);
+    border-radius:28px; position:relative; overflow:hidden;
+  }
 
-.env-letter {
-  width: 82%;
-  height: 78%;
-  background: #fff;
-  border-radius: 14px;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%) translateY(65%);
-  top: 5%;
-  transition: transform 1.1s cubic-bezier(.17,.88,.35,1.28);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.07);
-  opacity: 0;
-  z-index: 1;
-}
+  .neon-frame{
+    position:absolute; inset:18px;
+    border-radius:16px;
+    box-shadow:0 0 70px rgba(255,30,150,0.16);
+  }
 
-.letter-inner {
-  padding: 22px;
-  font-size: 18px;
-  font-weight: 700;
-  color: #503442;
-  line-height: 1.7;
-  text-align: center;
-  white-space: pre-line;
-  opacity: 0;
-  transition: opacity .8s ease;
-}
+  .neon-border{
+    position:absolute; inset:40px 16px 100px 16px;
+    border-radius:12px;
+    border:3px solid rgba(255,255,255,0.04);
+    box-shadow:0 0 40px rgba(255,50,150,0.18);
+  }
 
-.envelope-pro.open .env-flap {
-  transform: rotateX(-160deg);
-}
+  .screen-content{
+    position:absolute; inset:60px 26px 120px 26px;
+    text-align:center;
+    color:#ffdef3;
+  }
 
-.envelope-pro.open .env-letter {
-  transform: translateX(-50%) translateY(-30%);
-  opacity: 1;
-}
+  .logo-neo{ font-size:38px; }
+  .title-neo{
+    margin-top:10px;
+    font-size:28px;
+    font-weight:900;
+    color:var(--neon-pink);
+    text-shadow:0 0 30px rgba(255,40,150,0.3);
+  }
+  .sub-neo{ color:var(--muted); font-weight:700; }
 
-.envelope-pro.open .letter-inner {
-  opacity: 1;
-}
+  /* صندوق النص */
+  .text-box{
+    background:rgba(255,255,255,0.03);
+    border-radius:14px;
+    padding:12px;
+    margin-top:10px;
+    font-weight:700;
+    line-height:1.6;
+  }
 
+  /* ▼▼ الظرف الاحترافي ▼▼ */
+  .env-pro{
+    width:80%; max-width:300px; height:200px;
+    margin:20px auto;
+    perspective:1000px;
+    position:relative;
+  }
+
+  .env-body{
+    position:absolute; inset:0;
+    border-radius:14px;
+    background:linear-gradient(180deg,#1c0412,#2d0719);
+    border:3px solid rgba(255,255,255,0.04);
+    box-shadow:inset 0 4px 20px rgba(255,255,255,0.05);
+  }
+
+  .env-flap{
+    position:absolute; left:50%; transform:translateX(-50%);
+    top:-50px; width:220px; height:120px;
+    background:linear-gradient(180deg,#ff7a9f,#ff4d8a);
+    clip-path:polygon(50% 0,100% 100%,0 100%);
+    border-radius:12px;
+    transform-origin:top center;
+    transition:.9s cubic-bezier(.24,1,.26,1);
+    box-shadow:inset 0 -12px 30px rgba(0,0,0,0.1);
+  }
+
+  .env.shake .env-flap{
+    animation: flapShake .4s ease;
+  }
+  @keyframes flapShake{
+    0%{transform:translateX(-50%) rotateX(0deg)}
+    25%{transform:translateX(-50%) rotateX(8deg)}
+    50%{transform:translateX(-50%) rotateX(-8deg)}
+    75%{transform:translateX(-50%) rotateX(4deg)}
+    100%{transform:translateX(-50%) rotateX(0deg)}
+  }
+
+  .env.open .env-flap{
+    transform:translateX(-50%) rotateX(-170deg);
+  }
+
+  .letter{
+    position:absolute; top:40px; left:50%;
+    transform:translateX(-50%) translateY(90px);
+    width:85%; height:65%;
+    background:#fff; border-radius:10px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.18);
+    opacity:0;
+    transition:.9s cubic-bezier(.24,1,.26,1);
+    padding:16px;
+    font-weight:700;
+    color:#442a33;
+  }
+  .env.open .letter{
+    transform:translateX(-50%) translateY(-120px) rotateX(0deg);
+    opacity:1;
+  }
+
+  .seal{
+    position:absolute; bottom:10px; left:50%;
+    transform:translateX(-50%);
+    width:60px;height:60px;border-radius:50%;
+    background:linear-gradient(180deg,#ff2fa6,#ff70c1);
+    color:#fff;font-size:26px;font-weight:900;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;
+    box-shadow:0 0 30px rgba(255,80,150,0.3);
+  }
+
+  /* زر أسفل الشاشة */
+  .screen-bottom{
+    position:absolute; left:20px; right:20px; bottom:20px;
+    text-align:center;
+  }
+  .neon-btn{
+    background:linear-gradient(90deg,var(--neon-pink),var(--neon-pink-2));
+    color:#fff;
+    padding:14px 22px;
+    border-radius:999px;
+    font-weight:900;
+    box-shadow:0 0 30px rgba(255,50,150,0.25);
+    border:none; cursor:pointer;
+  }
+
+  /* الصفحات */
+  .page{ display:none; }
+  .page.active{ display:block; }
+
+  .controls{
+    text-align:center;margin-top:14px;
+  }
+  .link-btn{
+    background:transparent;
+    border:1px dashed rgba(255,255,255,0.1);
+    padding:8px 14px; color:#ddd;
+    border-radius:10px;
+  }
 </style>
 </head>
 
 <body>
 
-<!-- نجوم -->
-<div class="stars"></div>
+<div class="space"></div>
 
-<h1>💌 اضغطي على الظرف يا سارة 💖</h1>
+<div class="heart" style="left:8vw; top:30vh">❤</div>
+<div class="heart" style="left:80vw; top:50vh">❤</div>
+<div class="heart" style="left:15vw; top:70vh">❤</div>
 
-<!-- الظرف -->
-<div class="envelope-pro" id="envPro">
-  <div class="env-flap"></div>
+<div class="wrap">
+  <div class="panel">
+    <div class="card">
 
-  <div class="env-letter" id="envLetter">
-    <div class="letter-inner">
-      إلى سارة الجميلة 💖  
-      هذا يومك الفريد…  
-      وهذه أول كلمات لك…  
-      من قلبي إلى قلبك.  
+      <!-- PAGE 1 -->
+      <div class="page active" id="page1">
+
+        <div class="phone-wrap">
+          <div class="phone-screen">
+
+            <div class="neon-frame"></div>
+            <div class="neon-border"></div>
+
+            <div class="screen-content">
+              <div class="logo-neo">🌙</div>
+              <div class="title-neo">أنتِ صُنِعتِ للحب!</div>
+              <div class="sub-neo">مفاجأة كونية وردية</div>
+
+              <div class="text-box">
+                قلبكِ يشبه النجوم… يلمع بلا توقف 💗
+              </div>
+
+              <!-- Envelope -->
+              <div class="env-pro env" id="env">
+                <div class="env-body"></div>
+                <div class="env-flap" id="flap"></div>
+                <div class="letter" id="letter">
+                  إلى سارة الغالية 💖  
+                  <br><br>
+                  كل سنة وأنتِ أجمل شيء بحياتي.
+                </div>
+                <div class="seal" id="seal">❤</div>
+              </div>
+
+            </div>
+
+            <div class="screen-bottom">
+              <button class="neon-btn" id="openBtn">افتحي المفاجأة</button>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="controls">
+          <button class="link-btn" onclick="gotoPage(2)">التالي</button>
+        </div>
+      </div>
+
+      <!-- PAGE 2 -->
+      <div class="page" id="page2">
+        <h2 class="title-neo" style="text-align:center">الصفحة الثانية</h2>
+        <div class="controls">
+          <button class="link-btn" onclick="gotoPage(1)">رجوع</button>
+          <button class="link-btn" onclick="gotoPage(3)">التالي</button>
+        </div>
+      </div>
+
+      <!-- PAGE 3 -->
+      <div class="page" id="page3">
+        <h2 class="title-neo" style="text-align:center">الصفحة الثالثة</h2>
+        <div class="controls">
+          <button class="link-btn" onclick="gotoPage(2)">رجوع</button>
+          <button class="link-btn" onclick="gotoPage(4)">التالي</button>
+        </div>
+      </div>
+
+      <!-- PAGE 4 -->
+      <div class="page" id="page4">
+        <h2 class="title-neo" style="text-align:center">الصفحة الرابعة</h2>
+        <div class="controls">
+          <button class="link-btn" onclick="gotoPage(3)">رجوع</button>
+          <button class="link-btn" onclick="gotoPage(5)">التالي</button>
+        </div>
+      </div>
+
+      <!-- PAGE 5 -->
+      <div class="page" id="page5">
+        <h2 class="title-neo" style="text-align:center">الصفحة الخامسة</h2>
+        <div class="controls">
+          <button class="link-btn" onclick="gotoPage(1)">رجوع للبداية</button>
+        </div>
+      </div>
+
     </div>
   </div>
-
-  <div class="env-body"></div>
 </div>
 
+
 <script>
-
-/* ⭐ شهب مستمرة */
-function createShootingStar() {
-  const star = document.createElement("div");
-  star.classList.add("shooting-star");
-
-  star.style.top = Math.random() * -200 + "px";
-  star.style.left = Math.random() * window.innerWidth + "px";
-
-  document.body.appendChild(star);
-  setTimeout(() => star.remove(), 1800);
+/* ---------------------- صفحات ---------------------- */
+function gotoPage(n){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page'+n).classList.add('active');
+  window.scrollTo(0,0);
 }
 
-setInterval(createShootingStar, 900);
+/* ---------------------- شهب واقعية ---------------------- */
+function createStars(){
+  const space = document.querySelector('.space');
 
-/* 💗 قلوب */
-function createHeart() {
-  const heart = document.createElement("div");
-  heart.classList.add("heart");
-  heart.innerHTML = "💗";
-  heart.style.left = Math.random() * window.innerWidth + "px";
-  heart.style.top = Math.random() * window.innerHeight + "px";
-  document.body.appendChild(heart);
-  setTimeout(() => heart.remove(), 6000);
+  for(let i=0;i<120;i++){
+    const s = document.createElement('div');
+    s.className='star';
+    s.style.left=Math.random()*100+'vw';
+    s.style.top=Math.random()*100+'vh';
+    s.style.animationDelay=Math.random()*3+'s';
+    space.appendChild(s);
+  }
+
+  for(let i=0;i<8;i++){
+    const m = document.createElement('div');
+    m.className='meteor';
+    m.style.top = Math.random()*60+'vh';
+    m.style.left = (-20 - Math.random()*30)+'vw';
+    m.style.animationDuration = (3 + Math.random()*3)+'s';
+    m.style.animationDelay = Math.random()*8+'s';
+    space.appendChild(m);
+  }
+}
+createStars();
+
+/* ---------------------- حركة الظرف ---------------------- */
+const env = document.getElementById('env');
+const seal = document.getElementById('seal');
+const openBtn = document.getElementById('openBtn');
+
+function openEnvelope(){
+  if(env.classList.contains('open')) return;
+
+  env.classList.add('shake');  // اهتزاز خفيف
+
+  setTimeout(()=>{
+    env.classList.remove('shake');
+    env.classList.add('open');
+    confetti({particleCount:120,spread:120,origin:{y:0.4}});
+  },400);
 }
 
-setInterval(createHeart, 2000);
+seal.onclick = openEnvelope;
+openBtn.onclick = openEnvelope;
 
-/* 💌 فتح الظرف */
-const envPro = document.getElementById("envPro");
-
-envPro.addEventListener("click", () => {
-  envPro.classList.toggle("open");
-});
 </script>
 
 </body>
