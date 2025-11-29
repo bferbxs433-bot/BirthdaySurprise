@@ -1,444 +1,247 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>مفاجأة سارة — عيد ميلاد</title>
-
-<!-- Cairo -->
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;800&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<title>Sara Birthday</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-  :root{
-    --bg:#fff6f8;
-    --panel:#ffffff;
-    --soft-pink:#ffdfe6;
-    --pink:#ff6b9a;
-    --pink-2:#ff9ab6;
-    --accent:#6b8bff;
-    --muted:#8a8290;
-    --glass: rgba(255,255,255,0.7);
-    --radius:20px;
-  }
-  *{box-sizing:border-box}
-  html,body{height:100%;margin:0;font-family:'Cairo',system-ui,-apple-system,'Segoe UI',Roboto; background:var(--bg); color:#2b2130; -webkit-font-smoothing:antialiased}
-  a{color:inherit;text-decoration:none}
-  /* container */
-  .wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:86px;position:relative;overflow:hidden}
 
-  /* NAVBAR */
-  nav{
-    position:fixed;top:12px;left:12px;right:12px;
-    display:flex;justify-content:center;gap:10px;z-index:80;
-    background: linear-gradient(90deg, rgba(255,255,255,0.6), rgba(255,255,255,0.55));
-    padding:8px;border-radius:12px;backdrop-filter: blur(6px);box-shadow:0 8px 20px rgba(30,20,40,0.06);
-  }
-  nav button{border:0;background:transparent;padding:8px 14px;border-radius:10px;font-weight:700;cursor:pointer;color:var(--muted)}
-  nav button.active{ background: linear-gradient(90deg,var(--pink),var(--pink-2)); color:white; box-shadow:0 8px 22px rgba(255,107,154,0.12) }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Cairo", sans-serif;
+}
 
-  /* Background stars layer */
-  .space{
-    position:fixed;inset:0;z-index:-10;background: radial-gradient(circle at 10% 10%, #fff2f6 0%, transparent 10%),
-      radial-gradient(circle at 90% 90%, #f8f8ff 0%, transparent 12%), linear-gradient(180deg,#fff6f8,#fffafc 70%);
+body{
+    background:#fdeef4;
+    overflow-x:hidden;
+}
+
+/* -------------------------
+   خلفية Kawaii (قلوب – نجوم – غيوم – كعك)
+--------------------------*/
+
+.bg-decor{
+    position: fixed;
+    width:100%;
+    height:100%;
+    top:0; left:0;
+    pointer-events:none;
+    z-index:-1;
+}
+
+.shape{
+    position:absolute;
+    font-size:32px;
+    opacity:0.6;
+    animation: float 6s ease-in-out infinite alternate;
+}
+
+@keyframes float{
+    0%{ transform: translateY(0px); opacity:0.5; }
+    100%{ transform: translateY(-15px); opacity:1; }
+}
+
+/* -------------------------
+   الصفحات
+--------------------------*/
+
+.page{
+    width:100%;
+    min-height:100vh;
+    padding:120px 20px 60px;
+    display:none;
+    text-align:center;
+}
+
+.page.active{
+    display:block;
+}
+
+/* -------------------------
+   عنوان Kawaii
+--------------------------*/
+
+.title{
+    font-size:38px;
+    color:#ff6fa7;
+    margin-bottom:15px;
+}
+
+.subtitle{
+    color:#b88;
+    font-size:18px;
+}
+
+/* -------------------------
+   الظرف Kawaii
+--------------------------*/
+
+.envelope-container{
+    margin:40px auto;
+    width:300px;
+    height:220px;
+    position:relative;
+    cursor:pointer;
+}
+
+.envelope-body{
+    width:100%;
+    height:100%;
+    background:#ff9aba;
+    border-radius:10px;
+    border:3px solid #ff7aa7;
+    position:relative;
     overflow:hidden;
-  }
-  /* twinkling stars (small dots) */
-  .star { position:absolute;width:2px;height:2px;border-radius:50%;background:white;opacity:0.85;filter:blur(.2px);}
-  @keyframes tw{0%{opacity:.2}50%{opacity:1}100%{opacity:.2}}
+}
 
-  /* shooting stars */
-  .shoot{
-    position:absolute;width:140px;height:2px;background:linear-gradient(90deg,rgba(255,255,255,0.95),rgba(255,255,255,0.15));
-    transform:rotate(-28deg);opacity:0;filter:drop-shadow(0 0 6px rgba(255,255,255,0.5));
-    animation:shootAnim 4s linear infinite;
-  }
-  @keyframes shootAnim{0%{transform:translate(-30vw,-10vh) rotate(-28deg);opacity:0}10%{opacity:1}
-    100%{transform:translate(120vw,60vh) rotate(-28deg);opacity:0}
-  }
+.envelope-flap{
+    position:absolute;
+    width:100%;
+    height:100px;
+    top:0;
+    left:0;
+    background:#ffb5cc;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform-origin:top;
+    transition:0.8s;
+}
 
-  /* glowing hearts */
-  .heart{
-    position:fixed;font-size:22px;color:var(--pink);text-shadow:0 6px 18px rgba(255,107,154,0.18);
-    z-index:0;opacity:0.9;
-    animation:heartFloat 6s ease-in-out infinite;
-    filter: drop-shadow(0 6px 14px rgba(255,107,154,0.18));
-  }
-  @keyframes heartFloat{0%{transform:translateY(8px) scale(1)}50%{transform:translateY(-18px) scale(1.08)}100%{transform:translateY(8px) scale(1)}}
+.opened-flap{
+    transform:rotateX(150deg);
+}
 
-  /* main panel */
-  .panel{
-    width:92%;max-width:980px;background:var(--panel);border-radius:24px;padding:28px;box-shadow: 0 18px 48px rgba(20,20,40,0.08);
-    position:relative;z-index:10;margin-bottom:40px;
-  }
+.letter{
+    width:90%;
+    height:160px;
+    background:white;
+    position:absolute;
+    left:5%;
+    top:80px;
+    border-radius:10px;
+    padding:15px;
+    font-size:17px;
+    color:#444;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    transform:translateY(120px);
+    opacity:0;
+    transition:0.9s ease;
+}
 
-  .hero{
-    display:flex;gap:18px;align-items:center;flex-wrap:wrap;
-  }
-  .hero-left{flex:1;min-width:260px}
-  .hero-title{font-size:34px;font-weight:800;margin:4px 0}
-  .hero-sub{color:var(--muted);margin:4px 0 12px 0}
+.letter-show{
+    transform:translateY(10px);
+    opacity:1;
+}
 
-  /* envelope area (center card like the image) */
-  .envelope-card{
-    margin-top:18px;background:linear-gradient(180deg, #fff, #fffafc);border-radius:18px;padding:26px;display:flex;justify-content:center;align-items:center;
-    box-shadow: 0 10px 30px rgba(30,20,50,0.03); position:relative;
-  }
+/* -------------------------
+   زر kawaii
+--------------------------*/
+.btn{
+    margin-top:40px;
+    background:linear-gradient(to bottom, #ff8fb9, #ff6fa7);
+    border:none;
+    padding:12px 28px;
+    color:white;
+    font-size:18px;
+    border-radius:25px;
+    cursor:pointer;
+    box-shadow:0 4px 10px rgba(255,140,180,0.4);
+    transition:0.3s;
+}
 
-  /* big rounded frame like image */
-  .frame{
-    width:100%;max-width:720px;background:linear-gradient(180deg,#fff,#fff);border-radius:22px;padding:40px;display:flex;align-items:center;justify-content:center;border:6px solid rgba(255,235,240,0.9);
-    box-shadow: 0 14px 40px rgba(20,20,40,0.04);
-  }
+.btn:hover{
+    transform:scale(1.05);
+}
 
-  /* envelope */
-  .envelope{
-    width:320px;height:230px;position:relative;border-radius:18px;background:linear-gradient(180deg,var(--soft-pink),#ffd9e4);box-shadow:0 18px 40px rgba(255,107,154,0.08);
-    display:flex;align-items:center;justify-content:center;
-  }
-  /* flap triangle using pseudo */
-  .envelope::before{
-    content:"";position:absolute;top:-36px;left:50%;transform:translateX(-50%);width:220px;height:110px;background:linear-gradient(180deg,#ff9fb7,#ff7fa0);clip-path:polygon(50% 0, 100% 100%, 0 100%);border-radius:18px 18px 8px 8px;
-    box-shadow: inset 0 -8px 18px rgba(0,0,0,0.03);
-  }
-  .seal{
-    position:absolute;bottom:18px;left:50%;transform:translateX(-50%);width:72px;height:72px;background:linear-gradient(180deg,#ff6b9a,#ff4d6d);border-radius:50%;box-shadow:0 10px 30px rgba(255,107,154,0.2);
-    display:flex;align-items:center;justify-content:center;color:white;font-weight:900;font-size:20px;cursor:pointer;
-  }
+/* -------------------------
+   صفحات عادية
+--------------------------*/
 
-  /* paper */
-  .paper{
-    position:absolute;top:28px;left:50%;transform:translateX(-50%) translateY(-6px);width:88%;height:60%;background:#fff;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px;color:#5b4150;font-weight:700;opacity:0;transform-origin:top center;
-    transition: all .7s cubic-bezier(.2,.9,.2,1);
-    box-shadow: 0 12px 30px rgba(20,20,40,0.06);
-  }
-  .paper.show{ opacity:1; transform:translateX(-50%) translateY(-54px); }
+.box{
+    background:white;
+    width:90%;
+    margin:auto;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 4px 14px rgba(0,0,0,0.08);
+    font-size:18px;
+}
 
-  .paper p{ margin:6px 0; text-align:center; font-weight:700; font-size:16px }
-
-  /* btn style */
-  .cta{
-    margin-top:14px;display:inline-block;background:linear-gradient(90deg,var(--pink),var(--pink-2));color:white;padding:12px 18px;border-radius:999px;font-weight:800;border:none;cursor:pointer;box-shadow:0 12px 28px rgba(255,107,154,0.12)
-  }
-
-  /* small floating decorations around frame — stars & cakes drawn with SVG */
-  .decor{
-    position:absolute;right:14px;bottom:12px;font-size:20px;opacity:.95;
-  }
-
-  /* pages */
-  section.view{display:none;padding:36px 18px;min-height:70vh}
-  section.view.active{display:block}
-
-  /* gallery slides (simple) */
-  .gallery-grid{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
-  .g-item{width:calc(33% - 12px);min-width:120px;background:white;border-radius:12px;padding:10px;box-shadow:0 10px 28px rgba(20,20,40,0.04);text-align:center}
-  .g-item img{width:100%;border-radius:8px;display:block}
-
-  /* quiz styles */
-  .q-card{background:linear-gradient(180deg,#fff,#fffaf2);border-radius:12px;padding:12px;box-shadow:0 8px 22px rgba(20,20,40,0.04);margin-bottom:10px}
-
-  /* footer */
-  footer{margin:20px 0 60px;color:var(--muted);font-size:13px;text-align:center}
-
-  /* responsive */
-  @media(max-width:880px){
-    .frame{padding:24px}
-    .hero-title{font-size:26px}
-    .envelope{width:280px;height:200px}
-  }
 </style>
 </head>
+
 <body>
 
-<div class="space" aria-hidden="true">
-  <!-- stars (will be populated by JS) -->
-  <div id="starsLayer"></div>
-  <!-- shooting stars -->
-  <div class="shoot" style="top:10vh;left:-20vw;animation-delay:1s"></div>
-  <div class="shoot" style="top:25vh;left:-40vw;animation-delay:3s"></div>
-  <div class="shoot" style="top:5vh;left:-80vw;animation-delay:5.5s"></div>
+<!-- خلفية -->
+<div class="bg-decor">
+    <div class="shape" style="top:20px; left:20px;">💗</div>
+    <div class="shape" style="top:70px; right:30px;">⭐</div>
+    <div class="shape" style="bottom:40px; left:40px;">🍰</div>
+    <div class="shape" style="bottom:80px; right:25px;">☁️</div>
 </div>
 
-<!-- floating hearts (CSS) -->
-<div id="heartsLayer" aria-hidden="true"></div>
+<!-- صفحة 1: الظرف -->
+<div class="page active" id="page1">
 
-<nav role="navigation" aria-label="قائمة التنقل">
-  <button class="active" data-target="home">الرئيسية</button>
-  <button data-target="gallery">المعرض</button>
-  <button data-target="game">التحديات</button>
-  <button data-target="letter">الرسالة</button>
-  <button data-target="gift">الهدية</button>
-</nav>
+    <h1 class="title">عيد ميلاد سعيد يا سارة ✨</h1>
+    <p class="subtitle">اضغطي على الظرف لفتح الرسالة 💌</p>
 
-<div class="wrap">
+    <div class="envelope-container" onclick="openLetter()">
+        <div class="envelope-body">
+            <div class="envelope-flap" id="flap"></div>
 
-  <!-- main panel (page 1 view design like image) -->
-  <div class="panel view" id="home">
-    <div class="hero">
-      <div class="hero-left">
-        <div style="display:flex;align-items:center;gap:12px">
-          <div style="font-size:42px">🎂</div>
-          <div>
-            <div class="hero-title">عيد ميلاد سعيد يا سارة</div>
-            <div class="hero-sub">مفاجأة صغيرة من القلب — صممت خصيصاً لكِ 💖</div>
-          </div>
-        </div>
-
-        <div style="margin-top:8px">
-          <button class="cta" id="openNowBtn">افتح الظرف الآن</button>
-        </div>
-
-      </div>
-
-      <div class="hero-right" style="flex:1;display:flex;align-items:center;justify-content:center">
-        <div class="envelope-card" aria-hidden="false">
-          <div class="frame">
-            <div style="text-align:center;width:100%;max-width:700px">
-              <!-- envelope -->
-              <div class="envelope" id="envelope" role="button" aria-pressed="false" tabindex="0">
-                <div class="paper" id="paper">
-                  <p style="font-size:18px">إلى سارة 💖</p>
-                  <p>كل سنة وأنتِ مصدر سعادتي — أحبك كثيراً، هذه مفاجأة صغيرة لتذكيرك.</p>
-                </div>
-                <div class="seal" id="seal" title="اضغطي لفتح">❤</div>
-              </div>
+            <div class="letter" id="letter">
+                <p>إلى سارة الجميلة،  
+                أنتِ دائماً الأجمل والأقرب لقلبي…  
+                أتمنى أن تكون هذه البداية لطيفة مثل حضورك. 💗</p>
             </div>
-          </div>
         </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- gallery -->
-  <div class="panel view" id="gallery">
-    <h2 style="text-align:center;margin-top:6px">معرض الصور</h2>
-    <p style="text-align:center;color:var(--muted)">استبدلي الروابط داخل السكربت بالصور الحقيقية لاحقاً</p>
-
-    <div class="gallery-grid" id="galleryGrid">
-      <div class="g-item"><img src="https://via.placeholder.com/400x300?text=صورة+1" alt=""><div class="small muted">صورة 1</div></div>
-      <div class="g-item"><img src="https://via.placeholder.com/400x300?text=صورة+2" alt=""><div class="small muted">صورة 2</div></div>
-      <div class="g-item"><img src="https://via.placeholder.com/400x300?text=صورة+3" alt=""><div class="small muted">صورة 3</div></div>
-    </div>
-  </div>
-
-  <!-- game -->
-  <div class="panel view" id="game">
-    <h2 style="text-align:center;margin-top:6px">التحديات</h2>
-    <div style="max-width:720px;margin:14px auto">
-      <div class="q-card">
-        <div style="font-weight:800">سؤال: ما هي حلوى سارة المفضلة؟</div>
-        <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
-          <button class="cta small" onclick="quizAnswer('wrong')" style="padding:8px 12px;background:#fff;border:1px solid #ffe7ef;color:var(--pink)">تارت الفراولة</button>
-          <button class="cta small" onclick="quizAnswer('right')" style="padding:8px 12px;background:#fff;border:1px solid #ffe7ef;color:var(--pink)">تورتة الشوكولا</button>
-          <button class="cta small" onclick="quizAnswer('wrong')" style="padding:8px 12px;background:#fff;border:1px solid #ffe7ef;color:var(--pink)">مافن</button>
-        </div>
-        <div id="quizRes" style="margin-top:10px;color:var(--muted);font-weight:700"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- letter page (envelope + open) -->
-  <div class="panel view" id="letter">
-    <h2 style="text-align:center;margin-top:6px">الرسالة الخاصة</h2>
-    <p style="text-align:center;color:var(--muted)">اضغطي الظرف أو زر الفتح لعرض الرسالة</p>
-
-    <div style="display:flex;justify-content:center;margin-top:24px">
-      <div class="envelope" id="envelopePage" tabindex="0" role="button" aria-pressed="false">
-        <div class="paper" id="paperPage" style="width:88%;height:60%;top:28px;left:50%;transform:translateX(-50%) translateY(-6px);">
-          <p style="font-size:18px">إلى حبيبتي سارة 💕</p>
-          <p style="font-weight:600">هذه رسالة صغيرة تحمل بين كلماتها ألف تحية ومودة — أتمنى أن تبتسمي الآن.</p>
-        </div>
-        <div class="seal" id="sealPage" title="افتح الرسالة">❤</div>
-      </div>
     </div>
 
-    <div style="text-align:center;margin-top:18px">
-      <button class="cta" id="openLetterBtn">افتح الرسالة</button>
-    </div>
-  </div>
-
-  <!-- gift -->
-  <div class="panel view" id="gift">
-    <h2 style="text-align:center;margin-top:6px">🎁 الهدية</h2>
-    <p style="text-align:center;color:var(--muted)">هنا ستظهر هديتك النهائية — يمكن وضع كود خصم، صورة، أو رسالة صوتية</p>
-    <div style="display:flex;justify-content:center;margin-top:20px">
-      <div style="background:linear-gradient(90deg,var(--pink),var(--pink-2));padding:20px;border-radius:14px;color:white;font-weight:800">هدية حب: كوبون SARA-LOVE</div>
-    </div>
-  </div>
-
-  <footer>صُنع بكل حب — صِفَة Kawaii Pastel • قابل للتعديل والرفع على GitHub Pages</footer>
-
+    <button class="btn" onclick="nextPage(2)">التالي ➜</button>
 </div>
+
+<!-- صفحة 2 -->
+<div class="page" id="page2">
+    <h1 class="title">صفحة 2</h1>
+    <div class="box">اكتب هنا أي محتوى تريد إضافته.</div>
+    <button class="btn" onclick="nextPage(3)">التالي ➜</button>
+</div>
+
+<!-- صفحة 3 -->
+<div class="page" id="page3">
+    <h1 class="title">صفحة 3</h1>
+    <div class="box">أي شيء تريده هنا أيضًا.</div>
+    <button class="btn" onclick="nextPage(4)">التالي ➜</button>
+</div>
+
+<!-- صفحة 4 -->
+<div class="page" id="page4">
+    <h1 class="title">صفحة 4</h1>
+    <div class="box">صفحة رابعة جاهزة لك.</div>
+    <button class="btn" onclick="nextPage(5)">التالي ➜</button>
+</div>
+
+<!-- صفحة 5 -->
+<div class="page" id="page5">
+    <h1 class="title">الصفحة الأخيرة 🎁</h1>
+    <div class="box">ضع هنا الهدية أو المفاجأة النهائية.</div>
+</div>
+
 
 <script>
-  // ----------------- basic SPA nav -----------------
-  const navBtns = document.querySelectorAll('nav button');
-  navBtns.forEach(b => b.addEventListener('click', ()=> {
-    navBtns.forEach(x=> x.classList.remove('active'));
-    b.classList.add('active');
-    const tgt = b.dataset.target;
-    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-    document.getElementById(tgt).classList.add('active');
-    window.scrollTo({top:0,behavior:'smooth'});
-  }));
-  // show home as default
-  document.getElementById('home').classList.add('active');
 
-  // -------------- envelope open (home) ----------------
-  const envelope = document.getElementById('envelope');
-  const paper = document.getElementById('paper');
-  const seal = document.getElementById('seal');
-  let opened = false;
-  function toggleEnvelope(){
-    opened = !opened;
-    if(opened){
-      paper.classList.add('show');
-      envelope.setAttribute('aria-pressed','true');
-      seal.style.transform = 'scale(.9)';
-      // tiny confetti effect (simple)
-      fireConfetti();
-    } else {
-      paper.classList.remove('show');
-      envelope.setAttribute('aria-pressed','false');
-      seal.style.transform = '';
-    }
-  }
-  envelope.addEventListener('click', toggleEnvelope);
-  envelope.addEventListener('keydown', (e)=> { if(e.key==='Enter' || e.key===' ') toggleEnvelope(); });
-  seal.addEventListener('click', toggleEnvelope);
+function openLetter(){
+    document.getElementById("flap").classList.toggle("opened-flap");
+    document.getElementById("letter").classList.toggle("letter-show");
+}
 
-  // open now button
-  document.getElementById('openNowBtn').addEventListener('click', ()=> {
-    toggleEnvelope();
-  });
-
-  // -------------- envelope on letter page ----------------
-  const envPage = document.getElementById('envelopePage');
-  const paperPage = document.getElementById('paperPage');
-  const sealPage = document.getElementById('sealPage');
-  const openLetterBtn = document.getElementById('openLetterBtn');
-  let openedPage = false;
-  function toggleEnvPage(){
-    openedPage = !openedPage;
-    if(openedPage){
-      paperPage.classList.add('show');
-      envPage.setAttribute('aria-pressed','true');
-      sealPage.style.transform = 'scale(.9)';
-      fireConfetti();
-    } else {
-      paperPage.classList.remove('show');
-      envPage.setAttribute('aria-pressed','false');
-      sealPage.style.transform = '';
-    }
-  }
-  envPage.addEventListener('click', toggleEnvPage);
-  sealPage.addEventListener('click', toggleEnvPage);
-  openLetterBtn.addEventListener('click', toggleEnvPage);
-
-  // -------------- simple quiz ----------------
-  function quizAnswer(state){
-    const el = document.getElementById('quizRes');
-    if(state === 'right'){
-      el.textContent = 'ممتاز! إجابة صحيحة 🎉';
-      el.style.color = 'var(--pink)';
-    } else {
-      el.textContent = 'قريب جداً، جربي مرة أخرى 🙂';
-      el.style.color = 'var(--muted)';
-    }
-  }
-
-  // -------------- stars & hearts dynamic generation ------------
-  const starsLayer = document.getElementById('starsLayer');
-  for(let i=0;i<120;i++){
-    const s = document.createElement('div');
-    s.className='star';
-    s.style.left = Math.random()*100 + 'vw';
-    s.style.top = Math.random()*100 + 'vh';
-    s.style.width = (Math.random()*2 + 1)+'px';
-    s.style.height = s.style.width;
-    s.style.opacity = 0.6 + Math.random()*0.6;
-    s.style.animation = `tw ${1.8 + Math.random()*2}s ${Math.random()*2}s infinite`;
-    starsLayer.appendChild(s);
-  }
-
-  // hearts
-  const heartsLayer = document.getElementById('heartsLayer');
-  for(let i=0;i<12;i++){
-    const h = document.createElement('div');
-    h.className='heart';
-    h.innerHTML = '❤';
-    h.style.left = (Math.random()*88 + 4) + 'vw';
-    h.style.top = (Math.random()*70 + 8) + 'vh';
-    h.style.fontSize = (14 + Math.random()*18) + 'px';
-    h.style.animationDelay = (Math.random()*4)+'s';
-    h.style.opacity = 0.6 + Math.random()*0.4;
-    heartsLayer.appendChild(h);
-  }
-
-  // shooting stars randomize animation delay
-  document.querySelectorAll('.shoot').forEach((el, idx) => {
-    el.style.animationDuration = (3.5 + Math.random()*2) + 's';
-    el.style.animationDelay = (Math.random()*6) + 's';
-  });
-
-  // simple confetti (tiny circles)
-  function fireConfetti(){
-    for(let i=0;i<18;i++){
-      const dot = document.createElement('div');
-      dot.style.position='fixed';
-      dot.style.left = (50 + (Math.random()*120 - 60)) + 'vw';
-      dot.style.top = (40 + (Math.random()*40 - 10)) + 'vh';
-      dot.style.width = dot.style.height = (6 + Math.random()*10)+'px';
-      dot.style.borderRadius='50%';
-      dot.style.zIndex = 120;
-      dot.style.background = Math.random()>0.5 ? 'var(--pink)' : 'var(--accent)';
-      dot.style.opacity = 0.95;
-      dot.style.transform = `translateY(0)`;
-      dot.style.transition = 'transform 1s cubic-bezier(.2,.9,.2,1), opacity 1s';
-      document.body.appendChild(dot);
-      setTimeout(()=> { dot.style.transform = `translateY(${ - (80 + Math.random()*120) }px) translateX(${(Math.random()*200 -100)}px) rotate(${Math.random()*360}deg)`; dot.style.opacity=0; }, 20);
-      setTimeout(()=> document.body.removeChild(dot), 1100);
-    }
-  }
-
-  // accessibility: allow nav via keyboard (left/right)
-  document.addEventListener('keydown', (e)=> {
-    const activeIndex = Array.from(navBtns).findIndex(n=> n.classList.contains('active'));
-    if(e.key === 'ArrowRight'){ const next = (activeIndex+1) % navBtns.length; navBtns[next].click(); }
-    if(e.key === 'ArrowLeft'){ const prev = (activeIndex-1 + navBtns.length) % navBtns.length; navBtns[prev].click(); }
-  });
-
-  // Allow replacing gallery images easily by editing array:
-  // (If you want, I can replace these with your real links)
-  const GALLERY_IMAGES = [
-    "https://via.placeholder.com/900x600?text=صورة+1",
-    "https://via.placeholder.com/900x600?text=صورة+2",
-    "https://via.placeholder.com/900x600?text=صورة+3"
-  ];
-  // populate gallery grid with these (optional)
-  const grid = document.getElementById('galleryGrid');
-  grid.innerHTML = '';
-  GALLERY_IMAGES.forEach((src,i) => {
-    const div = document.createElement('div'); div.className='g-item';
-    const img = document.createElement('img'); img.src = src; img.alt = 'صورة '+(i+1);
-    div.appendChild(img);
-    const lbl = document.createElement('div'); lbl.className='small muted'; lbl.textContent = 'صورة '+(i+1);
-    div.appendChild(lbl);
-    grid.appendChild(div);
-  });
-
-  // set nav buttons dataset target initial
-  navBtns.forEach(b => {
-    if(!b.dataset.target) {
-      const txt = b.textContent.trim();
-      if(txt.includes('الرئيس')) b.dataset.target='home';
-      if(txt.includes('المعرض')) b.dataset.target='gallery';
-      if(txt.includes('التحدي') || txt.includes('التحديات')) b.dataset.target='game';
-      if(txt.includes('الرسالة')) b.dataset.target='letter';
-      if(txt.includes('الهدية')) b.dataset.target='gift';
-    }
-  });
+function nextPage(n){
+    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+    document.getElementById("page"+n).classList.add("active");
+}
 
 </script>
 
