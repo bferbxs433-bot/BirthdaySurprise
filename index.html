@@ -1,100 +1,114 @@
-here<!doctype html>
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>مفاجأة سارة — Ready</title>
+<title>مفاجأة — صفحة واحدة</title>
 <style>
   :root{
-    --bg1:#05051a; --bg2:#180428;
-    --accent:#ff3f7a; --paper:#fff9f6;
+    --bg-dark1:#050418;
+    --bg-dark2:#120427;
+    --accent:#ff3678;
+    --paper:#fff8f6;
+    --muted:#cdb0c0;
+    --card-w:380px;
   }
   *{box-sizing:border-box}
-  html,body{height:100%;margin:0;font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Cairo", Arial; background: linear-gradient(180deg,var(--bg1),var(--bg2)); color:#fff; overflow:hidden}
+  html,body{height:100%;margin:0;font-family:'Cairo',system-ui,Arial; background:linear-gradient(180deg,var(--bg-dark1),var(--bg-dark2)); color:#fff; -webkit-font-smoothing:antialiased; overflow:hidden}
+  /* canvas full */
+  canvas#space{position:fixed; inset:0; z-index:0; display:block}
 
-  /* canvas fills screen for stars + meteors */
-  #spaceCanvas { position:fixed; inset:0; z-index:0; display:block; }
+  /* decorative hearts */
+  .heart{position:fixed; pointer-events:none; z-index:3; font-size:22px; color:var(--accent); text-shadow:0 8px 30px rgba(255,70,140,0.12); animation:heartFloat 6s ease-in-out infinite}
+  @keyframes heartFloat{0%{transform:translateY(8px)}50%{transform:translateY(-24px)}100%{transform:translateY(8px)}}
 
-  /* center area */
-  .wrap { position:relative; z-index:5; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px; }
-  .card { width:360px; max-width:92%; padding:18px; border-radius:16px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); box-shadow: 0 30px 90px rgba(0,0,0,0.6); text-align:center; }
+  /* center stage */
+  .wrap{position:relative; z-index:6; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:28px}
+  .card{width:var(--card-w); max-width:94vw; padding:18px; border-radius:16px; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); box-shadow:0 32px 100px rgba(0,0,0,0.6); text-align:center; position:relative; overflow:visible}
 
-  .title { font-weight:700; font-size:20px; color:#ffdfe9; margin-bottom:6px; }
-  .subtitle { font-size:13px; color:rgba(220,190,200,0.9); margin-bottom:18px; }
+  .title{font-family:'Playfair Display', serif; font-size:20px; color: #ffdaea; margin-bottom:6px; font-weight:700; text-shadow:0 6px 26px rgba(255,40,140,0.06)}
+  .subtitle{font-size:13px;color:var(--muted); margin-bottom:14px; font-weight:600}
 
-  /* envelope 3d */
-  .envelope-wrap { display:flex; align-items:center; justify-content:center; margin:8px 0; perspective:1400px; }
-  .envelope { width:300px; height:200px; border-radius:14px; position:relative; transform-style:preserve-3d; transition: transform .45s cubic-bezier(.2,.9,.2,1); background: linear-gradient(180deg,#ffebf0,#ffe8ef); box-shadow: inset 0 8px 30px rgba(255,255,255,0.08), 0 26px 60px rgba(3,2,6,0.6); }
-  .flap { position:absolute; left:0; right:0; top:0; height:56%; background: linear-gradient(180deg,#ffbfd2,#ff84a8); clip-path: polygon(0 0, 50% 74%, 100% 0); transform-origin:50% 0; transition: transform .9s cubic-bezier(.18,.9,.28,1); box-shadow: 0 10px 30px rgba(255,60,140,0.06); z-index:6; }
-  .body-face { position:absolute; left:0; right:0; bottom:0; top:44%; background:transparent; border-top-left-radius:12px; border-top-right-radius:12px; z-index:3; }
+  /* envelope 3d container */
+  .envelope-wrap{display:flex;align-items:center;justify-content:center; perspective:1400px; margin:6px 0}
+  .envelope{width:320px;height:200px;border-radius:14px;position:relative;transform-style:preserve-3d; transition: transform .45s cubic-bezier(.2,.9,.2,1); background:linear-gradient(180deg,#ffdfe8,#ffeaf0); box-shadow:inset 0 8px 30px rgba(255,255,255,0.06), 0 26px 60px rgba(6,4,12,0.6)}
+  .flap{position:absolute; left:0; right:0; top:0; height:54%; background:linear-gradient(180deg,#ffbcd3,#ff7aa6); clip-path:polygon(0 0, 50% 74%, 100% 0); transform-origin:center top; transition: transform .9s cubic-bezier(.18,.9,.28,1); box-shadow:0 10px 30px rgba(255,80,140,0.06); z-index:6}
+  .body-face{position:absolute; left:0; right:0; bottom:0; top:46%; background:transparent; border-top-left-radius:12px; border-top-right-radius:12px; z-index:3}
 
-  /* seal */
-  .seal { position:absolute; left:50%; transform:translateX(-50%); bottom:16px; width:64px; height:64px; border-radius:50%; background: radial-gradient(circle at 28% 24%, #ffdfe6 0%, #ffb2c8 10%, var(--accent) 60%, #7a102b 100%); display:flex; align-items:center; justify-content:center; font-weight:900; font-size:22px; color:#fff; z-index:8; cursor:pointer; box-shadow:0 12px 36px rgba(255,40,120,0.12); }
+  .seal{position:absolute; left:50%; transform:translateX(-50%); bottom:18px; width:64px; height:64px; border-radius:50%;
+    background: radial-gradient(circle at 28% 24%, #ffdfe6 0%, #ffb2c8 10%, var(--accent) 60%, #7a102b 100%);
+    display:flex; align-items:center; justify-content:center; color:white; font-weight:900; font-size:22px; z-index:8; cursor:pointer; box-shadow:0 14px 36px rgba(255,40,120,0.12)}
+  .seal:active{transform:translateX(-50%) scale(.98)}
 
-  /* letter hidden inside */
-  .letter { position:absolute; left:50%; top:12%; transform:translateX(-50%) translateY(24%); width:85%; height:66%; background:linear-gradient(180deg,#fffaf7,#fff1f3); border-radius:10px; padding:14px; box-shadow:0 18px 50px rgba(20,20,40,0.06); opacity:0; transition: transform .9s cubic-bezier(.2,.9,.2,1), opacity .6s; z-index:4; color:#3b2a30; border:2px solid rgba(255,120,180,0.08); overflow:auto; font-weight:700; line-height:1.5; }
+  /* letter inside */
+  .letter{position:absolute; left:50%; top:12%; transform:translateX(-50%) translateY(24%); width:82%; height:66%; background:linear-gradient(180deg,#fffaf7,#fff1f3); border-radius:10px; padding:16px; box-shadow:0 18px 48px rgba(20,20,40,0.06); opacity:0; transition: transform .9s cubic-bezier(.2,.9,.2,1), opacity .6s; z-index:4; color:#3b2a30; border:2px solid rgba(255,120,180,0.08); overflow:auto; font-family:'Playfair Display', serif}
+  .typed{white-space:pre-wrap; font-weight:700; font-size:15px; line-height:1.6; text-align:right}
 
   /* open state */
-  .envelope.open { transform: translateY(-8px); }
-  .envelope.open .flap { transform: rotateX(-170deg) translateY(-6px); }
-  .envelope.open .letter { transform: translateX(-50%) translateY(-140%); opacity:1; z-index:10; }
+  .envelope.open{transform:translateY(-8px)}
+  .envelope.open .flap{transform:rotateX(-170deg) translateY(-6px)}
+  .envelope.open .letter{transform:translateX(-50%) translateY(-140%); opacity:1; z-index:10}
 
   /* controls */
-  .controls { margin-top:14px; display:flex; gap:10px; justify-content:center; }
-  .btn { padding:10px 16px; border-radius:999px; border:none; cursor:pointer; font-weight:800; background: linear-gradient(90deg,var(--accent),#ff86b1); color:#fff; box-shadow:0 12px 36px rgba(255,60,150,0.1); }
-  .btn.secondary { background:transparent; border:1px dashed rgba(255,255,255,0.06); color:rgba(240,200,220,0.9) }
+  .controls{display:flex; gap:10px; justify-content:center; margin-top:14px}
+  .btn{padding:12px 18px; border-radius:999px; border:none; background:linear-gradient(90deg,var(--accent),#ff86b1); color:#fff; font-weight:800; cursor:pointer; box-shadow:0 18px 48px rgba(255,60,150,0.12)}
+  .btn.secondary{background:transparent;border:1px dashed rgba(255,255,255,0.06); color:var(--muted)}
 
-  /* typed text style */
-  .typed{ white-space: pre-wrap; font-size:15px; text-align:right }
+  /* confetti root */
+  .confetti-root{position:absolute; inset:0; pointer-events:none; z-index:50; overflow:visible}
 
-  /* confetti container */
-  #confetti{ position: absolute; inset:0; pointer-events:none; z-index:30; }
-
-  /* accessibility focus */
-  .envelope:focus { outline: 3px solid rgba(255,79,138,0.14); }
-
+  /* small responsive */
   @media(max-width:420px){
-    .envelope { width:86vw; height:54vw; }
-    .card { width:92vw; padding:14px; }
+    :root{--card-w:92%}
+    .envelope{width:86vw;height:55vw;border-radius:12px}
+    .letter{width:84%}
+    .card{padding:12px}
   }
 </style>
 </head>
 <body>
 
-<canvas id="spaceCanvas" aria-hidden="true"></canvas>
+<!-- canvas for space (stars + meteors) -->
+<canvas id="space"></canvas>
 
+<!-- decorative hearts -->
+<div class="heart" style="left:6vw; top:34vh; animation-delay:.4s">❤</div>
+<div class="heart" style="left:86vw; top:44vh; font-size:30px; animation-delay:1.2s">❤</div>
+<div class="heart" style="left:12vw; top:64vh; font-size:18px; animation-delay:2.1s">❤</div>
+
+<!-- main -->
 <div class="wrap">
   <div class="card" role="main" aria-label="مفاجأة عيد ميلاد">
     <div class="title">مفاجأة كونية — سارة</div>
     <div class="subtitle">اضغطي على الظرف لفتح المفاجأة</div>
 
-    <div class="envelope-wrap" style="display:flex;justify-content:center">
-      <div class="envelope" id="env" role="button" tabindex="0" aria-pressed="false">
+    <div class="envelope-wrap">
+      <div class="envelope" id="envelope" role="button" tabindex="0" aria-pressed="false">
         <div class="flap" id="flap"></div>
         <div class="body-face"></div>
 
         <div class="letter" id="letter" aria-hidden="true">
-          <div class="typed" id="typedText"></div>
+          <div class="typed" id="typed"></div>
         </div>
 
-        <div class="seal" id="seal" title="افتح/اقفل">❤</div>
+        <div class="seal" id="seal" title="اضغط لفتح">❤</div>
       </div>
     </div>
 
     <div class="controls">
-      <button class="btn" id="openBtn">أفتح</button>
-      <button class="btn secondary" id="resetBtn">إعادة</button>
+      <button class="btn" id="openBtn">Open</button>
+      <button class="btn secondary" id="resetBtn">Reset</button>
     </div>
 
-    <div id="confetti" aria-hidden="true"></div>
+    <div class="confetti-root" id="confettiRoot" aria-hidden="true"></div>
   </div>
 </div>
 
 <script>
-/* ----------------------------
-   Canvas starfield + meteors
-   ---------------------------- */
-const canvas = document.getElementById('spaceCanvas');
+/* =========================
+   Canvas: stars + meteors
+   ========================= */
+const canvas = document.getElementById('space');
 const ctx = canvas.getContext('2d');
 let W = innerWidth, H = innerHeight;
 function resize(){ W = canvas.width = innerWidth; H = canvas.height = innerHeight; }
@@ -108,12 +122,12 @@ let stars = [];
 function initStars(n=240){
   stars = [];
   for(let i=0;i<n;i++){
-    stars.push({ x: Math.random()*W, y: Math.random()*H, r: Math.random()*1.6, alpha: 0.2 + Math.random()*0.9, twinkle: Math.random()*2+1, phase: Math.random()*Math.PI*2 });
+    stars.push({ x: Math.random()*W, y: Math.random()*H, r: Math.random()*1.7, alpha: 0.25 + Math.random()*0.8, twinkle: Math.random()*2+1, phase: Math.random()*Math.PI*2 });
   }
 }
-initStars();
+initStars(260);
 
-/* meteors array */
+/* meteors */
 let meteors = [];
 function spawnMeteor(){
   const startX = -rand(0.1*W, 0.9*W);
@@ -124,11 +138,12 @@ function spawnMeteor(){
 }
 setInterval(()=>{ if(Math.random() < 0.45) spawnMeteor(); }, 1200);
 
+/* draw loop */
 function draw(){
-  // background soft nebula
+  // nebula background
   const g = ctx.createLinearGradient(0,0,0,H);
-  g.addColorStop(0, 'rgba(6,4,18,0.2)');
-  g.addColorStop(1, 'rgba(24,4,48,0.45)');
+  g.addColorStop(0,'rgba(8,4,18,0.2)');
+  g.addColorStop(1,'rgba(24,4,48,0.45)');
   ctx.fillStyle = g;
   ctx.fillRect(0,0,W,H);
 
@@ -174,60 +189,64 @@ function draw(){
 }
 draw();
 
-/* ----------------------------
-   Envelope open / typing / confetti
-   ---------------------------- */
-const env = document.getElementById('env');
+/* =========================
+   Envelope interactions
+   ========================= */
+const envelope = document.getElementById('envelope');
 const flap = document.getElementById('flap');
 const letter = document.getElementById('letter');
+const typed = document.getElementById('typed');
 const seal = document.getElementById('seal');
 const openBtn = document.getElementById('openBtn');
 const resetBtn = document.getElementById('resetBtn');
-const typedEl = document.getElementById('typedText');
-const confettiRoot = document.getElementById('confetti');
+const confettiRoot = document.getElementById('confettiRoot');
 
 let opened = false;
 
-/* message (Arabic lines) */
+/* message lines (edit these if you want) */
 const messageLines = [
   "إلى سارة 💖",
-  "كل سنة وأنتِ بخير — يا أجمل نجمة في سمائي.",
-  "أتمنى لكِ أيامًا ملؤها الفرح والحب والنجاح.",
-  "مع كل حبي،"
+  "كل سنة وأنتِ بخير — يا نجمة قلبي.",
+  "أتمنى لكِ أياماً مليئة بالضحك والحب والنجاح.",
+  "مع حُبي،"
 ];
 
-function typeText(el, lines, speed = 28, done){
-  el.innerHTML = '';
-  let idx = 0;
-  function nextLine(){
-    if(idx >= lines.length){ if(done) done(); return; }
-    const line = lines[idx++];
+/* typing function */
+function typeLines(container, lines, speed=28, done){
+  container.innerHTML = '';
+  let iLine = 0;
+  function next(){
+    if(iLine >= lines.length){ if(done) done(); return; }
+    const line = lines[iLine++];
     const p = document.createElement('div');
-    p.style.marginTop = idx===1? '0' : '8px';
-    el.appendChild(p);
-    let i = 0;
-    const t = setInterval(()=> {
-      p.textContent += (line[i++] || '');
-      if(i > line.length){ clearInterval(t); setTimeout(nextLine, 220); }
+    p.style.marginTop = iLine===1 ? '0' : '8px';
+    container.appendChild(p);
+    let iChar = 0;
+    const timer = setInterval(()=> {
+      p.textContent += (line[iChar++] || '');
+      if(iChar > line.length){
+        clearInterval(timer);
+        setTimeout(next, 240);
+      }
     }, speed);
   }
-  nextLine();
+  next();
 }
 
-/* simple confetti */
+/* confetti simple */
 function spawnConfetti(){
   const colors = ['#ff6fb3','#ffd36f','#6fefff','#9d6cff','#ff9bbd'];
-  for(let i=0;i<40;i++){
+  for(let i=0;i<36;i++){
     const n = document.createElement('div');
-    n.style.position = 'absolute';
+    n.style.position='absolute';
     n.style.left = (50 + (Math.random()*140-70)) + '%';
     n.style.top = (30 + Math.random()*20) + '%';
     const size = 6 + Math.random()*14;
     n.style.width = size + 'px';
     n.style.height = (size*0.6) + 'px';
     n.style.background = colors[Math.floor(Math.random()*colors.length)];
-    n.style.borderRadius = Math.random()>0.6? '3px' : '50%';
-    n.style.zIndex = 80;
+    n.style.borderRadius = Math.random()>0.6 ? '3px' : '50%';
+    n.style.zIndex = 200;
     confettiRoot.appendChild(n);
     const dx = (Math.random()*300 - 150);
     const dy = - (60 + Math.random()*220);
@@ -241,15 +260,15 @@ function spawnConfetti(){
 }
 
 /* small icons burst */
-function burstSmall(){
+function burstIcons(){
   const icons = ['💫','💗','✨'];
   for(let i=0;i<12;i++){
     const el = document.createElement('div');
     el.style.position='absolute';
     el.style.left = (50 + (Math.random()*120-60)) + '%';
     el.style.top = (44 + Math.random()*12) + '%';
-    el.style.transform = 'translate(-50%,-50%)';
-    el.style.zIndex = 80;
+    el.style.transform='translate(-50%,-50%)';
+    el.style.zIndex = 200;
     el.style.fontSize = (12 + Math.random()*18) + 'px';
     el.textContent = icons[Math.floor(Math.random()*icons.length)];
     confettiRoot.appendChild(el);
@@ -265,44 +284,42 @@ function burstSmall(){
 }
 
 /* open sequence */
-function openSequence(){
+function openEnvelope(){
   if(opened) return;
   opened = true;
-  env.classList.add('open');
-  env.setAttribute('aria-pressed','true');
+  envelope.classList.add('open');
+  envelope.setAttribute('aria-pressed','true');
+  // typing then confetti
   setTimeout(()=> {
-    typeText(typedEl, messageLines, 28, ()=> {
-      spawnConfetti(); burstSmall();
-      seal.animate([{ transform:'scale(.86)'},{ transform:'scale(1.06)'},{ transform:'scale(1)' }], { duration:620, easing:'cubic-bezier(.2,.9,.3,1)'});
+    typeLines(typed, messageLines, 28, ()=> {
+      spawnConfetti();
+      burstIcons();
+      // little seal pop
+      seal.animate([{ transform:'scale(.86)' },{ transform:'scale(1.06)' },{ transform:'scale(1)' }], { duration:620, easing:'cubic-bezier(.2,.9,.3,1)'});
     });
-  }, 480);
+  }, 520);
 }
 
-/* reset function */
+/* reset */
 function resetAll(){
   opened = false;
-  env.classList.remove('open');
-  env.setAttribute('aria-pressed','false');
-  typedEl.innerHTML = '';
+  envelope.classList.remove('open');
+  envelope.setAttribute('aria-pressed','false');
+  typed.innerHTML = '';
   confettiRoot.innerHTML = '';
 }
 
-/* handlers */
-env.addEventListener('click', openSequence);
-openBtn.addEventListener('click', openSequence);
+/* events */
+envelope.addEventListener('click', openEnvelope);
+openBtn.addEventListener('click', openEnvelope);
 resetBtn.addEventListener('click', resetAll);
-seal.addEventListener('click', openSequence);
-env.addEventListener('keydown',(e)=>{ if(e.key==='Enter'||e.key===' ') openSequence(); });
-env.setAttribute('tabindex',0);
+seal.addEventListener('click', openEnvelope);
+envelope.addEventListener('keydown', (e)=> { if(e.key==='Enter' || e.key===' ') openEnvelope(); });
+envelope.setAttribute('tabindex','0');
 
-/* make stars twinkle slightly over time */
-setInterval(()=> {
-  for(let s of stars){ s.phase += 0.02; }
-}, 120);
-
-/* initial meteor seeding for immediate effect */
-for(let i=0;i<3;i++) spawnMeteor();
-
+/* small hearts: optional floating (just move them slowly) */
+const hearts = document.querySelectorAll('.heart');
+hearts.forEach((h,i)=> h.style.animationDelay = (i*0.6)+'s');
 </script>
 </body>
 </html>
